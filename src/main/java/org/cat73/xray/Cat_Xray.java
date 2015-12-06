@@ -146,7 +146,7 @@ public class Cat_Xray {
     }
 
     private boolean antiAntiXray(int x, int y, int z, WorldClient world) {
-        if(antiAntiXrayLevel > 1) {
+        if(antiAntiXrayLevel >= 1) {
             boolean[] isTranslucents = new boolean[6];
             isTranslucents[0] = blockIsTranslucent(world, x + 1, y, z);
             isTranslucents[1] = blockIsTranslucent(world, x - 1, y, z);
@@ -161,7 +161,7 @@ public class Cat_Xray {
                 }
             }
         }
-        if(antiAntiXrayLevel > 2) {
+        if(antiAntiXrayLevel >= 2) {
             boolean[] isTranslucents = new boolean[12];
             isTranslucents[0] = blockIsTranslucent(world, x + 1, y + 1, z);
             isTranslucents[1] = blockIsTranslucent(world, x + 1, y - 1, z);
@@ -182,7 +182,7 @@ public class Cat_Xray {
                 }
             }
         }
-        if(antiAntiXrayLevel > 3) {
+        if(antiAntiXrayLevel >= 3) {
             boolean[] isTranslucents = new boolean[8];
             isTranslucents[0] = blockIsTranslucent(world, x + 1, y + 1, z + 1);
             isTranslucents[1] = blockIsTranslucent(world, x + 1, y + 1, z - 1);
