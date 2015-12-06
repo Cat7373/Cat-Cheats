@@ -48,11 +48,7 @@ public class Cat_Xray {
         }
 
         config = new Configuration(event.getSuggestedConfigurationFile());
-        config.load();
-        radius = config.get("Xray", "Radius", 45, "Radius for X-ray").getInt();
-        antiAntiXray = config.get("Xray", "AntiAntiXray", false, "Anti Anti X-ray").getBoolean();
-        config.save();
-        XrayBlocks.load(config);
+        reloadConfig();
 
         this.toggleXrayBinding = new KeyBinding("Toggle Xray", 45, "Cat-Xray");
 
@@ -222,12 +218,20 @@ public class Cat_Xray {
         if (this.toggleXrayBinding.isPressed()) {
             toggleXray = !toggleXray;
             if (toggleXray) {
-                XrayBlocks.load(config);
+                reloadConfig();
                 cooldownTicks = 0;
             } else {
                 GL11.glDeleteLists(displayListid, 1);
             }
         }
+    }
+    
+    private void reloadConfig() {
+        config.load();
+        radius = config.get("Xray", "Radius", 45, "Radius for X-ray").getInt();
+        antiAntiXray = config.get("Xray", "AntiAntiXray", false, "Anti Anti X-ray").getBoolean();
+        XrayBlocks.load(config);
+        config.save();
     }
 
     @SubscribeEvent

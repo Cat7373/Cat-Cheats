@@ -36,9 +36,7 @@ public class XrayBlocks {
     }
     
     public static void load(Configuration config) {
-        config.load();
         String[] configBlocksList = config.getStringList("Blocks", "Xray", defaultBlocks, "Blocks for X-ray");
-        config.save();
         blocks.clear();
         for(String configBlock : configBlocksList) {
             blocks.add(XrayBlocks.fromString(configBlock));
