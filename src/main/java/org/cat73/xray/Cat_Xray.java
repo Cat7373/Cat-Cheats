@@ -112,11 +112,11 @@ public class Cat_Xray {
         final int endZ = (int) player.posZ + radius;
 
         final CatBlockPos pos = new CatBlockPos();
-        
+
         for (int x = sx; x <= endX; x++) {
             for (int z = sz; z <= endZ; z++) {
                 final int endY = world.getChunkFromChunkCoords(x >> 4, z >> 4).getHeight(x & 15, z & 15);
-                for (int y = 0; y <= endY; y++) {
+                for (int y = 0; y < endY; y++) {
                     pos.set(x, y, z);
                     final IBlockState blockState = world.getBlockState(pos);
                     final Block block = blockState.getBlock();
@@ -154,7 +154,7 @@ public class Cat_Xray {
             isTranslucents[3] = blockIsTranslucent(world, x, y - 1, z);
             isTranslucents[4] = blockIsTranslucent(world, x, y, z + 1);
             isTranslucents[5] = blockIsTranslucent(world, x, y, z - 1);
-    
+
             for(boolean isTranslucent : isTranslucents) {
                 if(isTranslucent) {
                     return true;
@@ -175,7 +175,7 @@ public class Cat_Xray {
             isTranslucents[9] = blockIsTranslucent(world, x - 1, y, z + 1);
             isTranslucents[10] = blockIsTranslucent(world, x + 1, y, z - 1);
             isTranslucents[11] = blockIsTranslucent(world, x - 1, y, z - 1);
-    
+
             for(boolean isTranslucent : isTranslucents) {
                 if(isTranslucent) {
                     return true;
@@ -199,10 +199,10 @@ public class Cat_Xray {
                 }
             }
         }
-        
+
         return false;
     }
-    
+
     private boolean blockIsTranslucent(WorldClient world, int x, int y, int z) {
         final IBlockState blockState = world.getBlockState(new BlockPos(x, y, z));
         final Block block = blockState.getBlock();
@@ -265,7 +265,7 @@ public class Cat_Xray {
             }
         }
     }
-    
+
     private void reloadConfig() {
         config.load();
         radius = config.get("Xray", "Radius", 45, "Radius for X-ray").getInt();

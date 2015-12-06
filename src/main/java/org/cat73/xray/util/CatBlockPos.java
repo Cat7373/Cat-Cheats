@@ -16,15 +16,15 @@ public class CatBlockPos extends BlockPos {
         this.y = y;
         this.z = z;
     }
-    
+
     public int getX() {
         return this.x;
     }
-    
+
     public int getY() {
         return this.y;
     }
-    
+
     public int getZ() {
         return this.z;
     }

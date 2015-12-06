@@ -13,7 +13,7 @@ public class XrayBlocks {
         "0 191 255 200 -1 minecraft:diamond_ore"
     };
     public static ArrayList<XrayBlocks> blocks = new ArrayList<XrayBlocks>();
-    
+
     public int r;
     public int g;
     public int b;
@@ -34,7 +34,7 @@ public class XrayBlocks {
         result.name = info[5];
         return result;
     }
-    
+
     public static void load(Configuration config) {
         String[] configBlocksList = config.getStringList("Blocks", "Xray", defaultBlocks, "Blocks for X-ray");
         blocks.clear();

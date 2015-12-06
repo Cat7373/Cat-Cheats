@@ -25,7 +25,7 @@ public class PlayerMessage {
             }
         }
     }
-    
+
     /**
      * 向玩家输出信息
      * @param message 要输出的信息
@@ -34,7 +34,7 @@ public class PlayerMessage {
         FMLLog.info(message);
         message("[信息]" + message);
     }
-    
+
     /**
      * 向玩家输出警告
      * @param message 要输出的信息
@@ -51,7 +51,7 @@ public class PlayerMessage {
         FMLLog.warning(message);
         message("[警告]" + message);
     }
-    
+
     /**
      * 向玩家输出错误
      * @param message 要输出的信息
@@ -60,7 +60,7 @@ public class PlayerMessage {
         FMLLog.log(Level.ERROR, message);
         message("[错误]" + message);
     }
-    
+
     /**
      * 向玩家输出调试信息
      * @param message 要输出的调试信息
