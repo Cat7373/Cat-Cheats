@@ -19,6 +19,7 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -86,7 +87,7 @@ public class Cat_Xray {
 
         if (cooldownTicks < 1) {
             compileDL();
-            cooldownTicks = 100;
+            cooldownTicks = antiAntiXray ? 10 * 20 : 20 * 5;
         }
 
         cooldownTicks -= 1;
@@ -129,9 +130,11 @@ public class Cat_Xray {
                         final String blockName = String.valueOf(GameData.getBlockRegistry().getNameForObject(block));
 
                         for (XrayBlocks xrayBlock : XrayBlocks.blocks) {
-                            if (xrayBlock.name.equalsIgnoreCase(blockName) && ((xrayBlock.meta == -1) || (xrayBlock.meta == meta)) && antiAntiXray && antiAntiXray(x, y, z, pos)) {
-                                renderBlock(x, y, z, xrayBlock);
-                                break;
+                            if (xrayBlock.name.equalsIgnoreCase(blockName) && ((xrayBlock.meta == -1) || (xrayBlock.meta == meta))) {
+                                if(!antiAntiXray || antiAntiXray(x, y, z, world)) {
+                                    renderBlock(x, y, z, xrayBlock);
+                                    break;
+                                }
                             }
                         }
                     }
@@ -146,9 +149,32 @@ public class Cat_Xray {
         GL11.glEndList();
     }
 
-    // TODO
-    private boolean antiAntiXray(int x, int y, int z, CatBlockPos pos) {
-        return true;
+    private boolean antiAntiXray(int x, int y, int z, WorldClient world) {
+        boolean[] isTranslucents = new boolean[6];
+        isTranslucents[0] = blockIsTranslucent(world, x + 1, y, z);
+        isTranslucents[1] = blockIsTranslucent(world, x - 1, y, z);
+        isTranslucents[2] = blockIsTranslucent(world, x, y + 1, z);
+        isTranslucents[3] = blockIsTranslucent(world, x, y - 1, z);
+        isTranslucents[4] = blockIsTranslucent(world, x, y, z + 1);
+        isTranslucents[5] = blockIsTranslucent(world, x, y, z - 1);
+
+        for(boolean isTranslucent : isTranslucents) {
+            if(isTranslucent) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    private boolean blockIsTranslucent(WorldClient world, int x, int y, int z) {
+        final IBlockState blockState = world.getBlockState(new BlockPos(x, y, z));
+        final Block block = blockState.getBlock();
+        return block == Blocks.water ||
+               block == Blocks.flowing_water ||
+               block == Blocks.lava ||
+               block == Blocks.flowing_lava ||
+               block.isTranslucent();
     }
 
     private void renderBlock(int x, int y, int z, XrayBlocks block) {
