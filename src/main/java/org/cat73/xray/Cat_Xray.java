@@ -42,7 +42,7 @@ public class Cat_Xray {
     private Configuration config;
 
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
+    public void preInit(final FMLPreInitializationEvent event) {
         if (event.getSide() == Side.SERVER) {
             return;
         }
@@ -56,7 +56,7 @@ public class Cat_Xray {
     }
 
     @EventHandler
-    public void init(FMLInitializationEvent event) {
+    public void init(final FMLInitializationEvent event) {
         if (event.getSide() == Side.SERVER) {
             return;
         }
@@ -68,25 +68,26 @@ public class Cat_Xray {
     }
 
     @EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
+    public void postInit(final FMLPostInitializationEvent event) {
         if (event.getSide() == Side.SERVER) {
             return;
         }
+
         displayListid = GL11.glGenLists(5) + 3;
     }
 
     @SubscribeEvent
-    public boolean onTickInGame(ClientTickEvent e) {
+    public boolean onTickInGame(final ClientTickEvent event) {
         if ((!toggleXray) || (this.mc.thePlayer == null)) {
             return true;
         }
 
         if (cooldownTicks < 1) {
             compileDL();
-            cooldownTicks = antiAntiXrayLevel == 0 ? 10 * 20 : 20 * 5;
+            cooldownTicks = antiAntiXrayLevel == 0 ? 20 * 10 : 20 * 5;
         }
 
-        cooldownTicks -= 1;
+        cooldownTicks--;
         return true;
     }
 
@@ -110,12 +111,13 @@ public class Cat_Xray {
         final int sz = (int) player.posZ - radius;
         final int endX = (int) player.posX + radius;
         final int endZ = (int) player.posZ + radius;
+        int endY;
 
         final CatBlockPos pos = new CatBlockPos();
 
         for (int x = sx; x <= endX; x++) {
             for (int z = sz; z <= endZ; z++) {
-                final int endY = world.getChunkFromChunkCoords(x >> 4, z >> 4).getHeight(x & 15, z & 15);
+                endY = world.getChunkFromChunkCoords(x >> 4, z >> 4).getHeight(x & 15, z & 15);
                 for (int y = 0; y < endY; y++) {
                     pos.set(x, y, z);
                     final IBlockState blockState = world.getBlockState(pos);
@@ -125,7 +127,7 @@ public class Cat_Xray {
                         final int meta = block.getMetaFromState(blockState);
                         final String blockName = String.valueOf(GameData.getBlockRegistry().getNameForObject(block));
 
-                        for (XrayBlocks xrayBlock : XrayBlocks.blocks) {
+                        for (final XrayBlocks xrayBlock : XrayBlocks.blocks) {
                             if (xrayBlock.name.equalsIgnoreCase(blockName) && ((xrayBlock.meta == -1) || (xrayBlock.meta == meta))) {
                                 if(antiAntiXrayLevel == 0 || antiAntiXray(x, y, z, world)) {
                                     renderBlock(x, y, z, xrayBlock);
@@ -145,9 +147,9 @@ public class Cat_Xray {
         GL11.glEndList();
     }
 
-    private boolean antiAntiXray(int x, int y, int z, WorldClient world) {
+    private boolean antiAntiXray(final int x, final int y, final int z, final WorldClient world) {
         if(antiAntiXrayLevel >= 1) {
-            boolean[] isTranslucents = new boolean[6];
+            final boolean[] isTranslucents = new boolean[6];
             isTranslucents[0] = blockIsTranslucent(world, x + 1, y, z);
             isTranslucents[1] = blockIsTranslucent(world, x - 1, y, z);
             isTranslucents[2] = blockIsTranslucent(world, x, y + 1, z);
@@ -155,14 +157,14 @@ public class Cat_Xray {
             isTranslucents[4] = blockIsTranslucent(world, x, y, z + 1);
             isTranslucents[5] = blockIsTranslucent(world, x, y, z - 1);
 
-            for(boolean isTranslucent : isTranslucents) {
+            for(final boolean isTranslucent : isTranslucents) {
                 if(isTranslucent) {
                     return true;
                 }
             }
         }
         if(antiAntiXrayLevel >= 2) {
-            boolean[] isTranslucents = new boolean[12];
+            final boolean[] isTranslucents = new boolean[12];
             isTranslucents[0] = blockIsTranslucent(world, x + 1, y + 1, z);
             isTranslucents[1] = blockIsTranslucent(world, x + 1, y - 1, z);
             isTranslucents[2] = blockIsTranslucent(world, x - 1, y + 1, z);
@@ -176,14 +178,14 @@ public class Cat_Xray {
             isTranslucents[10] = blockIsTranslucent(world, x + 1, y, z - 1);
             isTranslucents[11] = blockIsTranslucent(world, x - 1, y, z - 1);
 
-            for(boolean isTranslucent : isTranslucents) {
+            for(final boolean isTranslucent : isTranslucents) {
                 if(isTranslucent) {
                     return true;
                 }
             }
         }
         if(antiAntiXrayLevel >= 3) {
-            boolean[] isTranslucents = new boolean[8];
+            final boolean[] isTranslucents = new boolean[8];
             isTranslucents[0] = blockIsTranslucent(world, x + 1, y + 1, z + 1);
             isTranslucents[1] = blockIsTranslucent(world, x + 1, y + 1, z - 1);
             isTranslucents[2] = blockIsTranslucent(world, x + 1, y - 1, z + 1);
@@ -193,7 +195,7 @@ public class Cat_Xray {
             isTranslucents[6] = blockIsTranslucent(world, x - 1, y - 1, z + 1);
             isTranslucents[7] = blockIsTranslucent(world, x - 1, y - 1, z - 1);
 
-            for(boolean isTranslucent : isTranslucents) {
+            for(final boolean isTranslucent : isTranslucents) {
                 if(isTranslucent) {
                     return true;
                 }
@@ -203,7 +205,7 @@ public class Cat_Xray {
         return false;
     }
 
-    private boolean blockIsTranslucent(WorldClient world, int x, int y, int z) {
+    private boolean blockIsTranslucent(final WorldClient world, final int x, final int y, final int z) {
         final IBlockState blockState = world.getBlockState(new BlockPos(x, y, z));
         final Block block = blockState.getBlock();
         return block == Blocks.water ||
@@ -213,7 +215,7 @@ public class Cat_Xray {
                block.isTranslucent();
     }
 
-    private void renderBlock(int x, int y, int z, XrayBlocks block) {
+    private void renderBlock(final int x, final int y, final int z, final XrayBlocks block) {
         GL11.glColor4ub((byte) block.r, (byte) block.g, (byte) block.b, (byte) block.a);
 
         GL11.glVertex3f(x, y, z);
@@ -254,7 +256,7 @@ public class Cat_Xray {
     }
 
     @SubscribeEvent
-    public void keyboardEvent(KeyInputEvent key) {
+    public void keyboardEvent(final KeyInputEvent event) {
         if (this.toggleXrayBinding.isPressed()) {
             toggleXray = !toggleXray;
             if (toggleXray) {
@@ -278,14 +280,15 @@ public class Cat_Xray {
     }
 
     @SubscribeEvent
-    public void renderWorldLastEvent(RenderWorldLastEvent evt) {
+    public void renderWorldLastEvent(final RenderWorldLastEvent event) {
         if ((!toggleXray) || (this.mc.theWorld == null)) {
             return;
         }
 
-        double doubleX = this.mc.thePlayer.lastTickPosX + (this.mc.thePlayer.posX - this.mc.thePlayer.lastTickPosX) * evt.partialTicks;
-        double doubleY = this.mc.thePlayer.lastTickPosY + (this.mc.thePlayer.posY - this.mc.thePlayer.lastTickPosY) * evt.partialTicks;
-        double doubleZ = this.mc.thePlayer.lastTickPosZ + (this.mc.thePlayer.posZ - this.mc.thePlayer.lastTickPosZ) * evt.partialTicks;
+        final EntityPlayerSP player = this.mc.thePlayer;
+        final double doubleX = player.lastTickPosX + (player.posX - player.lastTickPosX) * event.partialTicks;
+        final double doubleY = player.lastTickPosY + (player.posY - player.lastTickPosY) * event.partialTicks;
+        final double doubleZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * event.partialTicks;
 
         GL11.glPushMatrix();
         GL11.glTranslated(-doubleX, -doubleY, -doubleZ);

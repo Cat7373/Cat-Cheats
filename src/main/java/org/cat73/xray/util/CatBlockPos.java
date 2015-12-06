@@ -11,7 +11,7 @@ public class CatBlockPos extends BlockPos {
         super(0, 0, 0);
     }
 
-    public void set(int x, int y, int z) {
+    public void set(final int x, final int y, final int z) {
         this.x = x;
         this.y = y;
         this.z = z;
