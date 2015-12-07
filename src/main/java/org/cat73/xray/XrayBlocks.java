@@ -14,11 +14,11 @@ public class XrayBlocks {
     };
     public static final ArrayList<XrayBlocks> blocks = new ArrayList<XrayBlocks>();
 
-    public int r;
-    public int g;
-    public int b;
-    public int a;
-    public int meta;
+    public byte r;
+    public byte g;
+    public byte b;
+    public byte a;
+    public byte meta;
     public String name;
 
     private XrayBlocks() {}
@@ -26,12 +26,12 @@ public class XrayBlocks {
     private static XrayBlocks fromString(final String s) {
         final XrayBlocks result = new XrayBlocks();
         final String[] info = s.split(" ");
-        result.r = Integer.parseInt(info[0]);
-        result.g = Integer.parseInt(info[1]);
-        result.b = Integer.parseInt(info[2]);
-        result.a = Integer.parseInt(info[3]);
-        result.meta = Integer.parseInt(info[4]);
-        result.name = info[5];
+        result.name = info[0];
+        result.meta = Byte.parseByte(info[1]);
+        result.r = (byte) Integer.parseInt(info[2]);
+        result.g = (byte) Integer.parseInt(info[3]);
+        result.b = (byte) Integer.parseInt(info[4]);
+        result.a = (byte) Integer.parseInt(info[5]);
         return result;
     }
 

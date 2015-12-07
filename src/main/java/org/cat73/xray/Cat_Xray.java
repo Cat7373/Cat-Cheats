@@ -82,12 +82,11 @@ public class Cat_Xray {
             return true;
         }
 
-        if (cooldownTicks < 1) {
+        if (cooldownTicks-- == 0) {
             compileDL();
             cooldownTicks = antiAntiXrayLevel == 0 ? 20 * 10 : 20 * 5;
         }
 
-        cooldownTicks--;
         return true;
     }
 
@@ -148,8 +147,9 @@ public class Cat_Xray {
     }
 
     private boolean antiAntiXray(final int x, final int y, final int z, final WorldClient world) {
+        boolean[] isTranslucents;
         if(antiAntiXrayLevel >= 1) {
-            final boolean[] isTranslucents = new boolean[6];
+            isTranslucents = new boolean[6];
             isTranslucents[0] = blockIsTranslucent(world, x + 1, y, z);
             isTranslucents[1] = blockIsTranslucent(world, x - 1, y, z);
             isTranslucents[2] = blockIsTranslucent(world, x, y + 1, z);
@@ -164,7 +164,7 @@ public class Cat_Xray {
             }
         }
         if(antiAntiXrayLevel >= 2) {
-            final boolean[] isTranslucents = new boolean[12];
+            isTranslucents = new boolean[12];
             isTranslucents[0] = blockIsTranslucent(world, x + 1, y + 1, z);
             isTranslucents[1] = blockIsTranslucent(world, x + 1, y - 1, z);
             isTranslucents[2] = blockIsTranslucent(world, x - 1, y + 1, z);
@@ -185,7 +185,7 @@ public class Cat_Xray {
             }
         }
         if(antiAntiXrayLevel >= 3) {
-            final boolean[] isTranslucents = new boolean[8];
+            isTranslucents = new boolean[8];
             isTranslucents[0] = blockIsTranslucent(world, x + 1, y + 1, z + 1);
             isTranslucents[1] = blockIsTranslucent(world, x + 1, y + 1, z - 1);
             isTranslucents[2] = blockIsTranslucent(world, x + 1, y - 1, z + 1);
@@ -216,7 +216,7 @@ public class Cat_Xray {
     }
 
     private void renderBlock(final int x, final int y, final int z, final XrayBlocks block) {
-        GL11.glColor4ub((byte) block.r, (byte) block.g, (byte) block.b, (byte) block.a);
+        GL11.glColor4ub(block.r, block.g, block.b, block.a);
 
         GL11.glVertex3f(x, y, z);
         GL11.glVertex3f(x + 1, y, z);
