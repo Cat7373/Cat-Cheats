@@ -40,6 +40,7 @@ public class Cat_Xray {
     private int cooldownTicks = 0;
     private int antiAntiXrayLevel = 0;
     private int interval = 20 * 5;
+    private final CatBlockPos pos = new CatBlockPos();
     private Minecraft mc;
     private Configuration config;
 
@@ -114,7 +115,6 @@ public class Cat_Xray {
         final int endZ = (int) player.posZ + radius;
         int endY;
 
-        final CatBlockPos pos = new CatBlockPos();
         final FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
 
         for (int x = sx; x <= endX; x++) {
@@ -152,12 +152,12 @@ public class Cat_Xray {
         boolean[] isTranslucents;
         if(antiAntiXrayLevel >= 1) {
             isTranslucents = new boolean[6];
-            isTranslucents[0] = blockIsTranslucent(world, x + 1, y, z);
-            isTranslucents[1] = blockIsTranslucent(world, x - 1, y, z);
-            isTranslucents[2] = blockIsTranslucent(world, x, y + 1, z);
-            isTranslucents[3] = blockIsTranslucent(world, x, y - 1, z);
-            isTranslucents[4] = blockIsTranslucent(world, x, y, z + 1);
-            isTranslucents[5] = blockIsTranslucent(world, x, y, z - 1);
+            isTranslucents[0] = showBlock(world, x + 1, y, z);
+            isTranslucents[1] = showBlock(world, x - 1, y, z);
+            isTranslucents[2] = showBlock(world, x, y + 1, z);
+            isTranslucents[3] = showBlock(world, x, y - 1, z);
+            isTranslucents[4] = showBlock(world, x, y, z + 1);
+            isTranslucents[5] = showBlock(world, x, y, z - 1);
 
             for(final boolean isTranslucent : isTranslucents) {
                 if(isTranslucent) {
@@ -167,18 +167,18 @@ public class Cat_Xray {
         }
         if(antiAntiXrayLevel >= 2) {
             isTranslucents = new boolean[12];
-            isTranslucents[0] = blockIsTranslucent(world, x + 1, y + 1, z);
-            isTranslucents[1] = blockIsTranslucent(world, x + 1, y - 1, z);
-            isTranslucents[2] = blockIsTranslucent(world, x - 1, y + 1, z);
-            isTranslucents[3] = blockIsTranslucent(world, x - 1, y - 1, z);
-            isTranslucents[4] = blockIsTranslucent(world, x, y + 1, z + 1);
-            isTranslucents[5] = blockIsTranslucent(world, x, y + 1, z - 1);
-            isTranslucents[6] = blockIsTranslucent(world, x, y - 1, z + 1);
-            isTranslucents[7] = blockIsTranslucent(world, x, y - 1, z - 1);
-            isTranslucents[8] = blockIsTranslucent(world, x + 1, y, z + 1);
-            isTranslucents[9] = blockIsTranslucent(world, x - 1, y, z + 1);
-            isTranslucents[10] = blockIsTranslucent(world, x + 1, y, z - 1);
-            isTranslucents[11] = blockIsTranslucent(world, x - 1, y, z - 1);
+            isTranslucents[0] = showBlock(world, x + 1, y + 1, z);
+            isTranslucents[1] = showBlock(world, x + 1, y - 1, z);
+            isTranslucents[2] = showBlock(world, x - 1, y + 1, z);
+            isTranslucents[3] = showBlock(world, x - 1, y - 1, z);
+            isTranslucents[4] = showBlock(world, x, y + 1, z + 1);
+            isTranslucents[5] = showBlock(world, x, y + 1, z - 1);
+            isTranslucents[6] = showBlock(world, x, y - 1, z + 1);
+            isTranslucents[7] = showBlock(world, x, y - 1, z - 1);
+            isTranslucents[8] = showBlock(world, x + 1, y, z + 1);
+            isTranslucents[9] = showBlock(world, x - 1, y, z + 1);
+            isTranslucents[10] = showBlock(world, x + 1, y, z - 1);
+            isTranslucents[11] = showBlock(world, x - 1, y, z - 1);
 
             for(final boolean isTranslucent : isTranslucents) {
                 if(isTranslucent) {
@@ -188,14 +188,14 @@ public class Cat_Xray {
         }
         if(antiAntiXrayLevel >= 3) {
             isTranslucents = new boolean[8];
-            isTranslucents[0] = blockIsTranslucent(world, x + 1, y + 1, z + 1);
-            isTranslucents[1] = blockIsTranslucent(world, x + 1, y + 1, z - 1);
-            isTranslucents[2] = blockIsTranslucent(world, x + 1, y - 1, z + 1);
-            isTranslucents[3] = blockIsTranslucent(world, x + 1, y - 1, z - 1);
-            isTranslucents[4] = blockIsTranslucent(world, x - 1, y + 1, z + 1);
-            isTranslucents[5] = blockIsTranslucent(world, x - 1, y + 1, z - 1);
-            isTranslucents[6] = blockIsTranslucent(world, x - 1, y - 1, z + 1);
-            isTranslucents[7] = blockIsTranslucent(world, x - 1, y - 1, z - 1);
+            isTranslucents[0] = showBlock(world, x + 1, y + 1, z + 1);
+            isTranslucents[1] = showBlock(world, x + 1, y + 1, z - 1);
+            isTranslucents[2] = showBlock(world, x + 1, y - 1, z + 1);
+            isTranslucents[3] = showBlock(world, x + 1, y - 1, z - 1);
+            isTranslucents[4] = showBlock(world, x - 1, y + 1, z + 1);
+            isTranslucents[5] = showBlock(world, x - 1, y + 1, z - 1);
+            isTranslucents[6] = showBlock(world, x - 1, y - 1, z + 1);
+            isTranslucents[7] = showBlock(world, x - 1, y - 1, z - 1);
 
             for(final boolean isTranslucent : isTranslucents) {
                 if(isTranslucent) {
@@ -207,14 +207,14 @@ public class Cat_Xray {
         return false;
     }
 
-    private boolean blockIsTranslucent(final WorldClient world, final int x, final int y, final int z) {
-        final IBlockState blockState = world.getBlockState(new BlockPos(x, y, z));
-        final Block block = blockState.getBlock();
-        return block == Blocks.water ||
+    private boolean showBlock(final WorldClient world, final int x, final int y, final int z) {
+        pos.set(x, y, z);
+        final Block block = world.getBlockState(pos).getBlock();
+        return block == Blocks.lava ||
+               block.isTranslucent() || 
+               block == Blocks.water ||
                block == Blocks.flowing_water ||
-               block == Blocks.lava ||
-               block == Blocks.flowing_lava ||
-               block.isTranslucent();
+               block == Blocks.flowing_lava;
     }
 
     private void renderBlock(final int x, final int y, final int z, final XrayBlocks block) {
