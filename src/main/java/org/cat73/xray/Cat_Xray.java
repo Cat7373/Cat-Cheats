@@ -39,6 +39,7 @@ public class Cat_Xray {
     private int displayListid = 0;
     private int cooldownTicks = 0;
     private int antiAntiXrayLevel = 0;
+    private int interval = 20 * 5;
     private Minecraft mc;
     private Configuration config;
 
@@ -85,7 +86,7 @@ public class Cat_Xray {
 
         if (cooldownTicks-- == 0) {
             compileDL();
-            cooldownTicks = antiAntiXrayLevel == 0 ? 20 * 10 : 20 * 5;
+            cooldownTicks = interval;
         }
 
         return true;
@@ -274,6 +275,7 @@ public class Cat_Xray {
         config.load();
         radius = config.get("Xray", "Radius", 45, "Radius for X-ray").getInt();
         antiAntiXrayLevel = config.get("Xray", "AntiAntiXrayLevel", 0, "Anti Anti X-ray Level (0: off, 1~3: open)").getInt();
+        interval = config.get("Xray", "Interval", 5, "Interval for X-ray(Seconds)").getInt() * 20;
         if(antiAntiXrayLevel > 3 || antiAntiXrayLevel < 0) {
             antiAntiXrayLevel = 0;
         }
