@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
+import net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry;
 import net.minecraftforge.fml.common.registry.GameData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraft.block.Block;
@@ -73,7 +74,7 @@ public class Cat_Xray {
             return;
         }
 
-        displayListid = GL11.glGenLists(5);
+        displayListid = GL11.glGenLists(1);
     }
 
     @SubscribeEvent
@@ -113,6 +114,7 @@ public class Cat_Xray {
         int endY;
 
         final CatBlockPos pos = new CatBlockPos();
+        final FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
 
         for (int x = sx; x <= endX; x++) {
             for (int z = sz; z <= endZ; z++) {
@@ -124,14 +126,14 @@ public class Cat_Xray {
 
                     if (block != Blocks.air) {
                         final int meta = block.getMetaFromState(blockState);
-                        final String blockName = String.valueOf(GameData.getBlockRegistry().getNameForObject(block));
+                        final String blockName = String.valueOf(blockRegistery.getNameForObject(block));
 
-                        for (final XrayBlocks xrayBlock : XrayBlocks.blocks) {
-                            if (xrayBlock.name.equalsIgnoreCase(blockName) && ((xrayBlock.meta == -1) || (xrayBlock.meta == meta))) {
-                                if(antiAntiXrayLevel == 0 || antiAntiXray(x, y, z, world)) {
-                                    renderBlock(x, y, z, xrayBlock);
-                                    break;
-                                }
+                        final XrayBlocks xrayBlock = XrayBlocks.find(blockName);
+                        
+                        if (xrayBlock != null && ((xrayBlock.meta == -1) || (xrayBlock.meta == meta))) {
+                            if(antiAntiXrayLevel == 0 || antiAntiXray(x, y, z, world)) {
+                                renderBlock(x, y, z, xrayBlock);
+                                break;
                             }
                         }
                     }

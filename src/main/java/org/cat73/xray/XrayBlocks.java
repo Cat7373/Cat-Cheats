@@ -1,45 +1,54 @@
 package org.cat73.xray;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import net.minecraftforge.common.config.Configuration;
 
 public class XrayBlocks {
-    public static final String[] defaultBlocks = new String[]{
+    private static final String[] defaultBlocks = new String[]{
         "0 0 128 200 -1 minecraft:lapis_ore",
         "255 0 0 200 -1 minecraft:redstone_ore",
         "255 255 0 200 -1 minecraft:gold_ore",
         "0 255 0 200 -1 minecraft:emerald_ore",
         "0 191 255 200 -1 minecraft:diamond_ore"
     };
-    public static final ArrayList<XrayBlocks> blocks = new ArrayList<XrayBlocks>();
+    private static final HashMap<String, XrayBlocks> blocks = new HashMap<String, XrayBlocks>();
 
-    public byte r;
-    public byte g;
-    public byte b;
-    public byte a;
-    public byte meta;
-    public String name;
+    public final byte meta;
+    public final byte r;
+    public final byte g;
+    public final byte b;
+    public final byte a;
 
-    private XrayBlocks() {}
+    private XrayBlocks(byte meta, byte r, byte g, byte b, byte a) {
+        this.meta = meta;
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.a = a;
+    }
 
-    private static XrayBlocks fromString(final String s) {
-        final XrayBlocks result = new XrayBlocks();
+    private static void fromString(final String s) {
         final String[] info = s.split(" ");
-        result.name = info[0];
-        result.meta = Byte.parseByte(info[1]);
-        result.r = (byte) Integer.parseInt(info[2]);
-        result.g = (byte) Integer.parseInt(info[3]);
-        result.b = (byte) Integer.parseInt(info[4]);
-        result.a = (byte) Integer.parseInt(info[5]);
-        return result;
+
+        final byte meta = Byte.parseByte(info[1]);
+        final byte r = (byte) Integer.parseInt(info[2]);
+        final byte g = (byte) Integer.parseInt(info[3]);
+        final byte b = (byte) Integer.parseInt(info[4]);
+        final byte a = (byte) Integer.parseInt(info[5]);
+
+        blocks.put(info[0], new XrayBlocks(meta, r, g, b, a));
     }
 
     public static void load(final Configuration config) {
         final String[] configBlocksList = config.getStringList("Blocks", "Xray", defaultBlocks, "Blocks for X-ray");
         blocks.clear();
         for(final String configBlock : configBlocksList) {
-            blocks.add(XrayBlocks.fromString(configBlock));
+            XrayBlocks.fromString(configBlock);
         }
+    }
+    
+    public static XrayBlocks find(String name) {
+        return blocks.get(name);
     }
 }
