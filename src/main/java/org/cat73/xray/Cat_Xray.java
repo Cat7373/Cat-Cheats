@@ -134,7 +134,6 @@ public class Cat_Xray {
                         if (xrayBlock != null && ((xrayBlock.meta == -1) || (xrayBlock.meta == meta))) {
                             if(antiAntiXrayLevel == 0 || antiAntiXray(x, y, z, world)) {
                                 renderBlock(x, y, z, xrayBlock);
-                                break;
                             }
                         }
                     }
