@@ -73,7 +73,7 @@ public class Cat_Xray {
             return;
         }
 
-        displayListid = GL11.glGenLists(5) + 3;
+        displayListid = GL11.glGenLists(5);
     }
 
     @SubscribeEvent
@@ -91,14 +91,14 @@ public class Cat_Xray {
     }
 
     private void compileDL() {
-        GL11.glNewList(displayListid, 4864);
+        GL11.glNewList(displayListid, GL11.GL_COMPILE);
 
-        GL11.glDisable(3553);
-        GL11.glDisable(2929);
-        GL11.glEnable(3042);
-        GL11.glBlendFunc(770, 771);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-        GL11.glBegin(1);
+        GL11.glBegin(GL11.GL_LINES);
 
         final WorldClient world = this.mc.theWorld;
         final EntityPlayerSP player = this.mc.thePlayer;
@@ -140,9 +140,9 @@ public class Cat_Xray {
         }
 
         GL11.glEnd();
-        GL11.glEnable(2929);
-        GL11.glDisable(3042);
-        GL11.glEnable(3553);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glEndList();
     }
 
