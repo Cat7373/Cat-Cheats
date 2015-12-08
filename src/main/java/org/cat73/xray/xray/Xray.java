@@ -10,6 +10,7 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.init.Blocks;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -84,15 +85,17 @@ public class Xray extends Thread{
                 int endY;
     
                 final FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
+                Chunk chunk;
     
                 for (int x = sx; x <= endX; x++) {
                     this.pos.setX(x);
                     for (int z = sz; z <= endZ; z++) {
                         this.pos.setZ(z);
-                        endY = world.getChunkFromChunkCoords(x >> 4, z >> 4).getHeight(x & 15, z & 15);
+                        chunk = world.getChunkFromChunkCoords(x >> 4, z >> 4);
+                        endY = chunk.getHeight(x & 15, z & 15);
                         for (int y = 0; y < endY; y++) {
                             this.pos.setY(y);
-                            final IBlockState blockState = world.getBlockState(this.pos);
+                            final IBlockState blockState = chunk.getBlockState(this.pos);
                             final Block block = blockState.getBlock();
     
                             if (block != Blocks.air) {
