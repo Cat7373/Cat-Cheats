@@ -1,4 +1,4 @@
-package org.cat73.xray;
+package org.cat73.xray.xray;
 
 import java.util.HashMap;
 
