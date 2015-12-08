@@ -29,15 +29,17 @@ public class XrayBlocks {
     }
 
     private static void fromString(final String s) {
-        final String[] info = s.split(" ");
+        if(!s.startsWith("//")) {
+            final String[] info = s.split(" ");
 
-        final byte meta = Byte.parseByte(info[1]);
-        final byte r = (byte) Integer.parseInt(info[2]);
-        final byte g = (byte) Integer.parseInt(info[3]);
-        final byte b = (byte) Integer.parseInt(info[4]);
-        final byte a = (byte) Integer.parseInt(info[5]);
+            final byte meta = Byte.parseByte(info[1]);
+            final byte r = (byte) Integer.parseInt(info[2]);
+            final byte g = (byte) Integer.parseInt(info[3]);
+            final byte b = (byte) Integer.parseInt(info[4]);
+            final byte a = (byte) Integer.parseInt(info[5]);
 
-        blocks.put(info[0], new XrayBlocks(meta, r, g, b, a));
+            blocks.put(info[0], new XrayBlocks(meta, r, g, b, a));
+        }
     }
 
     public static void load(final Configuration config) {
