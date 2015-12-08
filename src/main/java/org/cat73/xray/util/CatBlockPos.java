@@ -17,6 +17,18 @@ public class CatBlockPos extends BlockPos {
         this.z = z;
     }
 
+    public void setX(final int x) {
+        this.x = x;
+    }
+
+    public void setY(final int y) {
+        this.y = y;
+    }
+
+    public void setZ(final int z) {
+        this.z = z;
+    }
+    
     public int getX() {
         return this.x;
     }

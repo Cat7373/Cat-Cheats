@@ -20,7 +20,6 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -118,10 +117,12 @@ public class Cat_Xray {
         final FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
 
         for (int x = sx; x <= endX; x++) {
+            pos.setX(x);
             for (int z = sz; z <= endZ; z++) {
+                pos.setZ(z);
                 endY = world.getChunkFromChunkCoords(x >> 4, z >> 4).getHeight(x & 15, z & 15);
                 for (int y = 0; y < endY; y++) {
-                    pos.set(x, y, z);
+                    pos.setY(y);
                     final IBlockState blockState = world.getBlockState(pos);
                     final Block block = blockState.getBlock();
 
