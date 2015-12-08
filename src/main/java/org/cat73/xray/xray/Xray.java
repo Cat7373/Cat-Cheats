@@ -30,6 +30,7 @@ public class Xray extends Thread{
     
     private final KeyBinding toggleXrayBinding;
     private final CatBlockPos pos = new CatBlockPos();
+    private final CatBlockPos pos2 = new CatBlockPos();
     private boolean toggleXray = false;
     private int displayListid = 0;
     private List<XrayBlockInfo> blockList = new ArrayList<XrayBlockInfo>();
@@ -71,10 +72,11 @@ public class Xray extends Thread{
     
     private synchronized void refresh() {
         if (this.toggleXray && this.refresh == false) {
-            this.blockList.clear();
             final WorldClient world = this.mc.theWorld;
             final EntityPlayerSP player = this.mc.thePlayer;
-            if (this.toggleXray && this.refresh == false && world != null && player != null) {
+            if (world != null && player != null) {
+                this.blockList.clear();
+
                 final int sx = (int) player.posX - this.radius;
                 final int sz = (int) player.posZ - this.radius;
                 final int endX = (int) player.posX + this.radius;
@@ -94,12 +96,16 @@ public class Xray extends Thread{
                             final Block block = blockState.getBlock();
     
                             if (block != Blocks.air) {
-                                final int meta = block.getMetaFromState(blockState);
                                 final String blockName = String.valueOf(blockRegistery.getNameForObject(block));
-    
                                 final XrayBlocks xrayBlock = XrayBlocks.find(blockName);
-                                
-                                if (xrayBlock != null && ((xrayBlock.meta == -1) || (xrayBlock.meta == meta))) {
+
+                                if (xrayBlock != null) {
+                                    if(xrayBlock.meta != -1) {
+                                        final int meta = block.getMetaFromState(blockState);
+                                        if(xrayBlock.meta != meta) {
+                                            continue;
+                                        }
+                                    }
                                     if(this.antiAntiXrayLevel == 0 || antiAntiXray(x, y, z, world)) {
                                         blockList.add(new XrayBlockInfo(x, y, z, xrayBlock));
                                     }
@@ -173,8 +179,8 @@ public class Xray extends Thread{
     }
 
     private boolean showBlock(final WorldClient world, final int x, final int y, final int z) {
-        this.pos.set(x, y, z);
-        final Block block = world.getBlockState(this.pos).getBlock();
+        this.pos2.set(x, y, z);
+        final Block block = world.getBlockState(this.pos2).getBlock();
         return block == Blocks.lava ||
                block.isTranslucent() || 
                block == Blocks.water ||
