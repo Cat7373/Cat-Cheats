@@ -2,6 +2,8 @@ package org.cat73.xray.xray;
 
 import java.util.HashMap;
 
+import org.cat73.xray.util.PlayerMessage;
+
 import net.minecraftforge.common.config.Configuration;
 
 public class XrayBlocks {
@@ -46,7 +48,12 @@ public class XrayBlocks {
         final String[] configBlocksList = config.getStringList("Blocks", "Xray", defaultBlocks, "Blocks for X-ray");
         blocks.clear();
         for(final String configBlock : configBlocksList) {
-            XrayBlocks.fromString(configBlock);
+            try {
+                XrayBlocks.fromString(configBlock);
+            } catch(Exception e) {
+                PlayerMessage.warn("Load xray block info fali!");
+                PlayerMessage.warn(configBlock);
+            }
         }
     }
     
