@@ -43,6 +43,7 @@ public class Xray extends Thread{
     private int radius = 45;
     private int antiAntiXrayLevel = 0;
     private int interval = 5000;
+    private int cooldown = 0;
 
     private Xray() {
         this.mc = Cat_Xray.getMC();
@@ -66,15 +67,18 @@ public class Xray extends Thread{
 
     public void run() {
         while(true) {
-            refresh();
+            if(cooldown-- == 0) {
+                refresh();
+                cooldown = interval;
+            }
             try {
-                Thread.sleep(interval);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
             }
         }
     }
     
-    private synchronized void refresh() {
+    private void refresh() {
         if (this.toggleXray && this.refresh == false) {
             final WorldClient world = this.mc.theWorld;
             final EntityPlayerSP player = this.mc.thePlayer;
@@ -204,7 +208,7 @@ public class Xray extends Thread{
             this.toggleXray = !this.toggleXray;
             if (this.toggleXray) {
                 reloadConfig();
-                refresh();
+                cooldown = 0;
             } else {
                 GL11.glDeleteLists(this.displayListid, 1);
             }
@@ -301,7 +305,7 @@ public class Xray extends Thread{
         config.load();
 
         this.radius = config.get("Xray", "Radius", 45, "Radius for X-ray").getInt();
-        this.interval = config.get("Xray", "Interval", 5, "Interval for X-ray(Seconds)").getInt() * 1000;
+        this.interval = config.get("Xray", "Interval", 5, "Interval for X-ray(Seconds)").getInt() * 10;
         this.antiAntiXrayLevel = config.get("Xray", "AntiAntiXrayLevel", 0, "Anti Anti X-ray Level (0: off, 1~3: open)").getInt();
         if(this.radius < 0) {
             PlayerMessage.warn("Radius setting error!");
@@ -309,7 +313,7 @@ public class Xray extends Thread{
         }
         if(this.interval < 0) {
             PlayerMessage.warn("Interval setting error!");
-            this.interval = 5000;
+            this.interval = 50;
         }
         if(this.antiAntiXrayLevel > 3 || this.antiAntiXrayLevel < 0) {
             PlayerMessage.warn("AntiAntiXrayLevel setting error!");
@@ -319,19 +323,5 @@ public class Xray extends Thread{
         XrayBlocks.load(config);
 
         config.save();
-    }
-}
-
-class XrayBlockInfo {
-    public final int x;
-    public final int y;
-    public final int z;
-    public final XrayBlocks xrayBlock;
-    
-    public XrayBlockInfo(int x, int y, int z, XrayBlocks xrayBlock) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.xrayBlock = xrayBlock;
     }
 }
