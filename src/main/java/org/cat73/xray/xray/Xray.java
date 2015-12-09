@@ -29,6 +29,7 @@ import org.lwjgl.opengl.GL11;
 
 public class Xray extends Thread{
     private final Minecraft mc;
+    private final FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
     
     private final KeyBinding toggleXrayBinding;
     private final CatBlockPos pos = new CatBlockPos();
@@ -85,9 +86,13 @@ public class Xray extends Thread{
                 final int endX = (int) player.posX + this.radius;
                 final int endZ = (int) player.posZ + this.radius;
                 int endY;
-    
-                final FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
+
                 Chunk chunk;
+                IBlockState blockState;
+                Block block;
+                String blockName;
+                XrayBlocks xrayBlock;
+                int meta;
     
                 for (int x = sx; x <= endX; x++) {
                     this.pos.setX(x);
@@ -97,16 +102,16 @@ public class Xray extends Thread{
                         endY = chunk.getHeight(x & 15, z & 15);
                         for (int y = 0; y < endY; y++) {
                             this.pos.setY(y);
-                            final IBlockState blockState = chunk.getBlockState(this.pos);
-                            final Block block = blockState.getBlock();
+                            blockState = chunk.getBlockState(this.pos);
+                            block = blockState.getBlock();
     
                             if (block != Blocks.air) {
-                                final String blockName = String.valueOf(blockRegistery.getNameForObject(block));
-                                final XrayBlocks xrayBlock = XrayBlocks.find(blockName);
+                                blockName = String.valueOf(this.blockRegistery.getNameForObject(block));
+                                xrayBlock = XrayBlocks.find(blockName);
 
                                 if (xrayBlock != null) {
                                     if(xrayBlock.meta != -1) {
-                                        final int meta = block.getMetaFromState(blockState);
+                                        meta = block.getMetaFromState(blockState);
                                         if(xrayBlock.meta != meta) {
                                             continue;
                                         }
