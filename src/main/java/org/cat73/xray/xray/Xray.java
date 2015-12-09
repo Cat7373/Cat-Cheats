@@ -36,7 +36,7 @@ public class Xray extends Thread{
     private final CatBlockPos pos2 = new CatBlockPos();
     private final List<XrayBlockInfo> blockList = new ArrayList<XrayBlockInfo>();
 
-    private final int displayListid;
+    private int displayListid;
     private boolean toggleXray = false;
     private boolean refresh = false;
     
@@ -56,8 +56,6 @@ public class Xray extends Thread{
         FMLCommonHandler.instance().bus().register(this);
         MinecraftForge.EVENT_BUS.register(this);
 
-        this.displayListid = GL11.glGenLists(1);
-        
         this.start();
     }
 
@@ -205,13 +203,14 @@ public class Xray extends Thread{
     @SubscribeEvent
     public void keyboardEvent(final KeyInputEvent event) {
         if (this.toggleXrayBinding.isPressed()) {
-            this.toggleXray = !this.toggleXray;
             if (this.toggleXray) {
-                reloadConfig();
-                cooldown = 0;
-            } else {
                 GL11.glDeleteLists(this.displayListid, 1);
+            } else {
+                reloadConfig();
+                this.displayListid = GL11.glGenLists(1);
+                cooldown = 0;
             }
+            this.toggleXray = !this.toggleXray;
         }
     }
 
