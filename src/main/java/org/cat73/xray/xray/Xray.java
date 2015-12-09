@@ -87,7 +87,6 @@ public class Xray extends Thread{
                 final int sz = (int) player.posZ - this.radius;
                 final int endX = (int) player.posX + this.radius;
                 final int endZ = (int) player.posZ + this.radius;
-                int endY;
 
                 Chunk chunk;
                 IBlockState blockState;
@@ -96,14 +95,10 @@ public class Xray extends Thread{
                 XrayBlocks xrayBlock;
                 int meta;
     
-                for (int x = sx; x <= endX; x++) {
-                    this.pos.setX(x);
-                    for (int z = sz; z <= endZ; z++) {
-                        this.pos.setZ(z);
+                for (int x = sx; x <= endX; x++, this.pos.setX(x)) {
+                    for (int z = sz; z <= endZ; z++, this.pos.setZ(z)) {
                         chunk = world.getChunkFromChunkCoords(x >> 4, z >> 4);
-                        endY = chunk.getHeight(x & 15, z & 15);
-                        for (int y = 0; y < endY; y++) {
-                            this.pos.setY(y);
+                        for (int y = 0; y < 255; y++, this.pos.setY(y)) {
                             blockState = chunk.getBlockState(this.pos);
                             block = blockState.getBlock();
     
