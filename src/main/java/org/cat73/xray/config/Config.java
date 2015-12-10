@@ -14,10 +14,11 @@ public class Config {
 
     public static void init(File file) {
         Config.config = new Configuration(file);
-        reloadConfig();
+        load();
+        save();
     }
 
-    public static void reloadConfig() {
+    public static void load() {
         Config.config.load();
 
         Config.radius = Config.config.get("Xray", "Radius", 45, "Radius for X-ray").getInt();
@@ -38,7 +39,9 @@ public class Config {
         }
         
         XrayBlock.load(Config.config);
-
+    }
+    
+    public static void save() {
         Config.config.save();
     }
 
@@ -51,14 +54,17 @@ public class Config {
     public static int getAntiAntiXrayLevel() {
         return Config.antiAntiXrayLevel;
     }
-    // TODO 同时保存到配置文件中
+
     public static void setRadius(final int value) {
         Config.radius = value;
+        Config.config.get("Xray", "Radius", 45, "Radius for X-ray").set(value);
     }
     public static void setInterval(final int value) {
         Config.interval = value;
+        Config.config.get("Xray", "Interval", 45, "Radius for X-ray").set(value);
     }
     public static void setAntiAntiXrayLevel(final int value) {
         Config.antiAntiXrayLevel = value;
+        Config.config.get("Xray", "AntiAntiXrayLevel", 45, "Radius for X-ray").set(value);
     }
 }

@@ -27,7 +27,6 @@ public class Gui_Config extends GuiScreenBase {
         final int button_width = this.width / 2 - 3;
         int id = 0;
 
-        // TODO 按钮位置对齐
         this.numericRadius = new GuiNumericField(this.fontRendererObj, id++, 90, 10, this.width - 95);
         this.numericRadius.setValue(Config.getRadius());
         this.numericRadius.setMinimum(0);
@@ -69,6 +68,7 @@ public class Gui_Config extends GuiScreenBase {
                 Config.setRadius(this.numericRadius.getValue());
                 Config.setInterval(this.numericInterval.getValue());
                 Config.setAntiAntiXrayLevel(this.numericAntiAntiXrayLevel.getValue());
+                Config.save();
                 this.mc.displayGuiScreen(this.parentScreen);
             }
             if (guiButton.id == this.btnCancel.id) {

@@ -38,16 +38,14 @@ public class Xray extends Thread {
     private int displayListid;
     private boolean toggleXray = false;
     private boolean refresh = false;
+    private int cooldown = 0;
 
     private int radius = 45;
     private int antiAntiXrayLevel = 0;
     private int interval = 50;
-    private int cooldown = 0;
 
     private Xray() {
         this.minecraft = Minecraft.getMinecraft();
-
-        reloadConfig();
 
         this.toggleXrayBinding = new KeyBinding("Toggle Xray", 45, "Cat-Xray");
         ClientRegistry.registerKeyBinding(this.toggleXrayBinding);
@@ -204,7 +202,7 @@ public class Xray extends Thread {
             if (this.toggleXray) {
                 GL11.glDeleteLists(this.displayListid, 1);
             } else {
-                reloadConfig();
+                getConfig();
                 this.displayListid = GL11.glGenLists(1);
                 cooldown = 0;
             }
@@ -297,8 +295,7 @@ public class Xray extends Thread {
         GL11.glVertex3f(x + 1, y + 1, z + 1);
     }
 
-    private void reloadConfig() {
-        Config.reloadConfig();
+    private void getConfig() {
         this.radius = Config.getRadius();
         this.interval = Config.getInterval();
         this.antiAntiXrayLevel = Config.getAntiAntiXrayLevel();
