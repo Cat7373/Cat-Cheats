@@ -7,12 +7,12 @@ import org.cat73.xray.util.PlayerMessage;
 import net.minecraftforge.common.config.Configuration;
 
 public class XrayBlocks {
-    private static final String[] defaultBlocks = new String[]{
-        "0 0 128 200 -1 minecraft:lapis_ore",
-        "255 0 0 200 -1 minecraft:redstone_ore",
-        "255 255 0 200 -1 minecraft:gold_ore",
-        "0 255 0 200 -1 minecraft:emerald_ore",
-        "0 191 255 200 -1 minecraft:diamond_ore"
+    private static final String[] defaultBlocks = new String[] {
+        "minecraft:lapis_ore -1 0 0 128 200",
+        "minecraft:redstone_ore -1 255 0 0 200",
+        "minecraft:gold_ore -1 255 255 0 200",
+        "minecraft:emerald_ore -1 0 255 0 200",
+        "minecraft:diamond_ore -1 0 191 255 200"
     };
     private static final HashMap<String, XrayBlocks> blocks = new HashMap<String, XrayBlocks>();
 
@@ -56,7 +56,7 @@ public class XrayBlocks {
             }
         }
     }
-    
+
     public static XrayBlocks find(String name) {
         return blocks.get(name);
     }

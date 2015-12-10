@@ -15,7 +15,7 @@ import org.cat73.xray.xray.Xray;
 @Mod(modid = Cat_Xray.MODID, version = Cat_Xray.VERSION)
 public class Cat_Xray {
     public static final String MODID = "Cat-Xray";
-    public static final String VERSION = "0.1.1";
+    public static final String VERSION = "0.1.2";
     public static final boolean DEBUG = true;
     @Instance()
     private static Cat_Xray instance;
@@ -48,11 +48,11 @@ public class Cat_Xray {
 
         Xray.init();
     }
-    
+
     public static Minecraft getMC() {
         return Cat_Xray.instance.mc;
     }
-    
+
     public static Configuration getConfig() {
         return Cat_Xray.instance.config;
     }

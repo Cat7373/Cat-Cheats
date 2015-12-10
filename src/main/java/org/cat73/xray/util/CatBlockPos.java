@@ -28,7 +28,7 @@ public class CatBlockPos extends BlockPos {
     public void setZ(final int z) {
         this.z = z;
     }
-    
+
     public int getX() {
         return this.x;
     }

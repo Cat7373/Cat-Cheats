@@ -30,7 +30,7 @@ import org.lwjgl.opengl.GL11;
 public class Xray extends Thread{
     private final Minecraft mc;
     private final FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
-    
+
     private final KeyBinding toggleXrayBinding;
     private final CatBlockPos pos = new CatBlockPos();
     private final CatBlockPos pos2 = new CatBlockPos();
@@ -39,7 +39,7 @@ public class Xray extends Thread{
     private int displayListid;
     private boolean toggleXray = false;
     private boolean refresh = false;
-    
+
     private int radius = 45;
     private int antiAntiXrayLevel = 0;
     private int interval = 50;
@@ -75,7 +75,7 @@ public class Xray extends Thread{
             }
         }
     }
-    
+
     private void refresh() {
         if (this.toggleXray && this.refresh == false) {
             final WorldClient world = this.mc.theWorld;
@@ -94,7 +94,7 @@ public class Xray extends Thread{
                 String blockName;
                 XrayBlocks xrayBlock;
                 int meta;
-    
+
                 for (int x = sx; x <= endX; x++) {
                     this.pos.setX(x);
                     for (int z = sz; z <= endZ; z++) {
@@ -104,7 +104,7 @@ public class Xray extends Thread{
                             this.pos.setY(y);
                             blockState = chunk.getBlockState(this.pos);
                             block = blockState.getBlock();
-    
+
                             if (block != Blocks.air) {
                                 blockName = String.valueOf(this.blockRegistery.getNameForObject(block));
                                 xrayBlock = XrayBlocks.find(blockName);
@@ -128,7 +128,7 @@ public class Xray extends Thread{
             }
         }
     }
-    
+
     private boolean antiAntiXray(final int x, final int y, final int z, final WorldClient world) {
         boolean[] isTranslucents;
         if(this.antiAntiXrayLevel >= 1) {
@@ -197,7 +197,7 @@ public class Xray extends Thread{
                block == Blocks.flowing_water ||
                block == Blocks.flowing_lava;
     }
-    
+
     @SubscribeEvent
     public void keyboardEvent(final KeyInputEvent event) {
         if (this.toggleXrayBinding.isPressed()) {
@@ -226,7 +226,7 @@ public class Xray extends Thread{
             GL11.glPopMatrix();
         }
     }
-    
+
     @SubscribeEvent
     public void onTickInGame(final ClientTickEvent event) {
         if (this.toggleXray && this.refresh && this.mc.thePlayer != null) {
@@ -253,7 +253,7 @@ public class Xray extends Thread{
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glEndList();
-        
+
         this.refresh = false;
     }
 
@@ -296,7 +296,7 @@ public class Xray extends Thread{
         GL11.glVertex3f(x + 1, y, z + 1);
         GL11.glVertex3f(x + 1, y + 1, z + 1);
     }
-    
+
     private void reloadConfig() {
         final Configuration config = Cat_Xray.getConfig();
         config.load();
