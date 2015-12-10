@@ -5,7 +5,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.fml.common.FMLLog;
 
 import org.apache.logging.log4j.Level;
-import org.cat73.xray.Cat_Xray;
+import org.cat73.xray.reference.Reference;
 
 /**
  * 玩家信息类
@@ -66,7 +66,7 @@ public class PlayerMessage {
      * @param message 要输出的调试信息
      */
     public static void debug(final String message) {
-        if(Cat_Xray.DEBUG) {
+        if(Reference.DEBUG) {
             FMLLog.log(Level.DEBUG, message);
             message("[调试]" + message);
         }

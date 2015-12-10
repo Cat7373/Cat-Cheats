@@ -2,24 +2,18 @@ package org.cat73.xray;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import org.cat73.xray.proxy.Proxy;
+import org.cat73.xray.proxy.CommonProxy;
+import org.cat73.xray.reference.Reference;
 
-@Mod(modid = Cat_Xray.MODID, version = Cat_Xray.VERSION)
+@Mod(modid = Reference.MODID, version = Reference.VERSION)
 public class Cat_Xray {
-    public static final String MODID = "Cat-Xray";
-    public static final String VERSION = "0.2.0";
-    public static final boolean DEBUG = true;
-
-    @Instance()
-    private static Cat_Xray instance;
-    @SidedProxy(serverSide="org.cat73.xray.proxy.ServerProxy", clientSide = "org.cat73.xray.proxy.ClientProxy")
-    public static Proxy proxy;
+    @SidedProxy(serverSide=Reference.PROXY_SERVER, clientSide = Reference.PROXY_CLIENT)
+    private static CommonProxy proxy;
 
     @EventHandler
     public void preInit(final FMLPreInitializationEvent event) {
