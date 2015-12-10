@@ -31,6 +31,7 @@
 # 感谢(字母顺序排列):
 * Kradxn’s-X-ray-Mod
 * [LunatriusCore](https://github.com/Lunatrius/LunatriusCore)
+* [Minecraft Forge](http://files.minecraftforge.net/)
 * [Schematica](https://github.com/Lunatrius/Schematica)
 * [WorldEdit](https://github.com/sk89q/WorldEdit)
 
@@ -42,3 +43,4 @@
 * 增加飞行作弊功能。
 * 整理杂乱的代码。
 * 刷新显示列表单独一个线程。
+* 增加多国语言支持。

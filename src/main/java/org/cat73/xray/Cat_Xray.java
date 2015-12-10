@@ -10,6 +10,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.config.Configuration;
 
+import org.cat73.xray.gui.Gui;
 import org.cat73.xray.xray.Xray;
 
 @Mod(modid = Cat_Xray.MODID, version = Cat_Xray.VERSION)
@@ -47,6 +48,7 @@ public class Cat_Xray {
         }
 
         Xray.init();
+        Gui.init();
     }
 
     public static Minecraft getMC() {
