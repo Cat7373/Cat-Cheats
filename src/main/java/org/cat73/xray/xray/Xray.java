@@ -27,8 +27,8 @@ import org.cat73.xray.util.CatBlockPos;
 import org.cat73.xray.util.PlayerMessage;
 import org.lwjgl.opengl.GL11;
 
-public class Xray extends Thread{
-    private final Minecraft mc;
+public class Xray extends Thread {
+    private final Minecraft minecraft;
     private final FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
 
     private final KeyBinding toggleXrayBinding;
@@ -46,7 +46,7 @@ public class Xray extends Thread{
     private int cooldown = 0;
 
     private Xray() {
-        this.mc = Cat_Xray.getMC();
+        this.minecraft = Cat_Xray.getMinecraft();
 
         reloadConfig();
 
@@ -63,6 +63,7 @@ public class Xray extends Thread{
         new Xray();
     }
 
+    @Override
     public void run() {
         while(true) {
             if(cooldown-- == 0) {
@@ -78,8 +79,8 @@ public class Xray extends Thread{
 
     private void refresh() {
         if (this.toggleXray && this.refresh == false) {
-            final WorldClient world = this.mc.theWorld;
-            final EntityPlayerSP player = this.mc.thePlayer;
+            final WorldClient world = this.minecraft.theWorld;
+            final EntityPlayerSP player = this.minecraft.thePlayer;
             if (world != null && player != null) {
                 this.blockList.clear();
 
@@ -200,7 +201,7 @@ public class Xray extends Thread{
 
     @SubscribeEvent
     public void keyboardEvent(final KeyInputEvent event) {
-        if (this.toggleXrayBinding.isPressed()) {
+        if (this.minecraft.currentScreen == null && this.toggleXrayBinding.isPressed()) {
             if (this.toggleXray) {
                 GL11.glDeleteLists(this.displayListid, 1);
             } else {
@@ -214,8 +215,8 @@ public class Xray extends Thread{
 
     @SubscribeEvent
     public void renderWorldLastEvent(final RenderWorldLastEvent event) {
-        if (this.toggleXray && this.mc.theWorld != null) {
-            final EntityPlayerSP player = this.mc.thePlayer;
+        if (this.toggleXray && this.minecraft.theWorld != null) {
+            final EntityPlayerSP player = this.minecraft.thePlayer;
             final double doubleX = player.lastTickPosX + (player.posX - player.lastTickPosX) * event.partialTicks;
             final double doubleY = player.lastTickPosY + (player.posY - player.lastTickPosY) * event.partialTicks;
             final double doubleZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * event.partialTicks;
@@ -229,7 +230,7 @@ public class Xray extends Thread{
 
     @SubscribeEvent
     public void onTickInGame(final ClientTickEvent event) {
-        if (this.toggleXray && this.refresh && this.mc.thePlayer != null) {
+        if (this.toggleXray && this.refresh && this.minecraft.thePlayer != null) {
             compileDL();
         }
     }

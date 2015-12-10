@@ -3,6 +3,7 @@ package com.github.lunatrius.core.client.gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
+
 import org.lwjgl.input.Keyboard;
 
 import java.io.IOException;
@@ -12,7 +13,8 @@ import java.util.List;
 public class GuiScreenBase extends GuiScreen {
     protected final GuiScreen parentScreen;
 
-    protected List<GuiButton> buttonList = super.buttonList; // I feel dirty
+    @SuppressWarnings("unchecked")
+    protected List<GuiButton> buttonList = super.buttonList;
     protected List<GuiTextField> textFields = new ArrayList<GuiTextField>();
 
     public GuiScreenBase() {

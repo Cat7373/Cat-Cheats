@@ -20,7 +20,7 @@ public class Cat_Xray {
     public static final boolean DEBUG = true;
     @Instance()
     private static Cat_Xray instance;
-    private Minecraft mc;
+    private Minecraft minecraft;
     private Configuration config;
 
     @EventHandler
@@ -38,7 +38,7 @@ public class Cat_Xray {
             return;
         }
 
-        this.mc = Minecraft.getMinecraft();
+        this.minecraft = Minecraft.getMinecraft();
     }
 
     @EventHandler
@@ -51,8 +51,8 @@ public class Cat_Xray {
         Gui.init();
     }
 
-    public static Minecraft getMC() {
-        return Cat_Xray.instance.mc;
+    public static Minecraft getMinecraft() {
+        return Cat_Xray.instance.minecraft;
     }
 
     public static Configuration getConfig() {
