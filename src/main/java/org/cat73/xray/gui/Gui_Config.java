@@ -28,16 +28,20 @@ public class Gui_Config extends GuiScreenBase {
         int id = 0;
 
         // TODO 按钮位置对齐
-        this.numericRadius = new GuiNumericField(this.fontRendererObj, id++, 40, 10, this.width - 45);
+        this.numericRadius = new GuiNumericField(this.fontRendererObj, id++, 90, 10, this.width - 95);
         this.numericRadius.setValue(Config.getRadius());
+        this.numericRadius.setMinimum(0);
         this.buttonList.add(this.numericRadius);
 
-        this.numericInterval = new GuiNumericField(this.fontRendererObj, id++, 50, 30, this.width - 55);
+        this.numericInterval = new GuiNumericField(this.fontRendererObj, id++, 90, 30, this.width - 95);
         this.numericInterval.setValue(Config.getInterval());
+        this.numericInterval.setMinimum(0);
         this.buttonList.add(this.numericInterval);
 
-        this.numericAntiAntiXrayLevel = new GuiNumericField(this.fontRendererObj, id++, 70, 50, this.width - 75);
+        this.numericAntiAntiXrayLevel = new GuiNumericField(this.fontRendererObj, id++, 90, 50, this.width - 95);
         this.numericAntiAntiXrayLevel.setValue(Config.getAntiAntiXrayLevel());
+        this.numericAntiAntiXrayLevel.setMinimum(0);
+        this.numericAntiAntiXrayLevel.setMaximum(3);
         this.buttonList.add(this.numericAntiAntiXrayLevel);
         
         this.btnSave = new GuiButton(id++, 3, button_top, button_width, 20, "Save");
@@ -51,9 +55,9 @@ public class Gui_Config extends GuiScreenBase {
     public void drawScreen(int par1, int par2, float par3) {
         drawDefaultBackground();
 
-        drawString(this.fontRendererObj, "Radius:", 2, 14, 0xFFFFFF);
-        drawString(this.fontRendererObj, "Interval:", 2, 34, 0xFFFFFF);
-        drawString(this.fontRendererObj, "AntiAntiXrayLevel:", 2, 54, 0xFFFFFF);
+        drawString(this.fontRendererObj, "Radius:", 5, 14, 0xFFFFFF);
+        drawString(this.fontRendererObj, "Interval:", 5, 34, 0xFFFFFF);
+        drawString(this.fontRendererObj, "AntiAntiXrayLevel:", 5, 54, 0xFFFFFF);
         
         super.drawScreen(par1, par2, par3);
     }
