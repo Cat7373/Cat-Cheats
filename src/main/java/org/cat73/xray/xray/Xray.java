@@ -42,7 +42,7 @@ public class Xray extends Thread{
     
     private int radius = 45;
     private int antiAntiXrayLevel = 0;
-    private int interval = 5000;
+    private int interval = 50;
     private int cooldown = 0;
 
     private Xray() {

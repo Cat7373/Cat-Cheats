@@ -28,8 +28,14 @@
   * 2: 比上一项透视到的矿物更多，也更可能误报
   * 3: 比上一项透视到的矿物更多，也更可能误报
 
-# TODO：  
-* 创建一个 Wiki。    
+# 感谢(字母顺序排列):
+* Kradxn’s-X-ray-Mod
+* [LunatriusCore](https://github.com/Lunatrius/LunatriusCore)
+* [Schematica](https://github.com/Lunatrius/Schematica)
+* [WorldEdit](https://github.com/sk89q/WorldEdit)
+
+# TODO：
+* 创建一个 Wiki。
 * 制作一个 GUI 配置页。
 * 增加夜视功能。
 * 增加生物透视功能。
