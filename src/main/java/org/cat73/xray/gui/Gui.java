@@ -1,7 +1,5 @@
 package org.cat73.xray.gui;
 
-import org.cat73.xray.Cat_Xray;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -15,7 +13,7 @@ public class Gui {
     private final KeyBinding toggleXrayGui;
 
     private Gui() {
-        this.minecraft = Cat_Xray.getMinecraft();
+        this.minecraft = Minecraft.getMinecraft();
 
         this.toggleXrayGui = new KeyBinding("Toggle Setting", 64, "Cat-Xray");
         ClientRegistry.registerKeyBinding(this.toggleXrayGui);
@@ -31,7 +29,7 @@ public class Gui {
     public void keyboardEvent(final KeyInputEvent event) {
         if (this.minecraft.currentScreen == null) {
             if (this.toggleXrayGui.isPressed()) {
-                this.minecraft.displayGuiScreen(new Gui_Setting(this.minecraft.currentScreen));
+                this.minecraft.displayGuiScreen(new Gui_Main(this.minecraft.currentScreen));
             }
         }
     }

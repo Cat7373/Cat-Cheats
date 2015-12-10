@@ -1,4 +1,4 @@
-package org.cat73.xray.xray;
+package org.cat73.xray.config;
 
 import java.util.HashMap;
 
@@ -6,7 +6,7 @@ import org.cat73.xray.util.PlayerMessage;
 
 import net.minecraftforge.common.config.Configuration;
 
-public class XrayBlocks {
+public class XrayBlock {
     private static final String[] defaultBlocks = new String[] {
         "minecraft:lapis_ore -1 0 0 128 200",
         "minecraft:redstone_ore -1 255 0 0 200",
@@ -14,7 +14,7 @@ public class XrayBlocks {
         "minecraft:emerald_ore -1 0 255 0 200",
         "minecraft:diamond_ore -1 0 191 255 200"
     };
-    private static final HashMap<String, XrayBlocks> blocks = new HashMap<String, XrayBlocks>();
+    private static final HashMap<String, XrayBlock> blocks = new HashMap<String, XrayBlock>();
 
     public final byte meta;
     public final byte r;
@@ -22,7 +22,7 @@ public class XrayBlocks {
     public final byte b;
     public final byte a;
 
-    private XrayBlocks(byte meta, byte r, byte g, byte b, byte a) {
+    private XrayBlock(byte meta, byte r, byte g, byte b, byte a) {
         this.meta = meta;
         this.r = r;
         this.g = g;
@@ -40,7 +40,7 @@ public class XrayBlocks {
             final byte b = (byte) Integer.parseInt(info[4]);
             final byte a = (byte) Integer.parseInt(info[5]);
 
-            blocks.put(info[0], new XrayBlocks(meta, r, g, b, a));
+            blocks.put(info[0], new XrayBlock(meta, r, g, b, a));
         }
     }
 
@@ -49,7 +49,7 @@ public class XrayBlocks {
         blocks.clear();
         for(final String configBlock : configBlocksList) {
             try {
-                XrayBlocks.fromString(configBlock);
+                XrayBlock.fromString(configBlock);
             } catch(Exception e) {
                 PlayerMessage.warn("Load xray block info fali!");
                 PlayerMessage.warn(configBlock);
@@ -57,7 +57,7 @@ public class XrayBlocks {
         }
     }
 
-    public static XrayBlocks find(String name) {
+    public static XrayBlock find(String name) {
         return blocks.get(name);
     }
 }

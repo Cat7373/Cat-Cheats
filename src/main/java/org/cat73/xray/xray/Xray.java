@@ -13,7 +13,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -22,9 +21,9 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry;
 import net.minecraftforge.fml.common.registry.GameData;
 
-import org.cat73.xray.Cat_Xray;
+import org.cat73.xray.config.Config;
+import org.cat73.xray.config.XrayBlock;
 import org.cat73.xray.util.CatBlockPos;
-import org.cat73.xray.util.PlayerMessage;
 import org.lwjgl.opengl.GL11;
 
 public class Xray extends Thread {
@@ -46,7 +45,7 @@ public class Xray extends Thread {
     private int cooldown = 0;
 
     private Xray() {
-        this.minecraft = Cat_Xray.getMinecraft();
+        this.minecraft = Minecraft.getMinecraft();
 
         reloadConfig();
 
@@ -93,7 +92,7 @@ public class Xray extends Thread {
                 IBlockState blockState;
                 Block block;
                 String blockName;
-                XrayBlocks xrayBlock;
+                XrayBlock xrayBlock;
                 int meta;
 
                 for (int x = sx; x <= endX; x++) {
@@ -108,7 +107,7 @@ public class Xray extends Thread {
 
                             if (block != Blocks.air) {
                                 blockName = String.valueOf(this.blockRegistery.getNameForObject(block));
-                                xrayBlock = XrayBlocks.find(blockName);
+                                xrayBlock = XrayBlock.find(blockName);
 
                                 if (xrayBlock != null) {
                                     if(xrayBlock.meta != -1) {
@@ -258,7 +257,7 @@ public class Xray extends Thread {
         this.refresh = false;
     }
 
-    private void renderBlock(final int x, final int y, final int z, final XrayBlocks block) {
+    private void renderBlock(final int x, final int y, final int z, final XrayBlock block) {
         GL11.glColor4ub(block.r, block.g, block.b, block.a);
 
         GL11.glVertex3f(x, y, z);
@@ -299,27 +298,9 @@ public class Xray extends Thread {
     }
 
     private void reloadConfig() {
-        final Configuration config = Cat_Xray.getConfig();
-        config.load();
-
-        this.radius = config.get("Xray", "Radius", 45, "Radius for X-ray").getInt();
-        this.interval = config.get("Xray", "Interval", 5, "Interval for X-ray(Seconds)").getInt() * 10;
-        this.antiAntiXrayLevel = config.get("Xray", "AntiAntiXrayLevel", 0, "Anti Anti X-ray Level (0: off, 1~3: open)").getInt();
-        if(this.radius < 0) {
-            PlayerMessage.warn("Radius setting error!");
-            this.radius = 45;
-        }
-        if(this.interval < 0) {
-            PlayerMessage.warn("Interval setting error!");
-            this.interval = 50;
-        }
-        if(this.antiAntiXrayLevel > 3 || this.antiAntiXrayLevel < 0) {
-            PlayerMessage.warn("AntiAntiXrayLevel setting error!");
-            this.antiAntiXrayLevel = 0;
-        }
-
-        XrayBlocks.load(config);
-
-        config.save();
+        Config.reloadConfig();
+        this.radius = Config.getRadius();
+        this.interval = Config.getInterval();
+        this.antiAntiXrayLevel = Config.getAntiAntiXrayLevel();
     }
 }
