@@ -95,10 +95,13 @@ public class Xray extends Thread{
                 XrayBlocks xrayBlock;
                 int meta;
     
-                for (int x = sx; x <= endX; x++, this.pos.setX(x)) {
-                    for (int z = sz; z <= endZ; z++, this.pos.setZ(z)) {
+                for (int x = sx; x <= endX; x++) {
+                    this.pos.setX(x);
+                    for (int z = sz; z <= endZ; z++) {
+                        this.pos.setZ(z);
                         chunk = world.getChunkFromChunkCoords(x >> 4, z >> 4);
-                        for (int y = 0; y < 255; y++, this.pos.setY(y)) {
+                        for (int y = 0; y <= 255; y++) {
+                            this.pos.setY(y);
                             blockState = chunk.getBlockState(this.pos);
                             block = blockState.getBlock();
     
