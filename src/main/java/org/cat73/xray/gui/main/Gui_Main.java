@@ -2,6 +2,7 @@ package org.cat73.xray.gui.main;
 
 import java.io.IOException;
 
+import org.cat73.xray.config.XrayBlock;
 import org.cat73.xray.gui.Gui_Config;
 
 import net.minecraft.client.gui.GuiButton;
@@ -56,6 +57,14 @@ public class Gui_Main extends GuiScreenBase {
         drawDefaultBackground();
         
         this.gui_Main_Block_Slot.drawScreen(par1, par2, par3);
+        
+        if(this.gui_Main_Block_Slot.selectedIndex == -1) {
+            this.btnEditBlock.enabled = false;
+            this.btnDeleteBlock.enabled = false;
+        } else {
+            // this.btnEditBlock.enabled = true;
+            this.btnDeleteBlock.enabled = true;
+        }
 
         super.drawScreen(par1, par2, par3);
     }
@@ -69,7 +78,10 @@ public class Gui_Main extends GuiScreenBase {
     @Override
     protected void actionPerformed(GuiButton guiButton) {
         if (guiButton.enabled) {
-            if (guiButton.id == this.btnConfig.id) {
+            if (guiButton.id == this.btnDeleteBlock.id) {
+                XrayBlock.delByIndex(this.gui_Main_Block_Slot.selectedIndex);
+                XrayBlock.save();
+            } else if (guiButton.id == this.btnConfig.id) {
                 this.mc.displayGuiScreen(new Gui_Config(this));
             } else if (guiButton.id == this.btnExit.id) {
                 this.mc.displayGuiScreen(this.parentScreen);

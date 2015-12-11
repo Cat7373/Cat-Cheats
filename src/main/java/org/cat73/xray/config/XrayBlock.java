@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.cat73.xray.util.PlayerMessage;
 
 import net.minecraft.block.Block;
-import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry;
 import net.minecraftforge.fml.common.registry.GameData;
 
@@ -35,28 +35,32 @@ public class XrayBlock {
         this.b = b;
         this.a = a;
     }
-
-    private static void fromString(final String s) {
-        if(!s.startsWith("//")) {
-            final String[] info = s.split(" ");
-
-            final int id = blockRegistery.getId(info[0]);
-            if(id == -1) {
-                PlayerMessage.warn("Block " + info[0] + " not found!");
-                return;
-            }
-            final byte meta = Byte.parseByte(info[1]);
-            final byte r = (byte) Integer.parseInt(info[2]);
-            final byte g = (byte) Integer.parseInt(info[3]);
-            final byte b = (byte) Integer.parseInt(info[4]);
-            final byte a = (byte) Integer.parseInt(info[5]);
-
-            blocks.add(new XrayBlock(id, meta, r, g, b, a));
-        }
+    
+    @Override
+    public String toString() {
+        final Block block = blockRegistery.getObjectById(this.id);
+        return blockRegistery.getNameForObject(block).toString() + " " + this.meta + " " + this.r + " " + this.g + " " + this.b + " " + this.a;
     }
 
-    public static void load(final Configuration config) {
-        final String[] configBlocksList = config.getStringList("Blocks", "Xray", defaultBlocks, "Blocks for X-ray");
+    private static void fromString(final String s) {
+        final String[] info = s.split(" ");
+
+        final int id = blockRegistery.getId(info[0]);
+        if(id == -1) {
+            PlayerMessage.warn("Block " + info[0] + " not found!");
+            return;
+        }
+        final byte meta = Byte.parseByte(info[1]);
+        final byte r = (byte) Integer.parseInt(info[2]);
+        final byte g = (byte) Integer.parseInt(info[3]);
+        final byte b = (byte) Integer.parseInt(info[4]);
+        final byte a = (byte) Integer.parseInt(info[5]);
+
+        blocks.add(new XrayBlock(id, meta, r, g, b, a));
+    }
+
+    public static void load() {
+        final String[] configBlocksList = Config.config.get("Xray", "Blocks", defaultBlocks, "Blocks for X-ray").getStringList();
         blocks.clear();
         for(final String configBlock : configBlocksList) {
             try {
@@ -66,6 +70,16 @@ public class XrayBlock {
                 PlayerMessage.warn(configBlock);
             }
         }
+    }
+    
+    public static void save() {
+        Property configBolcks = Config.config.get("Xray", "Blocks", defaultBlocks, "Blocks for X-ray");
+        final String[] configBlocksList = new String[getSize()];
+        for(int i = 0; i < configBlocksList.length; i++) {
+            configBlocksList[i] = blocks.get(i).toString();
+        }
+        configBolcks.set(configBlocksList);
+        Config.config.save();
     }
 
     public static XrayBlock find(final int id, final byte meta) {
@@ -86,5 +100,9 @@ public class XrayBlock {
     
     public static XrayBlock getByIndex(int index) {
         return blocks.get(index);
+    }
+
+    public static XrayBlock delByIndex(int index) {
+        return blocks.remove(index);
     }
 }

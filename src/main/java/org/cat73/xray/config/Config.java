@@ -7,7 +7,7 @@ import net.minecraftforge.common.config.Configuration;
 import org.cat73.xray.util.PlayerMessage;
 
 public class Config {
-    private static Configuration config;
+    protected static Configuration config;
     private static int radius;
     private static int interval;
     private static int antiAntiXrayLevel;
@@ -38,7 +38,7 @@ public class Config {
             Config.antiAntiXrayLevel = 0;
         }
         
-        XrayBlock.load(Config.config);
+        XrayBlock.load();
     }
     
     public static void save() {
