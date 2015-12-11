@@ -38,11 +38,13 @@ public class XrayBlock {
     
     @Override
     public String toString() {
+        // TODO 一些诸如方块id转名称的方法放进util包里
         final Block block = blockRegistery.getObjectById(this.id);
         return blockRegistery.getNameForObject(block).toString() + " " + this.meta + " " + this.r + " " + this.g + " " + this.b + " " + this.a;
     }
 
-    private static void fromString(final String s) {
+    public static void addFromString(final String s) {
+        // TODO 自动去重
         final String[] info = s.split(" ");
 
         final int id = blockRegistery.getId(info[0]);
@@ -51,11 +53,12 @@ public class XrayBlock {
             return;
         }
         final byte meta = Byte.parseByte(info[1]);
-        final byte r = (byte) Integer.parseInt(info[2]);
-        final byte g = (byte) Integer.parseInt(info[3]);
-        final byte b = (byte) Integer.parseInt(info[4]);
-        final byte a = (byte) Integer.parseInt(info[5]);
+        final byte r = Byte.parseByte(info[2]);
+        final byte g = Byte.parseByte(info[3]);
+        final byte b = Byte.parseByte(info[4]);
+        final byte a = Byte.parseByte(info[5]);
 
+        // TODO meta -1 跟 非 -1 的分开存 优化性能
         blocks.add(new XrayBlock(id, meta, r, g, b, a));
     }
 
@@ -64,7 +67,7 @@ public class XrayBlock {
         blocks.clear();
         for(final String configBlock : configBlocksList) {
             try {
-                XrayBlock.fromString(configBlock);
+                XrayBlock.addFromString(configBlock);
             } catch(Exception e) {
                 PlayerMessage.warn("Load xray block info fali!");
                 PlayerMessage.warn(configBlock);
@@ -103,6 +106,7 @@ public class XrayBlock {
     }
 
     public static XrayBlock delByIndex(int index) {
+        // TODO 为空时自动替换为默认值
         return blocks.remove(index);
     }
 }
