@@ -89,9 +89,9 @@ public class Xray extends Thread {
                 Chunk chunk;
                 IBlockState blockState;
                 Block block;
-                String blockName;
+                int blockId;
                 XrayBlock xrayBlock;
-                int meta;
+                byte meta;
 
                 for (int x = sx; x <= endX; x++) {
                     this.pos.setX(x);
@@ -104,16 +104,11 @@ public class Xray extends Thread {
                             block = blockState.getBlock();
 
                             if (block != Blocks.air) {
-                                blockName = String.valueOf(this.blockRegistery.getNameForObject(block));
-                                xrayBlock = XrayBlock.find(blockName);
+                                blockId = this.blockRegistery.getId(block);
+                                meta = (byte) block.getMetaFromState(blockState);
+                                xrayBlock = XrayBlock.find(blockId, meta);
 
                                 if (xrayBlock != null) {
-                                    if(xrayBlock.meta != -1) {
-                                        meta = block.getMetaFromState(blockState);
-                                        if(xrayBlock.meta != meta) {
-                                            continue;
-                                        }
-                                    }
                                     if(this.antiAntiXrayLevel == 0 || antiAntiXray(x, y, z, world)) {
                                         blockList.add(new XrayBlockInfo(x, y, z, xrayBlock));
                                     }
@@ -296,6 +291,8 @@ public class Xray extends Thread {
     }
 
     private void getConfig() {
+        // TODO GUI 配置完善之后删掉load
+        Config.load();
         this.radius = Config.getRadius();
         this.interval = Config.getInterval();
         this.antiAntiXrayLevel = Config.getAntiAntiXrayLevel();

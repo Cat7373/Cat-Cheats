@@ -36,9 +36,6 @@
 * [Schematica](https://github.com/Lunatrius/Schematica)
 * [WorldEdit](https://github.com/sk89q/WorldEdit)
 
-# 已知问题:
-* 同一个名称的方块但附加值不同时，只能透视第一个。
-
 # TODO:
 * 创建一个 Wiki。
 * Blocks 通过 GUI 配置。
