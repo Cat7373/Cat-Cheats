@@ -28,13 +28,13 @@ public class Gui_Config extends GuiScreenBase {
         int id = 0;
 
         this.numericRadius = new GuiNumericField(this.fontRendererObj, id++, 90, 10, this.width - 95);
-        this.numericRadius.setValue(Config.getRadius());
         this.numericRadius.setMinimum(0);
+        this.numericRadius.setValue(Config.getRadius());
         this.buttonList.add(this.numericRadius);
 
         this.numericInterval = new GuiNumericField(this.fontRendererObj, id++, 90, 30, this.width - 95);
-        this.numericInterval.setValue(Config.getInterval());
         this.numericInterval.setMinimum(0);
+        this.numericInterval.setValue(Config.getInterval());
         this.buttonList.add(this.numericInterval);
 
         this.numericAntiAntiXrayLevel = new GuiNumericField(this.fontRendererObj, id++, 90, 50, this.width - 95);

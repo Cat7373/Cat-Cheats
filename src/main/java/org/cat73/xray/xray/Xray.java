@@ -291,8 +291,6 @@ public class Xray extends Thread {
     }
 
     private void getConfig() {
-        // TODO GUI 配置完善之后删掉load
-        Config.load();
         this.radius = Config.getRadius();
         this.interval = Config.getInterval();
         this.antiAntiXrayLevel = Config.getAntiAntiXrayLevel();

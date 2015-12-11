@@ -61,7 +61,7 @@ public class Gui_Main extends GuiScreenBase {
             this.btnEditBlock.enabled = false;
             this.btnDeleteBlock.enabled = false;
         } else {
-            // this.btnEditBlock.enabled = true;
+            this.btnEditBlock.enabled = true;
             this.btnDeleteBlock.enabled = true;
         }
 

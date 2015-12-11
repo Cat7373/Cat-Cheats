@@ -1,7 +1,6 @@
 package org.cat73.xray.gui.addblock;
 
 import org.cat73.xray.config.XrayBlock;
-import org.cat73.xray.util.PlayerMessage;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
@@ -25,39 +24,45 @@ public class Gui_AddBlock extends GuiScreenBase {
     private GuiButton btnSave;
     private GuiButton btnCancel;
     
+    private int xrayBlockIndex = -1;
+    private XrayBlock xrayBlock = null;
+    
     public Gui_AddBlock(GuiScreen guiScreen) {
         super(guiScreen);
     }
     
     public Gui_AddBlock(GuiScreen guiScreen, int xrayBlockIndex) {
         this(guiScreen);
-        // TODO 支持编辑方块
+        this.xrayBlockIndex = xrayBlockIndex;
+        this.xrayBlock = XrayBlock.getByIndex(xrayBlockIndex);
     }
     
     @Override
     public void initGui() {
         this.buttonList.clear();
-        
+
         final int button_top = this.height - 22;
         final int button_width = this.width / 2 - 3;
         int id = 0;
         
         this.numericBlockId = new GuiNumericField(this.fontRendererObj, id++, 90, 10, (int) (this.width / 3));
         this.numericBlockId.setMinimum(0);
+        this.numericBlockId.setValue(this.xrayBlock == null ? 0 : this.xrayBlock.id);
         this.buttonList.add(this.numericBlockId);
         
         this.numericMeta = new GuiNumericField(this.fontRendererObj, id++, 90, 30, (int) (this.width / 3));
-        this.numericMeta.setMinimum(0);
+        this.numericMeta.setMinimum(-1);
         this.numericMeta.setMaximum(15);
+        this.numericMeta.setValue(this.xrayBlock == null ? 0 : this.xrayBlock.meta);
         this.buttonList.add(this.numericMeta);
         
-        this.slider_r = new GuiSlider(id++, this.width - 160, this.height / 10 * 5, "Red-Value", 0.5f);
+        this.slider_r = new GuiSlider(id++, this.width - 160, this.height / 10 * 5, "Red-Value", this.xrayBlock == null ? 0.5f : (this.xrayBlock.r & 255) / 255.0f);
         this.buttonList.add(this.slider_r);
-        this.slider_g = new GuiSlider(id++, this.width - 160, this.height / 10 * 6, "Green-Value", 0.5f);
+        this.slider_g = new GuiSlider(id++, this.width - 160, this.height / 10 * 6, "Green-Value", this.xrayBlock == null ? 0.5f : (this.xrayBlock.g & 255) / 255.0f);
         this.buttonList.add(this.slider_g);
-        this.slider_b = new GuiSlider(id++, this.width - 160, this.height / 10 * 7, "Blue-Value", 0.5f);
+        this.slider_b = new GuiSlider(id++, this.width - 160, this.height / 10 * 7, "Blue-Value", this.xrayBlock == null ? 0.5f : (this.xrayBlock.b & 255) / 255.0f);
         this.buttonList.add(this.slider_b);
-        this.slider_a = new GuiSlider(id++, this.width - 160, this.height / 10 * 8, "Alpha-Value", 1.0f);
+        this.slider_a = new GuiSlider(id++, this.width - 160, this.height / 10 * 8, "Alpha-Value", this.xrayBlock == null ? 1.0f : (this.xrayBlock.a & 255) / 255.0f);
         this.buttonList.add(this.slider_a);
         // TODO Meta-Check && Enable
         
@@ -86,12 +91,15 @@ public class Gui_AddBlock extends GuiScreenBase {
     protected void actionPerformed(GuiButton guiButton) {
         if (guiButton.enabled) {
             if (guiButton.id == this.btnSave.id) {
+                if(this.xrayBlock != null) {
+                    // TODO 支持直接编辑而不是删除后重新添加
+                    XrayBlock.delByIndex(xrayBlockIndex);
+                }
                 XrayBlock.addFromString(this.toString());
                 XrayBlock.save();
                 this.mc.displayGuiScreen(this.parentScreen);
             }
             if (guiButton.id == this.btnCancel.id) {
-                PlayerMessage.debug(this.toString());
                 this.mc.displayGuiScreen(this.parentScreen);
             }
         }
