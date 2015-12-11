@@ -20,15 +20,15 @@ public class XrayBlock {
     };
     private static final ArrayList<XrayBlock> blocks = new ArrayList<XrayBlock>();
 
-    public final int blockId;
+    public final int id;
     public final byte meta;
     public final byte r;
     public final byte g;
     public final byte b;
     public final byte a;
 
-    private XrayBlock(int blockId, byte meta, byte r, byte g, byte b, byte a) {
-        this.blockId = blockId;
+    private XrayBlock(int id, byte meta, byte r, byte g, byte b, byte a) {
+        this.id = id;
         this.meta = meta;
         this.r = r;
         this.g = g;
@@ -40,8 +40,8 @@ public class XrayBlock {
         if(!s.startsWith("//")) {
             final String[] info = s.split(" ");
 
-            final int blockId = blockRegistery.getId(info[0]);
-            if(blockId == -1) {
+            final int id = blockRegistery.getId(info[0]);
+            if(id == -1) {
                 PlayerMessage.warn("Block " + info[0] + " not found!");
                 return;
             }
@@ -51,7 +51,7 @@ public class XrayBlock {
             final byte b = (byte) Integer.parseInt(info[4]);
             final byte a = (byte) Integer.parseInt(info[5]);
 
-            blocks.add(new XrayBlock(blockId, meta, r, g, b, a));
+            blocks.add(new XrayBlock(id, meta, r, g, b, a));
         }
     }
 
@@ -68,15 +68,23 @@ public class XrayBlock {
         }
     }
 
-    public static XrayBlock find(final int blockId, final byte meta) {
+    public static XrayBlock find(final int id, final byte meta) {
         for(final XrayBlock xrayBlock : blocks) {
-            if(xrayBlock.blockId == blockId && xrayBlock.meta == meta) {
+            if(xrayBlock.id == id && xrayBlock.meta == meta) {
                 return xrayBlock;
             }
         }
         if(meta != -1) {
-            return find(blockId, (byte) -1);
+            return find(id, (byte) -1);
         }
         return null;
+    }
+    
+    public static int getSize() {
+        return blocks.size();
+    }
+    
+    public static XrayBlock getByIndex(int index) {
+        return blocks.get(index);
     }
 }

@@ -1,4 +1,8 @@
-package org.cat73.xray.gui;
+package org.cat73.xray.gui.main;
+
+import java.io.IOException;
+
+import org.cat73.xray.gui.Gui_Config;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -6,12 +10,12 @@ import net.minecraft.client.gui.GuiScreen;
 import com.github.lunatrius.core.client.gui.GuiScreenBase;
 
 public class Gui_Main extends GuiScreenBase {
-    // TODO 透视的方块编辑
-    private GuiButton btnAddBlock = null;
-    private GuiButton btnEditBlock = null;
-    private GuiButton btnDeleteBlock = null;
-    private GuiButton btnConfig = null;
-    private GuiButton btnExit = null;
+    private Gui_Main_Block_Slot gui_Main_Block_Slot;
+    private GuiButton btnAddBlock;
+    private GuiButton btnEditBlock;
+    private GuiButton btnDeleteBlock;
+    private GuiButton btnConfig;
+    private GuiButton btnExit;
 
     public Gui_Main(GuiScreen guiScreen) {
         super(guiScreen);
@@ -43,13 +47,23 @@ public class Gui_Main extends GuiScreenBase {
 
         this.btnExit = new GuiButton(id++, this.width / 11 * 9, button_top, button_width, 20, "Exit");
         this.buttonList.add(this.btnExit);
+        
+        this.gui_Main_Block_Slot = new Gui_Main_Block_Slot(this);
     }
     
     @Override
     public void drawScreen(int par1, int par2, float par3) {
         drawDefaultBackground();
+        
+        this.gui_Main_Block_Slot.drawScreen(par1, par2, par3);
 
         super.drawScreen(par1, par2, par3);
+    }
+    
+    @Override
+    public void handleMouseInput() throws IOException {
+        super.handleMouseInput();
+        this.gui_Main_Block_Slot.handleMouseInput();
     }
     
     @Override
@@ -57,9 +71,10 @@ public class Gui_Main extends GuiScreenBase {
         if (guiButton.enabled) {
             if (guiButton.id == this.btnConfig.id) {
                 this.mc.displayGuiScreen(new Gui_Config(this));
-            }
-            if (guiButton.id == this.btnExit.id) {
+            } else if (guiButton.id == this.btnExit.id) {
                 this.mc.displayGuiScreen(this.parentScreen);
+            } else {
+                this.gui_Main_Block_Slot.actionPerformed(guiButton);
             }
         }
     }

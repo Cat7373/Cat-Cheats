@@ -1,5 +1,7 @@
 package org.cat73.xray.gui;
 
+import org.cat73.xray.gui.main.Gui_Main;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
