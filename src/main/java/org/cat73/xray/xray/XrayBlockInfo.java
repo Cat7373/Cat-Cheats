@@ -8,7 +8,7 @@ public class XrayBlockInfo {
     public final int z;
     public final XrayBlock xrayBlock;
 
-    public XrayBlockInfo(int x, int y, int z, XrayBlock xrayBlock) {
+    public XrayBlockInfo(final int x, final int y, final int z, final XrayBlock xrayBlock) {
         this.x = x;
         this.y = y;
         this.z = z;

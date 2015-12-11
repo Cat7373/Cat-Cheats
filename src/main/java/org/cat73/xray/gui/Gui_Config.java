@@ -15,7 +15,7 @@ public class Gui_Config extends GuiScreenBase {
     private GuiButton btnSave;
     private GuiButton btnCancel;
     
-    public Gui_Config(GuiScreen guiScreen) {
+    public Gui_Config(final GuiScreen guiScreen) {
         super(guiScreen);
     }
     
@@ -51,7 +51,7 @@ public class Gui_Config extends GuiScreenBase {
     }
     
     @Override
-    public void drawScreen(int par1, int par2, float par3) {
+    public void drawScreen(final int par1, final int par2, final float par3) {
         drawDefaultBackground();
 
         drawString(this.fontRendererObj, "Radius:", 5, 14, 0xFFFFFF);
@@ -62,7 +62,7 @@ public class Gui_Config extends GuiScreenBase {
     }
     
     @Override
-    protected void actionPerformed(GuiButton guiButton) {
+    protected void actionPerformed(final GuiButton guiButton) {
         if (guiButton.enabled) {
             if (guiButton.id == this.btnSave.id) {
                 Config.setRadius(this.numericRadius.getValue());

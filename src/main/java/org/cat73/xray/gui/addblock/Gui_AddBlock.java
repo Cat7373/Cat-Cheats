@@ -13,7 +13,7 @@ import com.github.lunatrius.core.client.gui.GuiNumericField;
 import com.github.lunatrius.core.client.gui.GuiScreenBase;
 
 public class Gui_AddBlock extends GuiScreenBase {
-    private static final FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
+    private final static FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
     
     private GuiNumericField numericBlockId;
     private GuiNumericField numericMeta;
@@ -27,16 +27,17 @@ public class Gui_AddBlock extends GuiScreenBase {
     private int xrayBlockIndex = -1;
     private XrayBlock xrayBlock = null;
     
-    public Gui_AddBlock(GuiScreen guiScreen) {
+    public Gui_AddBlock(final GuiScreen guiScreen) {
         super(guiScreen);
     }
     
-    public Gui_AddBlock(GuiScreen guiScreen, int xrayBlockIndex) {
+    public Gui_AddBlock(final GuiScreen guiScreen, final int xrayBlockIndex) {
         this(guiScreen);
         this.xrayBlockIndex = xrayBlockIndex;
         this.xrayBlock = XrayBlock.getByIndex(xrayBlockIndex);
     }
     
+    // TODO 窗口大小变化后值会重置
     @Override
     public void initGui() {
         this.buttonList.clear();
@@ -74,7 +75,7 @@ public class Gui_AddBlock extends GuiScreenBase {
     }
     
     @Override
-    public void drawScreen(int par1, int par2, float par3) {
+    public void drawScreen(final int par1, final int par2, final float par3) {
         drawDefaultBackground();
         
         drawString(this.fontRendererObj, "BlockId:", 5, 14, 0xFFFFFF);
@@ -88,7 +89,7 @@ public class Gui_AddBlock extends GuiScreenBase {
     }
     
     @Override
-    protected void actionPerformed(GuiButton guiButton) {
+    protected void actionPerformed(final GuiButton guiButton) {
         if (guiButton.enabled) {
             if (guiButton.id == this.btnSave.id) {
                 XrayBlock.set(XrayBlock.fromString(this.toString()), xrayBlockIndex);

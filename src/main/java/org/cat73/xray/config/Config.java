@@ -12,7 +12,7 @@ public class Config {
     private static int interval;
     private static int antiAntiXrayLevel;
 
-    public static void init(File file) {
+    public static void init(final File file) {
         Config.config = new Configuration(file);
         load();
         save();

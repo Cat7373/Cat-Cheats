@@ -10,15 +10,15 @@ import net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry;
 import net.minecraftforge.fml.common.registry.GameData;
 
 public class XrayBlock {
-    private static final FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
-    private static final String[] defaultBlocks = new String[] {
+    private final static FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
+    private final static String[] defaultBlocks = new String[] {
         "minecraft:lapis_ore -1 0 0 128 200",
         "minecraft:redstone_ore -1 255 0 0 200",
         "minecraft:gold_ore -1 255 255 0 200",
         "minecraft:emerald_ore -1 0 255 0 200",
         "minecraft:diamond_ore -1 0 191 255 200"
     };
-    private static final ArrayList<XrayBlock> blocks = new ArrayList<XrayBlock>();
+    private final static ArrayList<XrayBlock> blocks = new ArrayList<XrayBlock>();
 
     public final int id;
     public final byte meta;
@@ -27,7 +27,7 @@ public class XrayBlock {
     public final byte b;
     public final byte a;
 
-    private XrayBlock(int id, byte meta, byte r, byte g, byte b, byte a) {
+    private XrayBlock(final int id, final byte meta, final byte r, final byte g, final byte b, final byte a) {
         this.id = id;
         this.meta = meta;
         this.r = r;
@@ -62,8 +62,10 @@ public class XrayBlock {
     }
 
     public static void load() {
-        final String[] configBlocksList = Config.config.get("Xray", "Blocks", defaultBlocks, "Blocks for X-ray").getStringList();
         blocks.clear();
+        
+        final String[] configBlocksList = Config.config.get("Xray", "Blocks", defaultBlocks, "Blocks for X-ray").getStringList();
+        
         XrayBlock block;
         for(final String configBlock : configBlocksList) {
             try {
@@ -80,7 +82,7 @@ public class XrayBlock {
     }
     
     public static void save() {
-        Property configBolcks = Config.config.get("Xray", "Blocks", defaultBlocks, "Blocks for X-ray");
+        final Property configBolcks = Config.config.get("Xray", "Blocks", defaultBlocks, "Blocks for X-ray");
         final String[] configBlocksList = new String[getSize()];
         for(int i = 0; i < configBlocksList.length; i++) {
             configBlocksList[i] = blocks.get(i).toString();
@@ -105,16 +107,16 @@ public class XrayBlock {
         return blocks.size();
     }
     
-    public static XrayBlock getByIndex(int index) {
+    public static XrayBlock getByIndex(final int index) {
         return blocks.get(index);
     }
 
-    public static void delByIndex(int index) {
+    public static void delByIndex(final int index) {
         // TODO 为空时自动替换为默认值
         blocks.remove(index);
     }
     
-    public static void set(XrayBlock block, int index) {
+    public static void set(final XrayBlock block, final int index) {
         blocks.set(index, block);
     }
 }

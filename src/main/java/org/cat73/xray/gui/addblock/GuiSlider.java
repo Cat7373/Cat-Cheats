@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 
-// TODO 窗口大小变化后值会重置
 public class GuiSlider extends GuiButton {
     protected float percent;
     private boolean isClicked;

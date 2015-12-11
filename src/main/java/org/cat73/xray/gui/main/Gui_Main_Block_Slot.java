@@ -11,12 +11,12 @@ import net.minecraftforge.fml.common.registry.GameData;
 
 public class Gui_Main_Block_Slot extends GuiSlot {
     private final Minecraft minecraft = Minecraft.getMinecraft();
-    private static final FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
+    private final static FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
     private final Gui_Main gui_Main;
     
     protected int selectedIndex = -1;
 
-    public Gui_Main_Block_Slot(Gui_Main gui_Main) {
+    public Gui_Main_Block_Slot(final Gui_Main gui_Main) {
         super(Minecraft.getMinecraft(), gui_Main.width, gui_Main.height, 16, gui_Main.height - 40, 24);
         this.gui_Main = gui_Main;
     }
@@ -27,12 +27,12 @@ public class Gui_Main_Block_Slot extends GuiSlot {
     }
 
     @Override
-    protected void elementClicked(int slotIndex, boolean isDoubleClick, int mouseX, int mouseY) {
+    protected void elementClicked(final int slotIndex, final boolean isDoubleClick, final int mouseX, final int mouseY) {
         this.selectedIndex = slotIndex;
     }
 
     @Override
-    protected boolean isSelected(int slotIndex) {
+    protected boolean isSelected(final int slotIndex) {
         return slotIndex == this.selectedIndex;
     }
 
@@ -41,7 +41,7 @@ public class Gui_Main_Block_Slot extends GuiSlot {
     }
 
     @Override
-    protected void drawSlot(int index, int x, int y, int par4, int mouseX, int mouseY) {
+    protected void drawSlot(final int index, final int x, final int y, final int par4, final int mouseX, final int mouseY) {
         if (index < 0 || index >= getSize()) {
             return;
         }

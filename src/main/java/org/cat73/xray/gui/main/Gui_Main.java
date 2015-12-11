@@ -20,7 +20,7 @@ public class Gui_Main extends GuiScreenBase {
     private GuiButton btnConfig;
     private GuiButton btnExit;
 
-    public Gui_Main(GuiScreen guiScreen) {
+    public Gui_Main(final GuiScreen guiScreen) {
         super(guiScreen);
     }
     
@@ -53,7 +53,7 @@ public class Gui_Main extends GuiScreenBase {
     }
     
     @Override
-    public void drawScreen(int par1, int par2, float par3) {
+    public void drawScreen(final int par1, final int par2, final float par3) {
         drawDefaultBackground();
         
         this.gui_Main_Block_Slot.drawScreen(par1, par2, par3);
@@ -76,7 +76,7 @@ public class Gui_Main extends GuiScreenBase {
     }
     
     @Override
-    protected void actionPerformed(GuiButton guiButton) {
+    protected void actionPerformed(final GuiButton guiButton) {
         if (guiButton.enabled) {
             if (guiButton.id == this.btnAddBlock.id) {
                 this.mc.displayGuiScreen(new Gui_AddBlock(this));
