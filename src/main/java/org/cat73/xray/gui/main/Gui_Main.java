@@ -27,26 +27,25 @@ public class Gui_Main extends GuiScreenBase {
         this.buttonList.clear();
         
         final int button_top = this.height - 22;
-        final int button_width = this.width / 11 * 2 - 3;
+        final int button_width = this.width / 10 * 2 - 2;
         int id = 0;
 
-        // TODO 按钮位置对齐
-        this.btnAddBlock = new GuiButton(id++, this.width / 11 * 1, button_top, button_width, 20, "Add Block");
+        this.btnAddBlock = new GuiButton(id++, 1, button_top, button_width, 20, "Add Block");
         this.buttonList.add(this.btnAddBlock);
         this.btnAddBlock.enabled = false;
 
-        this.btnEditBlock = new GuiButton(id++, this.width / 11 * 3, button_top, button_width, 20, "Edit Block");
+        this.btnEditBlock = new GuiButton(id++, this.width / 10 * 2 + 1, button_top, button_width, 20, "Edit Block");
         this.buttonList.add(this.btnEditBlock);
         this.btnEditBlock.enabled = false;
 
-        this.btnDeleteBlock = new GuiButton(id++, this.width / 11 * 5, button_top, button_width, 20, "Del Block");
+        this.btnDeleteBlock = new GuiButton(id++, this.width / 10 * 4 + 1, button_top, button_width, 20, "Del Block");
         this.buttonList.add(this.btnDeleteBlock);
         this.btnDeleteBlock.enabled = false;
 
-        this.btnConfig = new GuiButton(id++, this.width / 11 * 7, button_top, button_width, 20, "Config");
+        this.btnConfig = new GuiButton(id++, this.width / 10 * 6 + 1, button_top, button_width, 20, "Config");
         this.buttonList.add(this.btnConfig);
 
-        this.btnExit = new GuiButton(id++, this.width / 11 * 9, button_top, button_width, 20, "Exit");
+        this.btnExit = new GuiButton(id++, this.width / 10 * 8 + 1, button_top, button_width, 20, "Exit");
         this.buttonList.add(this.btnExit);
         
         this.gui_Main_Block_Slot = new Gui_Main_Block_Slot(this);
