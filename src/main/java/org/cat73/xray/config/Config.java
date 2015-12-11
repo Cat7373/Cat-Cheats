@@ -22,7 +22,7 @@ public class Config {
         Config.config.load();
 
         Config.radius = Config.config.get("Xray", "Radius", 45, "Radius for X-ray").getInt();
-        Config.interval = Config.config.get("Xray", "Interval", 5, "Interval for X-ray(Seconds)").getInt();
+        Config.interval = Config.config.get("Xray", "Interval", 50, "Interval for X-ray(Seconds)").getInt();
         Config.antiAntiXrayLevel = Config.config.get("Xray", "AntiAntiXrayLevel", 0, "Anti Anti X-ray Level (0: off, 1~3: open)").getInt();
 
         if(Config.radius < 0) {
@@ -61,10 +61,10 @@ public class Config {
     }
     public static void setInterval(final int value) {
         Config.interval = value;
-        Config.config.get("Xray", "Interval", 45, "Radius for X-ray").set(value);
+        Config.config.get("Xray", "Interval", 50, "Radius for X-ray").set(value);
     }
     public static void setAntiAntiXrayLevel(final int value) {
         Config.antiAntiXrayLevel = value;
-        Config.config.get("Xray", "AntiAntiXrayLevel", 45, "Radius for X-ray").set(value);
+        Config.config.get("Xray", "AntiAntiXrayLevel", 0, "Radius for X-ray").set(value);
     }
 }

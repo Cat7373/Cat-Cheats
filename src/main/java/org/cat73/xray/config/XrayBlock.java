@@ -12,11 +12,11 @@ import net.minecraftforge.fml.common.registry.GameData;
 public class XrayBlock {
     private final static FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
     private final static String[] defaultBlocks = new String[] {
-        "minecraft:lapis_ore -1 0 0 128 200",
-        "minecraft:redstone_ore -1 255 0 0 200",
-        "minecraft:gold_ore -1 255 255 0 200",
-        "minecraft:emerald_ore -1 0 255 0 200",
-        "minecraft:diamond_ore -1 0 191 255 200"
+        "minecraft:lapis_ore -1 0 0 -128 -56",
+        "minecraft:redstone_ore -1 -1 0 0 -56",
+        "minecraft:gold_ore -1 -1 -1 0 -56",
+        "minecraft:emerald_ore -1 0 -1 0 -56",
+        "minecraft:diamond_ore -1 0 -65 -1 -56"
     };
     private final static ArrayList<XrayBlock> blocks = new ArrayList<XrayBlock>();
 
