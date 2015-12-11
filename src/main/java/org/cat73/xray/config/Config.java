@@ -24,7 +24,7 @@ public class Config {
         Config.radius = Config.config.get("Xray", "Radius", 45, "Radius for X-ray").getInt();
         Config.interval = Config.config.get("Xray", "Interval", 5, "Interval for X-ray(Seconds)").getInt();
         Config.antiAntiXrayLevel = Config.config.get("Xray", "AntiAntiXrayLevel", 0, "Anti Anti X-ray Level (0: off, 1~3: open)").getInt();
-        
+
         if(Config.radius < 0) {
             PlayerMessage.warn("Radius setting error!");
             Config.radius = 45;
@@ -37,10 +37,10 @@ public class Config {
             PlayerMessage.warn("AntiAntiXrayLevel setting error!");
             Config.antiAntiXrayLevel = 0;
         }
-        
+
         XrayBlock.load();
     }
-    
+
     public static void save() {
         Config.config.save();
     }

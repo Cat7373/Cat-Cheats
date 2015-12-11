@@ -23,11 +23,11 @@ public class Gui_Main extends GuiScreenBase {
     public Gui_Main(final GuiScreen guiScreen) {
         super(guiScreen);
     }
-    
+
     @Override
     public void initGui() {
         this.buttonList.clear();
-        
+
         final int button_top = this.height - 22;
         final int button_width = this.width / 10 * 2 - 2;
         int id = 0;
@@ -48,16 +48,16 @@ public class Gui_Main extends GuiScreenBase {
 
         this.btnExit = new GuiButton(id++, this.width / 10 * 8 + 1, button_top, button_width, 20, "Exit");
         this.buttonList.add(this.btnExit);
-        
+
         this.gui_Main_Block_Slot = new Gui_Main_Block_Slot(this);
     }
-    
+
     @Override
     public void drawScreen(final int par1, final int par2, final float par3) {
         drawDefaultBackground();
-        
+
         this.gui_Main_Block_Slot.drawScreen(par1, par2, par3);
-        
+
         if(this.gui_Main_Block_Slot.selectedIndex == -1) {
             this.btnEditBlock.enabled = false;
             this.btnDeleteBlock.enabled = false;
@@ -68,13 +68,13 @@ public class Gui_Main extends GuiScreenBase {
 
         super.drawScreen(par1, par2, par3);
     }
-    
+
     @Override
     public void handleMouseInput() throws IOException {
         super.handleMouseInput();
         this.gui_Main_Block_Slot.handleMouseInput();
     }
-    
+
     @Override
     protected void actionPerformed(final GuiButton guiButton) {
         if (guiButton.enabled) {

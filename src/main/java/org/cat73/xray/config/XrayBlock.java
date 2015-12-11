@@ -35,7 +35,7 @@ public class XrayBlock {
         this.b = b;
         this.a = a;
     }
-    
+
     @Override
     public String toString() {
         // TODO 一些诸如方块id转名称的方法放进util包里
@@ -63,9 +63,9 @@ public class XrayBlock {
 
     public static void load() {
         blocks.clear();
-        
+
         final String[] configBlocksList = Config.config.get("Xray", "Blocks", defaultBlocks, "Blocks for X-ray").getStringList();
-        
+
         XrayBlock block;
         for(final String configBlock : configBlocksList) {
             try {
@@ -80,7 +80,7 @@ public class XrayBlock {
             }
         }
     }
-    
+
     public static void save() {
         final Property configBolcks = Config.config.get("Xray", "Blocks", defaultBlocks, "Blocks for X-ray");
         final String[] configBlocksList = new String[getSize()];
@@ -102,11 +102,11 @@ public class XrayBlock {
         }
         return null;
     }
-    
+
     public static int getSize() {
         return blocks.size();
     }
-    
+
     public static XrayBlock getByIndex(final int index) {
         return blocks.get(index);
     }
@@ -115,7 +115,7 @@ public class XrayBlock {
         // TODO 为空时自动替换为默认值
         blocks.remove(index);
     }
-    
+
     public static void set(final XrayBlock block, final int index) {
         blocks.set(index, block);
     }

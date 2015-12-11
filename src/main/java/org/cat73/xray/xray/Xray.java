@@ -185,7 +185,7 @@ public class Xray extends Thread {
         this.pos2.set(x, y, z);
         final Block block = world.getBlockState(this.pos2).getBlock();
         return block == Blocks.lava ||
-               block.isTranslucent() || 
+               block.isTranslucent() ||
                block == Blocks.water ||
                block == Blocks.flowing_water ||
                block == Blocks.flowing_lava;

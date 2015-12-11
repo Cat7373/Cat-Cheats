@@ -14,15 +14,15 @@ public class Gui_Config extends GuiScreenBase {
     private GuiNumericField numericAntiAntiXrayLevel;
     private GuiButton btnSave;
     private GuiButton btnCancel;
-    
+
     public Gui_Config(final GuiScreen guiScreen) {
         super(guiScreen);
     }
-    
+
     @Override
     public void initGui() {
         this.buttonList.clear();
-        
+
         final int button_top = this.height - 22;
         final int button_width = this.width / 2 - 3;
         int id = 0;
@@ -42,14 +42,14 @@ public class Gui_Config extends GuiScreenBase {
         this.numericAntiAntiXrayLevel.setMinimum(0);
         this.numericAntiAntiXrayLevel.setMaximum(3);
         this.buttonList.add(this.numericAntiAntiXrayLevel);
-        
+
         this.btnSave = new GuiButton(id++, 3, button_top, button_width, 20, "Save");
         this.buttonList.add(this.btnSave);
 
         this.btnCancel = new GuiButton(id++, this.width / 2, button_top, button_width, 20, "Cancel");
         this.buttonList.add(this.btnCancel);
     }
-    
+
     @Override
     public void drawScreen(final int par1, final int par2, final float par3) {
         drawDefaultBackground();
@@ -57,10 +57,10 @@ public class Gui_Config extends GuiScreenBase {
         drawString(this.fontRendererObj, "Radius:", 5, 14, 0xFFFFFF);
         drawString(this.fontRendererObj, "Interval:", 5, 34, 0xFFFFFF);
         drawString(this.fontRendererObj, "AntiAntiXrayLevel:", 5, 54, 0xFFFFFF);
-        
+
         super.drawScreen(par1, par2, par3);
     }
-    
+
     @Override
     protected void actionPerformed(final GuiButton guiButton) {
         if (guiButton.enabled) {

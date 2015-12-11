@@ -13,7 +13,7 @@ public class Gui_Main_Block_Slot extends GuiSlot {
     private final Minecraft minecraft = Minecraft.getMinecraft();
     private final static FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
     private final Gui_Main gui_Main;
-    
+
     protected int selectedIndex = -1;
 
     public Gui_Main_Block_Slot(final Gui_Main gui_Main) {
