@@ -53,7 +53,7 @@ public class Gui_Main_Block_Slot extends GuiSlot {
         final int color = ((xrayBlock.a << 24) & 0xff000000) | ((xrayBlock.r << 16) & 0x00ff0000) | ((xrayBlock.g << 8) & 0x0000ff00) | (xrayBlock.b & 0x000000ff);
 
         gui_Main.drawString(this.minecraft.fontRendererObj, blockName, x + 24, y + 6, 0x00FFFFFF);
-        Gui.drawRect(x + 180, y, x + 200, y + 20, color);
+        Gui.drawRect(x + 170, y, x + 200, y + 20, color);
     }
 
 }
