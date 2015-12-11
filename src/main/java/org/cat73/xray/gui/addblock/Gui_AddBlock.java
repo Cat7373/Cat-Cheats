@@ -64,7 +64,7 @@ public class Gui_AddBlock extends GuiScreenBase {
         this.buttonList.add(this.slider_b);
         this.slider_a = new GuiSlider(id++, this.width - 160, this.height / 10 * 8, "Alpha-Value", this.xrayBlock == null ? 1.0f : (this.xrayBlock.a & 255) / 255.0f);
         this.buttonList.add(this.slider_a);
-        // TODO Meta-Check && Enable
+        // TODO 增加这一项的开关
         
         this.btnSave = new GuiButton(id++, 3, button_top, button_width, 20, "Save");
         this.buttonList.add(this.btnSave);
@@ -91,11 +91,7 @@ public class Gui_AddBlock extends GuiScreenBase {
     protected void actionPerformed(GuiButton guiButton) {
         if (guiButton.enabled) {
             if (guiButton.id == this.btnSave.id) {
-                if(this.xrayBlock != null) {
-                    // TODO 支持直接编辑而不是删除后重新添加
-                    XrayBlock.delByIndex(xrayBlockIndex);
-                }
-                XrayBlock.addFromString(this.toString());
+                XrayBlock.set(XrayBlock.fromString(this.toString()), xrayBlockIndex);
                 XrayBlock.save();
                 this.mc.displayGuiScreen(this.parentScreen);
             }
