@@ -119,4 +119,8 @@ public class XrayBlock {
     public static void set(final XrayBlock block, final int index) {
         blocks.set(index, block);
     }
+    
+    public static void add(final XrayBlock block) {
+        blocks.add(block);
+    }
 }

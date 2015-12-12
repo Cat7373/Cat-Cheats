@@ -92,7 +92,11 @@ public class Gui_AddBlock extends GuiScreenBase {
     protected void actionPerformed(final GuiButton guiButton) {
         if (guiButton.enabled) {
             if (guiButton.id == this.btnSave.id) {
-                XrayBlock.set(XrayBlock.fromString(this.toString()), xrayBlockIndex);
+                if(this.xrayBlock == null) {
+                    XrayBlock.add(XrayBlock.fromString(this.toString()));
+                } else {
+                    XrayBlock.set(XrayBlock.fromString(this.toString()), xrayBlockIndex);
+                }
                 XrayBlock.save();
                 this.mc.displayGuiScreen(this.parentScreen);
             }
