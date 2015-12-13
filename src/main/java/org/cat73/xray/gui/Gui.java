@@ -1,6 +1,7 @@
 package org.cat73.xray.gui;
 
 import org.cat73.xray.gui.main.Gui_Main;
+import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -17,7 +18,7 @@ public class Gui {
     private Gui() {
         this.minecraft = Minecraft.getMinecraft();
 
-        this.toggleXrayGui = new KeyBinding("Toggle Setting", 64, "Cat-Xray");
+        this.toggleXrayGui = new KeyBinding("Toggle Setting", Keyboard.KEY_F6, "Cat-Xray");
         ClientRegistry.registerKeyBinding(this.toggleXrayGui);
 
         FMLCommonHandler.instance().bus().register(this);
