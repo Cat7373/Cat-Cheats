@@ -16,11 +16,15 @@ public class Fullbright extends Mod {
     @Override
     public void onInit() {
         FMLCommonHandler.instance().bus().register(this);
+        
+        setGamma();
+        onDisable();
     }
     
     @Override
     public void onEnable() {
-        this.gamma = Mod.minecraft.gameSettings.gammaSetting;
+        setGamma();
+
         Mod.minecraft.gameSettings.gammaSetting = 16.0F;
     }
     
@@ -38,5 +42,10 @@ public class Fullbright extends Mod {
                 player.removePotionEffectClient(Potion.confusion.id);
             }
         }
+    }
+    
+    private void setGamma() {
+        this.gamma = Mod.minecraft.gameSettings.gammaSetting;
+        this.gamma = this.gamma > 1.0F ? 1.0F : this.gamma;
     }
 }
