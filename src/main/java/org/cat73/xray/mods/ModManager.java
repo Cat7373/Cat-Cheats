@@ -2,6 +2,7 @@ package org.cat73.xray.mods;
 
 import java.util.HashMap;
 
+import org.cat73.xray.mods.fullbright.Fullbright;
 import org.cat73.xray.mods.gui.Gui;
 import org.cat73.xray.mods.xray.Xray;
 
@@ -22,6 +23,7 @@ public final class ModManager {
         
         putMod(new Gui());
         putMod(new Xray());
+        putMod(new Fullbright());
         
         registerHotKeys();
     }
