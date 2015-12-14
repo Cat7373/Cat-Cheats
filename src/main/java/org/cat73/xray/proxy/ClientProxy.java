@@ -1,8 +1,7 @@
 package org.cat73.xray.proxy;
 
 import org.cat73.xray.config.Config;
-import org.cat73.xray.gui.Gui;
-import org.cat73.xray.xray.Xray;
+import org.cat73.xray.mods.ModManager;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -20,7 +19,6 @@ public class ClientProxy implements CommonProxy {
 
     @Override
     public void postInit(final FMLPostInitializationEvent event) {
-        Xray.init();
-        Gui.init();
+        new ModManager();
     }
 }

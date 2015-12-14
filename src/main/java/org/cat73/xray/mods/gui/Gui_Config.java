@@ -1,4 +1,4 @@
-package org.cat73.xray.gui;
+package org.cat73.xray.mods.gui;
 
 import org.cat73.xray.config.Config;
 

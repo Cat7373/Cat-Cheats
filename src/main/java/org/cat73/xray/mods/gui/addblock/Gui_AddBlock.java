@@ -1,4 +1,4 @@
-package org.cat73.xray.gui.addblock;
+package org.cat73.xray.mods.gui.addblock;
 
 import org.cat73.xray.config.XrayBlock;
 

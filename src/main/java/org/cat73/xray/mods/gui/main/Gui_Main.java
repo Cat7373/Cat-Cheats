@@ -1,10 +1,10 @@
-package org.cat73.xray.gui.main;
+package org.cat73.xray.mods.gui.main;
 
 import java.io.IOException;
 
 import org.cat73.xray.config.XrayBlock;
-import org.cat73.xray.gui.Gui_Config;
-import org.cat73.xray.gui.addblock.Gui_AddBlock;
+import org.cat73.xray.mods.gui.Gui_Config;
+import org.cat73.xray.mods.gui.addblock.Gui_AddBlock;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

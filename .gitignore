@@ -6,4 +6,4 @@
 !build.bat
 !build.gradle
 !gradle.properties
-/src/main/java/org/cat73/xray/MainTest.java
+/src/main/java/MainTest.java

@@ -1,4 +1,4 @@
-package org.cat73.xray.xray;
+package org.cat73.xray.mods.xray;
 
 import org.cat73.xray.config.XrayBlock;
 

@@ -1,4 +1,4 @@
-package org.cat73.xray.gui.addblock;
+package org.cat73.xray.mods.gui.addblock;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;

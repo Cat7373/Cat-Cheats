@@ -1,43 +1,39 @@
-package org.cat73.xray.xray;
+package org.cat73.xray.mods.xray;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry;
 import net.minecraftforge.fml.common.registry.GameData;
 
 import org.cat73.xray.config.Config;
 import org.cat73.xray.config.XrayBlock;
+import org.cat73.xray.mods.Mod;
+import org.cat73.xray.mods.ModInfo;
 import org.cat73.xray.util.CatBlockPos;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-public class Xray extends Thread {
-    private final Minecraft minecraft;
+@ModInfo(name="Xray", hotkey=Keyboard.KEY_X)
+public class Xray extends Mod implements Runnable {
     private final FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
 
-    private final KeyBinding toggleXrayBinding;
     private final CatBlockPos pos = new CatBlockPos();
     private final CatBlockPos pos2 = new CatBlockPos();
     private final List<XrayBlockInfo> blockList = new ArrayList<XrayBlockInfo>();
 
     private int displayListid;
-    private boolean enable = false;
     private boolean refresh = false;
     private int cooldown = 0;
 
@@ -45,20 +41,12 @@ public class Xray extends Thread {
     private int antiAntiXrayLevel = 0;
     private int interval = 50;
 
-    private Xray() {
-        this.minecraft = Minecraft.getMinecraft();
-
-        this.toggleXrayBinding = new KeyBinding("Toggle Xray", Keyboard.KEY_X, "Cat-Xray");
-        ClientRegistry.registerKeyBinding(this.toggleXrayBinding);
-
+    @Override
+    public void onInit() {
         FMLCommonHandler.instance().bus().register(this);
         MinecraftForge.EVENT_BUS.register(this);
 
-        this.start();
-    }
-
-    public static void init() {
-        new Xray();
+        new Thread(this).start();
     }
 
     @Override
@@ -76,9 +64,9 @@ public class Xray extends Thread {
     }
 
     private void refresh() {
-        if (this.enable && this.refresh == false) {
-            final WorldClient world = this.minecraft.theWorld;
-            final EntityPlayerSP player = this.minecraft.thePlayer;
+        if (this.enabled && this.refresh == false) {
+            final WorldClient world = Mod.minecraft.theWorld;
+            final EntityPlayerSP player = Mod.minecraft.thePlayer;
             if (world != null && player != null) {
                 this.blockList.clear();
 
@@ -192,24 +180,22 @@ public class Xray extends Thread {
                block == Blocks.flowing_lava;
     }
 
-    @SubscribeEvent
-    public void keyboardEvent(final KeyInputEvent event) {
-        if (this.minecraft.currentScreen == null && this.toggleXrayBinding.isPressed()) {
-            if (this.enable) {
-                GL11.glDeleteLists(this.displayListid, 1);
-            } else {
-                getConfig();
-                this.displayListid = GL11.glGenLists(1);
-                cooldown = 0;
-            }
-            this.enable = !this.enable;
-        }
+    @Override
+    public void onEnable() {
+        getConfig();
+        this.displayListid = GL11.glGenLists(1);
+        cooldown = 0;
+    }
+    
+    @Override
+    public void onDisable() {
+        GL11.glDeleteLists(this.displayListid, 1);
     }
 
     @SubscribeEvent
     public void renderWorldLastEvent(final RenderWorldLastEvent event) {
-        if (this.enable && this.minecraft.theWorld != null) {
-            final EntityPlayerSP player = this.minecraft.thePlayer;
+        if (this.enabled && Mod.minecraft.theWorld != null) {
+            final EntityPlayerSP player = Mod.minecraft.thePlayer;
             final double doubleX = player.lastTickPosX + (player.posX - player.lastTickPosX) * event.partialTicks;
             final double doubleY = player.lastTickPosY + (player.posY - player.lastTickPosY) * event.partialTicks;
             final double doubleZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * event.partialTicks;
@@ -223,7 +209,7 @@ public class Xray extends Thread {
 
     @SubscribeEvent
     public void onTickInGame(final ClientTickEvent event) {
-        if (this.refresh && this.enable && this.minecraft.thePlayer != null) {
+        if (this.refresh && this.enabled && Mod.minecraft.thePlayer != null) {
             compileDL();
         }
     }
