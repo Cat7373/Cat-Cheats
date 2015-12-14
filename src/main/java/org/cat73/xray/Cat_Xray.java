@@ -10,9 +10,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.cat73.xray.proxy.CommonProxy;
 import org.cat73.xray.reference.Reference;
 
-@Mod(modid = Reference.MODID, version = Reference.VERSION)
+@Mod(modid=Reference.MODID, version=Reference.VERSION)
 public class Cat_Xray {
-    @SidedProxy(serverSide=Reference.PROXY_SERVER, clientSide = Reference.PROXY_CLIENT)
+    @SidedProxy(serverSide=Reference.PROXY_SERVER, clientSide=Reference.PROXY_CLIENT)
     private static CommonProxy proxy;
 
     @EventHandler

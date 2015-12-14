@@ -23,12 +23,17 @@ public class Mod {
     }
     
     public void toggle() {
-        if(this.enabled) {
-            onDisable();
-        } else {
+        setEnable(!this.enabled);
+    }
+    
+    public void setEnable(boolean enabled) {
+        if(enabled) {
             onEnable();
+        } else {
+            onDisable();
         }
-        enabled = !enabled;
+
+        this.enabled = enabled;
     }
     
     public void onInit() {}

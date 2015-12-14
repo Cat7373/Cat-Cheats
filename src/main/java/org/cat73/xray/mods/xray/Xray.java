@@ -46,8 +46,7 @@ public class Xray extends Mod implements Runnable {
         FMLCommonHandler.instance().bus().register(this);
         MinecraftForge.EVENT_BUS.register(this);
 
-        final Thread refreshThread = new Thread(this);
-        refreshThread.setName("Cat-Xray_Xray-Refresh");
+        final Thread refreshThread = new Thread(this, "Cat-Xray_Xray-Refresh");
         refreshThread.setDaemon(true);
         refreshThread.start();
     }
