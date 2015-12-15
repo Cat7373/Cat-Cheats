@@ -2,6 +2,7 @@ package org.cat73.xray.config;
 
 import java.util.ArrayList;
 
+import org.cat73.xray.util.BlockUnit;
 import org.cat73.xray.util.PlayerMessage;
 
 import net.minecraft.block.Block;
@@ -27,7 +28,7 @@ public class XrayBlock {
     public final byte b;
     public final byte a;
 
-    private XrayBlock(final int id, final byte meta, final byte r, final byte g, final byte b, final byte a) {
+    public XrayBlock(final int id, final byte meta, final byte r, final byte g, final byte b, final byte a) {
         this.id = id;
         this.meta = meta;
         this.r = r;
@@ -38,13 +39,29 @@ public class XrayBlock {
 
     @Override
     public String toString() {
-        // TODO 一些诸如方块id转名称的方法放进util包里
-        final Block block = blockRegistery.getObjectById(this.id);
-        return blockRegistery.getNameForObject(block).toString() + " " + this.meta + " " + this.r + " " + this.g + " " + this.b + " " + this.a;
+        return BlockUnit.getNameById(this.id) + " " + this.meta + " " + this.r + " " + this.g + " " + this.b + " " + this.a;
     }
 
+    public static void load() {
+        blocks.clear();
+
+        final String[] configBlocksList = Config.config.get("Xray", "Blocks", defaultBlocks, "Blocks for X-ray").getStringList();
+
+        XrayBlock block;
+        for(final String configBlock : configBlocksList) {
+            try {
+                block = XrayBlock.fromString(configBlock);
+                if(block != null) {
+                    add(block);
+                }
+            } catch(Exception e) {
+                PlayerMessage.warn("Load xray block info fali!");
+                PlayerMessage.warn(configBlock);
+            }
+        }
+    }
+    
     public static XrayBlock fromString(final String s) {
-        // TODO 自动去重
         final String[] info = s.split(" ");
 
         final int id = blockRegistery.getId(info[0]);
@@ -59,26 +76,6 @@ public class XrayBlock {
         final byte a = Byte.parseByte(info[5]);
 
         return new XrayBlock(id, meta, r, g, b, a);
-    }
-
-    public static void load() {
-        blocks.clear();
-
-        final String[] configBlocksList = Config.config.get("Xray", "Blocks", defaultBlocks, "Blocks for X-ray").getStringList();
-
-        XrayBlock block;
-        for(final String configBlock : configBlocksList) {
-            try {
-                // TODO meta -1 跟 非 -1 的分开存 优化性能
-                block = XrayBlock.fromString(configBlock);
-                if(block != null) {
-                    blocks.add(block);
-                }
-            } catch(Exception e) {
-                PlayerMessage.warn("Load xray block info fali!");
-                PlayerMessage.warn(configBlock);
-            }
-        }
     }
 
     public static void save() {
@@ -117,10 +114,14 @@ public class XrayBlock {
     }
 
     public static void set(final XrayBlock block, final int index) {
+        // TODO meta -1 跟 非 -1 的分开存 优化性能
+        // TODO 自动去重
         blocks.set(index, block);
     }
     
     public static void add(final XrayBlock block) {
+        // TODO meta -1 跟 非 -1 的分开存 优化性能
+        // TODO 自动去重
         blocks.add(block);
     }
 }

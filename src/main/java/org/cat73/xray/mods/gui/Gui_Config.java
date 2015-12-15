@@ -26,19 +26,23 @@ public class Gui_Config extends GuiScreenBase {
         final int button_top = this.height - 22;
         final int button_width = this.width / 2 - 3;
         int id = 0;
+        int value;
 
+        value = this.numericRadius == null ? Config.getRadius() : this.numericRadius.getValue();
         this.numericRadius = new GuiNumericField(this.fontRendererObj, id++, 90, 10, this.width - 95);
         this.numericRadius.setMinimum(0);
-        this.numericRadius.setValue(Config.getRadius());
+        this.numericRadius.setValue(value);
         this.buttonList.add(this.numericRadius);
 
+        value = this.numericInterval == null ? Config.getInterval() : this.numericInterval.getValue();
         this.numericInterval = new GuiNumericField(this.fontRendererObj, id++, 90, 30, this.width - 95);
         this.numericInterval.setMinimum(0);
-        this.numericInterval.setValue(Config.getInterval());
+        this.numericInterval.setValue(value);
         this.buttonList.add(this.numericInterval);
 
+        value = this.numericAntiAntiXrayLevel == null ? Config.getAntiAntiXrayLevel() : this.numericAntiAntiXrayLevel.getValue();
         this.numericAntiAntiXrayLevel = new GuiNumericField(this.fontRendererObj, id++, 90, 50, this.width - 95);
-        this.numericAntiAntiXrayLevel.setValue(Config.getAntiAntiXrayLevel());
+        this.numericAntiAntiXrayLevel.setValue(value);
         this.numericAntiAntiXrayLevel.setMinimum(0);
         this.numericAntiAntiXrayLevel.setMaximum(3);
         this.buttonList.add(this.numericAntiAntiXrayLevel);

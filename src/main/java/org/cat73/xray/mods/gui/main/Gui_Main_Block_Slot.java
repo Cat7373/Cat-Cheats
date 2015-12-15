@@ -1,6 +1,7 @@
 package org.cat73.xray.mods.gui.main;
 
 import org.cat73.xray.config.XrayBlock;
+import org.cat73.xray.util.GuiUnit;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -49,8 +50,8 @@ public class Gui_Main_Block_Slot extends GuiSlot {
         final XrayBlock xrayBlock = XrayBlock.getByIndex(index);
         final Block block = blockRegistery.getObjectById(xrayBlock.id);
         final String blockName = block.getLocalizedName();
-        // TODO 颜色计算挪到 unit 中
-        final int color = ((xrayBlock.a << 24) & 0xff000000) | ((xrayBlock.r << 16) & 0x00ff0000) | ((xrayBlock.g << 8) & 0x0000ff00) | (xrayBlock.b & 0x000000ff);
+
+        final int color = GuiUnit.colorToARGB(xrayBlock.r, xrayBlock.g, xrayBlock.b, xrayBlock.a); 
 
         gui_Main.drawString(this.minecraft.fontRendererObj, blockName, x + 24, y + 6, 0x00FFFFFF);
         Gui.drawRect(x + 170, y, x + 200, y + 20, color);
