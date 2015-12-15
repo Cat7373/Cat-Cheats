@@ -43,9 +43,6 @@ public class Xray extends Mod implements Runnable {
 
     @Override
     public void onInit() {
-        FMLCommonHandler.instance().bus().register(this);
-        MinecraftForge.EVENT_BUS.register(this);
-
         final Thread refreshThread = new Thread(this, "Cat-Xray_Xray-Refresh");
         refreshThread.setDaemon(true);
         refreshThread.start();
@@ -187,31 +184,35 @@ public class Xray extends Mod implements Runnable {
         getConfig();
         this.displayListid = GL11.glGenLists(1);
         cooldown = 0;
+        
+        FMLCommonHandler.instance().bus().register(this);
+        MinecraftForge.EVENT_BUS.register(this);
     }
     
     @Override
     public void onDisable() {
+        FMLCommonHandler.instance().bus().unregister(this);
+        MinecraftForge.EVENT_BUS.unregister(this);
+
         GL11.glDeleteLists(this.displayListid, 1);
     }
 
     @SubscribeEvent
     public void renderWorldLastEvent(final RenderWorldLastEvent event) {
-        if (this.enabled && Mod.minecraft.theWorld != null) {
-            final EntityPlayerSP player = Mod.minecraft.thePlayer;
-            final double doubleX = player.lastTickPosX + (player.posX - player.lastTickPosX) * event.partialTicks;
-            final double doubleY = player.lastTickPosY + (player.posY - player.lastTickPosY) * event.partialTicks;
-            final double doubleZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * event.partialTicks;
+        final EntityPlayerSP player = Mod.minecraft.thePlayer;
+        final double doubleX = player.lastTickPosX + (player.posX - player.lastTickPosX) * event.partialTicks;
+        final double doubleY = player.lastTickPosY + (player.posY - player.lastTickPosY) * event.partialTicks;
+        final double doubleZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * event.partialTicks;
 
-            GL11.glPushMatrix();
-            GL11.glTranslated(-doubleX, -doubleY, -doubleZ);
-            GL11.glCallList(this.displayListid);
-            GL11.glPopMatrix();
-        }
+        GL11.glPushMatrix();
+        GL11.glTranslated(-doubleX, -doubleY, -doubleZ);
+        GL11.glCallList(this.displayListid);
+        GL11.glPopMatrix();
     }
 
     @SubscribeEvent
     public void onTickInGame(final ClientTickEvent event) {
-        if (this.refresh && this.enabled && Mod.minecraft.thePlayer != null) {
+        if (this.refresh && Mod.minecraft.theWorld != null) {
             compileDL();
         }
     }
