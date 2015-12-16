@@ -32,12 +32,13 @@
 * Fullbright 夜视(同时会移除反胃 / 失明效果)。
 
 # 感谢(字母顺序排列):
-* Kradxn’s-X-ray-Mod
+* [Kradxn’s-X-ray-Mod](http://www.minecraftforum.net/topic/1921866-162-forge-x-ray-mod-forge-is-required/)
 * [LunatriusCore](https://github.com/Lunatrius/LunatriusCore)
 * [Minecraft Forge](http://files.minecraftforge.net/)
 * [NotEnoughItems](https://github.com/Chicken-Bones/NotEnoughItems)
 * [Schematica](https://github.com/Lunatrius/Schematica)
 * [WorldEdit](https://github.com/sk89q/WorldEdit)
+* [Wurst](https://github.com/Wurst-Imperium/Wurst-Client)
 
 # TODO:
 * 代码部分:

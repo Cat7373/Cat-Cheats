@@ -29,7 +29,7 @@ public class Fullbright extends Mod {
     
     @Override
     public void onDisable() {
-        FMLCommonHandler.instance().bus().register(this);
+        FMLCommonHandler.instance().bus().unregister(this);
 
         Mod.minecraft.gameSettings.gammaSetting = this.gamma;
     }
