@@ -6,6 +6,7 @@ import net.minecraftforge.common.config.Configuration;
 
 import org.cat73.xray.util.PlayerMessage;
 
+// TODO 重构下配置部分
 public class Config {
     protected static Configuration config;
     private static int radius;

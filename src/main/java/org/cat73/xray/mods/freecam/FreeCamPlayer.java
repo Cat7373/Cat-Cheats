@@ -10,13 +10,10 @@ import net.minecraft.util.MovementInput;
 import net.minecraft.world.World;
 
 public class FreeCamPlayer extends EntityPlayer {
-    protected final static Minecraft minecraft = Minecraft.getMinecraft();
+    private final static Minecraft minecraft = Minecraft.getMinecraft();
 
     public FreeCamPlayer(final World worldIn, final GameProfile gameProfile) {
         super(worldIn, gameProfile);
-        this.capabilities.allowFlying = true;
-        this.capabilities.isFlying = true;
-        this.noClip = true;
     }
     
     @Override
@@ -34,6 +31,7 @@ public class FreeCamPlayer extends EntityPlayer {
             this.inventory = player.inventory;
 
             // TODO 更平滑的加速与减速
+            // TODO 支持疾跑键加速
             // 刷新速度
             final float flySpeed = this.capabilities.getFlySpeed();
             final float strafe = movementInput.moveStrafe * flySpeed * 6.0F;
@@ -60,6 +58,6 @@ public class FreeCamPlayer extends EntityPlayer {
 
     @Override
     public boolean isSpectator() {
-        return false;
+        return true;
     }
 }

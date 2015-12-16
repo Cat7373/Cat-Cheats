@@ -41,8 +41,7 @@ public class Xray extends Mod implements Runnable {
     private int antiAntiXrayLevel = 0;
     private int interval = 50;
 
-    @Override
-    public void onInit() {
+    public Xray() {
         final Thread refreshThread = new Thread(this, "Cat-Xray_Xray-Refresh");
         refreshThread.setDaemon(true);
         refreshThread.start();

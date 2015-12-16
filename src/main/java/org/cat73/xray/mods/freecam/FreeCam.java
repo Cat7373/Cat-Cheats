@@ -17,7 +17,7 @@ public class FreeCam extends Mod {
         final WorldClient world = Mod.minecraft.theWorld;
 
         this.ghostPlayer = new FreeCamPlayer(world, player.getGameProfile());
-        this.ghostPlayer.copyLocationAndAnglesFrom(Mod.minecraft.thePlayer);
+        this.ghostPlayer.copyLocationAndAnglesFrom(player);
 
         world.spawnEntityInWorld(this.ghostPlayer);
         Mod.minecraft.setRenderViewEntity(this.ghostPlayer);
