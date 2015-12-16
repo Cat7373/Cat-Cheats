@@ -16,7 +16,7 @@ public class Fullbright extends Mod {
     @Override
     public void onInit() {
         setGamma();
-        onDisable();
+        Mod.minecraft.gameSettings.gammaSetting = this.gamma;
     }
     
     @Override

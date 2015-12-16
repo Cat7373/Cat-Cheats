@@ -30,6 +30,7 @@
 
 # 其他功能列表
 * Fullbright 夜视(同时会移除反胃 / 失明效果)。
+* FreeCam 本地观察者模式，可以穿墙查看周围，可以穿墙操作附近的东西。
 
 # 感谢(字母顺序排列):
 * [Kradxn’s-X-ray-Mod](http://www.minecraftforum.net/topic/1921866-162-forge-x-ray-mod-forge-is-required/)
@@ -45,7 +46,6 @@
   * 增加生物透视功能。
   * 增加飞行作弊功能。
   * 增加多国语言支持。
-  * 增加本地观察者模式。
   * 增加弓箭瞄准辅助。
   * 刷新显示列表单独一个线程。
   * 美化 GUI 配置页面。
