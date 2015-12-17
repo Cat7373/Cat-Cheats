@@ -31,9 +31,12 @@ public class FreeCamPlayer extends EntityPlayer {
             this.inventory = player.inventory;
 
             // TODO 更平滑的加速与减速
-            // TODO 支持疾跑键加速
             // 刷新速度
-            final float flySpeed = this.capabilities.getFlySpeed();
+            float flySpeed = this.capabilities.getFlySpeed();
+            if(FreeCamPlayer.minecraft.gameSettings.keyBindSprint.isKeyDown()) {
+                flySpeed *= 1.8;
+            }
+            
             final float strafe = movementInput.moveStrafe * flySpeed * 6.0F;
             final float forward = movementInput.moveForward * flySpeed * 6.0F;
             final float sin = MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F);

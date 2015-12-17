@@ -19,10 +19,10 @@ public class Mod {
     }
     
     public void toggle() {
-        setEnable(!this.enabled);
+        setEnabled(!this.enabled);
     }
     
-    public void setEnable(boolean enabled) {
+    public void setEnabled(boolean enabled) {
         if(enabled) {
             onEnable();
         } else {
