@@ -18,7 +18,7 @@ public class Gui_CreateGive extends GuiScreenBase {
 
     @Override
     public void initGui() {
-        this.buttonList.clear();
+        super.initGui();
 
         final int button_top = this.height - 22;
         final int button_width = this.width / 3 - 3;

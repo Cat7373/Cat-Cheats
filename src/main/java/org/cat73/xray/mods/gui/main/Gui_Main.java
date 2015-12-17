@@ -26,7 +26,7 @@ public class Gui_Main extends GuiScreenBase {
 
     @Override
     public void initGui() {
-        this.buttonList.clear();
+        super.initGui();
 
         final int button_top = this.height - 22;
         final int button_width = this.width / 10 * 2 - 2;
