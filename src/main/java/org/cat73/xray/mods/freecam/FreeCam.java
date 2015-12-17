@@ -30,6 +30,6 @@ public class FreeCam extends Mod {
 
         world.removeEntity(this.ghostPlayer);
         Mod.minecraft.setRenderViewEntity(player);
-        // TODO 刷新显示
+        Mod.minecraft.renderGlobal.loadRenderers();
     }
 }
