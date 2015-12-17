@@ -74,8 +74,7 @@ public class Gui_Config extends GuiScreenBase {
                 Config.setAntiAntiXrayLevel(this.numericAntiAntiXrayLevel.getValue());
                 Config.save();
                 this.mc.displayGuiScreen(this.parentScreen);
-            }
-            if (guiButton.id == this.btnCancel.id) {
+            } else if (guiButton.id == this.btnCancel.id) {
                 this.mc.displayGuiScreen(this.parentScreen);
             }
         }

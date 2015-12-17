@@ -23,13 +23,13 @@ public class Mod {
     }
     
     public void setEnabled(boolean enabled) {
-        if(enabled) {
+        this.enabled = enabled;
+
+        if(this.enabled) {
             onEnable();
         } else {
             onDisable();
         }
-
-        this.enabled = enabled;
     }
 
     public void onEnable() {}

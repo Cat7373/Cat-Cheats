@@ -22,15 +22,15 @@ public class XrayBlock {
     private final static ArrayList<XrayBlock> blocks = new ArrayList<XrayBlock>();
 
     public final int id;
-    public final byte meta;
+    public final byte damage;
     public final byte r;
     public final byte g;
     public final byte b;
     public final byte a;
 
-    public XrayBlock(final int id, final byte meta, final byte r, final byte g, final byte b, final byte a) {
+    public XrayBlock(final int id, final byte damage, final byte r, final byte g, final byte b, final byte a) {
         this.id = id;
-        this.meta = meta;
+        this.damage = damage;
         this.r = r;
         this.g = g;
         this.b = b;
@@ -39,7 +39,7 @@ public class XrayBlock {
 
     @Override
     public String toString() {
-        return BlockUnit.getNameById(this.id) + " " + this.meta + " " + this.r + " " + this.g + " " + this.b + " " + this.a;
+        return BlockUnit.getNameById(this.id) + " " + this.damage + " " + this.r + " " + this.g + " " + this.b + " " + this.a;
     }
 
     public static void load() {
@@ -88,13 +88,13 @@ public class XrayBlock {
         Config.config.save();
     }
 
-    public static XrayBlock find(final int id, final byte meta) {
+    public static XrayBlock find(final int id, final byte damage) {
         for(final XrayBlock xrayBlock : blocks) {
-            if(xrayBlock.id == id && xrayBlock.meta == meta) {
+            if(xrayBlock.id == id && xrayBlock.damage == damage) {
                 return xrayBlock;
             }
         }
-        if(meta != -1) {
+        if(damage != -1) {
             return find(id, (byte) -1);
         }
         return null;

@@ -2,6 +2,7 @@ package org.cat73.xray.mods;
 
 import java.util.HashMap;
 
+import org.cat73.xray.mods.creategive.CreateGive;
 import org.cat73.xray.mods.freecam.FreeCam;
 import org.cat73.xray.mods.fullbright.Fullbright;
 import org.cat73.xray.mods.gui.Gui;
@@ -26,8 +27,13 @@ public final class ModManager {
         putMod(new Xray());
         putMod(new Fullbright());
         putMod(new FreeCam());
+        putMod(new CreateGive());
         
         registerHotKeys();
+    }
+    
+    public static Mod getMod(String name) {
+        return mods.get(name);
     }
 
     private void putMod(final Mod mod) {

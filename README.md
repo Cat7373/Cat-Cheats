@@ -13,7 +13,7 @@
 # 配置说明:
 * Add / Edit Block: 增加或编辑要透视的方块：
   * BlockId: 方块的ID
-  * Meta: 方块的附加值(-1 表示不检测)
+  * Damage: 方块的附加值(-1 表示不检测)
   * Red-Value: 线条颜色的 红色占比
   * Green-Value: 线条颜色的 绿色占比
   * Blue-Value: 线条颜色的 蓝色占比
@@ -29,8 +29,9 @@
     * 3: 比上一项透视到的矿物更多，也更可能误报
 
 # 其他功能列表
-* Fullbright 夜视(同时会移除反胃 / 失明效果)。
+* CreateGive 在创造模式下模拟 give 指令。
 * FreeCam 本地观察者模式，可以穿墙查看周围，可以穿墙操作附近的东西。
+* Fullbright 夜视(同时会移除反胃 / 失明效果)。
 
 # 感谢(字母顺序排列):
 * [Kradxn’s-X-ray-Mod](http://www.minecraftforum.net/topic/1921866-162-forge-x-ray-mod-forge-is-required/)

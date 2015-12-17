@@ -78,7 +78,7 @@ public class Xray extends Mod implements Runnable {
                 Block block;
                 int blockId;
                 XrayBlock xrayBlock;
-                byte meta;
+                byte damage;
 
                 for (int x = sx; x <= endX; x++) {
                     this.pos.setX(x);
@@ -92,8 +92,8 @@ public class Xray extends Mod implements Runnable {
 
                             if (block != Blocks.air) {
                                 blockId = this.blockRegistery.getId(block);
-                                meta = (byte) block.getMetaFromState(blockState);
-                                xrayBlock = XrayBlock.find(blockId, meta);
+                                damage = (byte) block.getMetaFromState(blockState);
+                                xrayBlock = XrayBlock.find(blockId, damage);
 
                                 if (xrayBlock != null) {
                                     if(this.antiAntiXrayLevel == 0 || antiAntiXray(x, y, z, world)) {
