@@ -26,11 +26,11 @@ public class Gui_CreateGive extends GuiScreenBase {
         int value;
         String value_s;
 
-        value = this.numericSlot == null ? 0 : this.numericSlot.getValue();
+        value = this.numericSlot == null ? 1 : this.numericSlot.getValue();
         this.numericSlot = new GuiNumericField(this.fontRendererObj, id++, 90, 10, this.width - 95);
         this.numericSlot.setValue(value);
-        this.numericSlot.setMinimum(0);
-        this.numericSlot.setMaximum(39);
+        this.numericSlot.setMinimum(1);
+        this.numericSlot.setMaximum(9);
         this.buttonList.add(this.numericSlot);
 
         value = this.numericItemId == null ? 1 : this.numericItemId.getValue();
@@ -42,6 +42,7 @@ public class Gui_CreateGive extends GuiScreenBase {
         value = this.numericDamage == null ? 0 : this.numericDamage.getValue();
         this.numericDamage = new GuiNumericField(this.fontRendererObj, id++, 90, 60, this.width - 95);
         this.numericDamage.setMinimum(0);
+        this.numericDamage.setMaximum(32767);
         this.numericDamage.setValue(value);
         this.buttonList.add(this.numericDamage);
         
@@ -84,6 +85,7 @@ public class Gui_CreateGive extends GuiScreenBase {
     protected void actionPerformed(final GuiButton guiButton) {
         if (guiButton.enabled) {
             if (guiButton.id == this.btnGive.id) {
+                // TODO 增加数量设置
                 CreateGive.giveItem(this.numericItemId.getValue(), this.numericDamage.getValue(), this.numericSlot.getValue(), 1, this.textNbt_Json.getText());
                 this.mc.displayGuiScreen(this.parentScreen);
             } else if (guiButton.id == this.btnGive_Command.id) {

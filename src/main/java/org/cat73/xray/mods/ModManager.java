@@ -40,6 +40,7 @@ public final class ModManager {
         mods.put(mod.name, mod);
     }
     
+    // TODO 避免热键与其他 MOD 冲突
     private void registerHotKeys() {
         KeyBinding hotkey;
         for(final Mod mod : ModManager.mods.values()) {

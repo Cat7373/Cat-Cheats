@@ -1,9 +1,9 @@
 /*
 !.gitignore
-!/src/
+!/src/main/java/
+!/src/main/resources/
 !README.md
 !LICENSE
 !build.bat
 !build.gradle
 !gradle.properties
-/src/main/java/MainTest.java
