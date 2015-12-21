@@ -10,6 +10,7 @@ public class Gui_CreateGive extends GuiScreenBase {
     private GuiNumericField numericItemId;
     private GuiNumericField numericDamage;
     private GuiNumericField numericSlot;
+    // TODO 持续按着删除键却只能删除一个字符
     private GuiTextField textNbt_Json;
     private GuiTextField textCommand;
     private GuiButton btnGive;

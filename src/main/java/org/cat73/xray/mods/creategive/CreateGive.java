@@ -15,6 +15,7 @@ import net.minecraft.util.ResourceLocation;
 
 @ModInfo(name="CreateGive")
 public class CreateGive extends Mod {
+    @Override
     public void onEnable() {
         Mod.minecraft.displayGuiScreen(new Gui_CreateGive());
         setEnabled(false);
@@ -30,10 +31,11 @@ public class CreateGive extends Mod {
             return;
         }
 
+        ItemStack stack;
         // 输入检查
-        damage = damage > item.getMaxDamage() ? item.getMaxDamage() : damage;
-        ItemStack stack = new ItemStack(item, 1, damage);
-        count = count > item.getItemStackLimit(stack) ? item.getItemStackLimit(stack) : count;
+        // damage = damage > item.getMaxDamage() ? item.getMaxDamage() : damage;
+        // stack = new ItemStack(item, 1, damage);
+        // count = count > item.getItemStackLimit(stack) ? item.getItemStackLimit(stack) : count;
         
         // 获取物品
         stack = new ItemStack(item, count, damage);

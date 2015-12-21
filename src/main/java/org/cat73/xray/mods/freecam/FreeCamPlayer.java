@@ -9,6 +9,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovementInput;
 import net.minecraft.world.World;
 
+//TODO 像真正的观察者模式一样 可以吸附在其他生物身上
 public class FreeCamPlayer extends EntityPlayer {
     private final static Minecraft minecraft = Minecraft.getMinecraft();
 
@@ -16,6 +17,7 @@ public class FreeCamPlayer extends EntityPlayer {
         super(worldIn, gameProfile);
     }
     
+    // TODO 同时复制玩家的HP与饱食度信息
     @Override
     public void onLivingUpdate() {
         final EntityPlayerSP player = FreeCamPlayer.minecraft.thePlayer;

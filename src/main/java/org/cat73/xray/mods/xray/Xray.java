@@ -196,6 +196,7 @@ public class Xray extends Mod implements Runnable {
         GL11.glDeleteLists(this.displayListid, 1);
     }
 
+    // TODO FreeCam模式下标记位置工作不正常
     @SubscribeEvent
     public void renderWorldLastEvent(final RenderWorldLastEvent event) {
         final EntityPlayerSP player = Mod.minecraft.thePlayer;
