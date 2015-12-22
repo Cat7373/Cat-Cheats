@@ -17,7 +17,6 @@ public class FreeCamPlayer extends EntityPlayer {
         super(worldIn, gameProfile);
     }
     
-    // TODO 同时复制玩家的HP与饱食度信息
     @Override
     public void onLivingUpdate() {
         final EntityPlayerSP player = FreeCamPlayer.minecraft.thePlayer;
@@ -27,6 +26,8 @@ public class FreeCamPlayer extends EntityPlayer {
             movementInput.updatePlayerMoveState();
 
             // 刷新角度 物品栏
+            this.setHealth(player.getHealth());
+            this.foodStats = player.getFoodStats();
             this.rotationPitch = player.rotationPitch;
             this.rotationYaw = player.rotationYaw;
             this.rotationYawHead = player.rotationYawHead;
