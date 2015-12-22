@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
@@ -196,13 +197,12 @@ public class Xray extends Mod implements Runnable {
         GL11.glDeleteLists(this.displayListid, 1);
     }
 
-    // TODO FreeCam模式下标记位置工作不正常
     @SubscribeEvent
     public void renderWorldLastEvent(final RenderWorldLastEvent event) {
-        final EntityPlayerSP player = Mod.minecraft.thePlayer;
-        final double doubleX = player.lastTickPosX + (player.posX - player.lastTickPosX) * event.partialTicks;
-        final double doubleY = player.lastTickPosY + (player.posY - player.lastTickPosY) * event.partialTicks;
-        final double doubleZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * event.partialTicks;
+        final Entity entity = Mod.minecraft.getRenderViewEntity();
+        final double doubleX = entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * event.partialTicks;
+        final double doubleY = entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * event.partialTicks;
+        final double doubleZ = entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * event.partialTicks;
 
         GL11.glPushMatrix();
         GL11.glTranslated(-doubleX, -doubleY, -doubleZ);
