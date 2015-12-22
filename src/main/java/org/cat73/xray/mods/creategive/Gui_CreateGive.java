@@ -49,13 +49,13 @@ public class Gui_CreateGive extends GuiScreenBase {
         
         value_s = this.textNbt_Json == null ? "{}" : this.textNbt_Json.getText();
         this.textNbt_Json = new GuiTextField(0, this.fontRendererObj, 90, 80, this.width - 100, 20);
-        this.textNbt_Json.setMaxStringLength(32767);
+        this.textNbt_Json.setMaxStringLength(Integer.MAX_VALUE);
         this.textNbt_Json.setText(value_s);
         this.textFields.add(this.textNbt_Json);
 
-        value_s = this.textCommand == null ? "/give Cat73 minecraft:stone 64 0 {display:{Name:\"Cat73_stone\"}}" : this.textCommand.getText();
+        value_s = this.textCommand == null ? "/give Cat73 minecraft:stone 64 0 {display:{Name:\"Cat73 stone\"}}" : this.textCommand.getText();
         this.textCommand = new GuiTextField(0, this.fontRendererObj, 90, 110, this.width - 100, 20);
-        this.textCommand.setMaxStringLength(32767);
+        this.textCommand.setMaxStringLength(Integer.MAX_VALUE);
         this.textCommand.setText(value_s);
         this.textFields.add(this.textCommand);
         
@@ -72,14 +72,15 @@ public class Gui_CreateGive extends GuiScreenBase {
     @Override
     public void drawScreen(final int par1, final int par2, final float par3) {
         drawDefaultBackground();
+        
+        super.drawScreen(par1, par2, par3);
 
+        // TODO 尝试利用super的labelList
         drawString(this.fontRendererObj, "Slot:", 5, 14, 0xFFFFFF);
         drawString(this.fontRendererObj, "ItemId:", 5, 44, 0xFFFFFF);
         drawString(this.fontRendererObj, "Damage:", 5, 64, 0xFFFFFF);
         drawString(this.fontRendererObj, "NBT_Json:", 5, 84, 0xFFFFFF);
         drawString(this.fontRendererObj, "Give Command:", 5, 114, 0xFFFFFF);
-
-        super.drawScreen(par1, par2, par3);
     }
 
     @Override
