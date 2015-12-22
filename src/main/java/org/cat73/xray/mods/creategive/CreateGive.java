@@ -54,24 +54,41 @@ public class CreateGive extends Mod {
         // 将物品添加到物品栏
         player.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(35 + slot, stack));
     }
-    
-    // TODO 支持更少的参数
-    // TODO NBT_Json中含有空格时不会出错
+
     public static void giveItem(final String command, final int slot) {
         final String[] args = command.split(" ");
+        if(args.length < 3) {
+            PlayerMessage.error("缺少参数: " + command);
+        }
+
         try {
             final int itemId = getItemByText(args[2]);
-            final int damage = Integer.parseInt(args[4]);
-            final int count = Integer.parseInt(args[3]);
-            giveItem(itemId, damage, slot, count, args[5]);
+            final int count = args.length >= 4 ? Integer.parseInt(args[3]) : 1;
+            final int damage = args.length >= 5 ? Integer.parseInt(args[4]): 0;
+            String nbt_JSON = args.length >= 6 ? getNbtJSON(args, 5) : "{}";
+            giveItem(itemId, damage, slot, count, nbt_JSON);
         } catch(NumberFormatException e) {
-            PlayerMessage.error("未知的物品名称: " + args[2]);
+            PlayerMessage.error("未知的物品名称或数量 / 损害值设置错误: " + args[2]);
         } catch (Exception e) {
             PlayerMessage.error("无法解析Command: " + command);
             e.printStackTrace();
         }
     }
     
+    private static String getNbtJSON(String[] args, int i) {
+        String result = "";
+        while(true) {
+            result += args[i];
+
+            if(++i < args.length) {
+                result += " ";
+            } else {
+                break;
+            }
+        }
+        return result;
+    }
+
     public static int getItemByText(final String text) {
         final ResourceLocation resourcelocation = new ResourceLocation(text);
         final Item item = (Item)Item.itemRegistry.getObject(resourcelocation);
