@@ -10,5 +10,6 @@ public class Gui extends Mod {
     @Override
     public void onEnable() {
         Mod.minecraft.displayGuiScreen(new Gui_Main(Mod.minecraft.currentScreen));
+        this.setEnabled(false);
     }
 }
