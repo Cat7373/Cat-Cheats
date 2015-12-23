@@ -1,9 +1,9 @@
 [{
-  "modid": "Cat-Xray",
-  "name": "Cat-Xray",
-  "description": "A xray mod.",
+  "modid": "Cat-Cheats",
+  "name": "Cat-Cheats",
+  "description": "A cheat mod.",
   "version": "0.3.0",
   "mcversion": "1.8",
-  "url": "https://github.com/Cat7373/Cat-Xray",
+  "url": "https://github.com/Cat7373/Cat-Cheats",
   "authorList": ["Cat73"]
 }]
