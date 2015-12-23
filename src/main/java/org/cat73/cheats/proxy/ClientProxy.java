@@ -1,6 +1,7 @@
 package org.cat73.cheats.proxy;
 
 import org.cat73.cheats.config.Config;
+import org.cat73.cheats.gui.Gui;
 import org.cat73.cheats.mods.ModManager;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -25,5 +26,6 @@ public class ClientProxy extends CommonProxy {
         super.postInit(event);
 
         new ModManager();
+        new Gui();
     }
 }
