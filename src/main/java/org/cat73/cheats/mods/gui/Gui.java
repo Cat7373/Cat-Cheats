@@ -3,9 +3,8 @@ package org.cat73.cheats.mods.gui;
 import org.cat73.cheats.mods.Mod;
 import org.cat73.cheats.mods.ModInfo;
 import org.cat73.cheats.mods.gui.main.Gui_Main;
-import org.lwjgl.input.Keyboard;
 
-@ModInfo(name="Toggle Setting", hotkey=Keyboard.KEY_F6)
+@ModInfo(name="Toggle Setting")
 public class Gui extends Mod {
     @Override
     public void onEnable() {

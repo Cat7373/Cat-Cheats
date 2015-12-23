@@ -7,7 +7,6 @@ public class Mod {
 
     public final String name;
     public final String description;
-    public final int hotkey;
 
     protected boolean enabled = false;
     
@@ -15,7 +14,6 @@ public class Mod {
         final ModInfo info = this.getClass().getAnnotation(ModInfo.class);
         this.name = info.name();
         this.description = info.description();
-        this.hotkey = info.hotkey();
     }
     
     public void toggle() {
@@ -30,6 +28,10 @@ public class Mod {
         } else {
             onDisable();
         }
+    }
+    
+    public boolean isEnabled() {
+        return this.enabled;
     }
 
     public void onEnable() {}

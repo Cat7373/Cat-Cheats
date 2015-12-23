@@ -48,7 +48,9 @@ public class Gui_Main_Mods_Slot extends GuiSlot {
 
         final Mod mod = mods.get(index);
         final String modName = mod.name;
+        final String enable = mod.isEnabled() ? "enable" : "disable";
 
         gui_Main.drawString(this.minecraft.fontRendererObj, modName, x + 24, y + 6, 0x00FFFFFF);
+        gui_Main.drawString(this.minecraft.fontRendererObj, enable, x + 160, y + 6, 0x00FFFFFF);
     }
 }
