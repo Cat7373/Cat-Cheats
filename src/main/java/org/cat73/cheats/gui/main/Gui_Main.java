@@ -3,6 +3,7 @@ package org.cat73.cheats.gui.main;
 import java.io.IOException;
 
 import org.cat73.cheats.mods.Mod;
+import org.cat73.cheats.mods.ModSetting;
 
 import com.github.lunatrius.core.client.gui.GuiScreenBase;
 
@@ -53,7 +54,11 @@ public class Gui_Main extends GuiScreenBase {
             this.btn_setting.enabled = false;
         } else {
             this.btn_toggle.enabled = true;
-            // this.btn_setting.enabled = true;
+            if(mods_slot.getSelectMod().settingClassName.equals("")) {
+                this.btn_setting.enabled = false;
+            } else {
+                this.btn_setting.enabled = true;
+            }
         }
     }
     
@@ -63,13 +68,27 @@ public class Gui_Main extends GuiScreenBase {
         this.mods_slot.handleMouseInput();
     }
     
+    @SuppressWarnings("unchecked")
     @Override
     protected void actionPerformed(final GuiButton guiButton) {
         if (guiButton.enabled) {
             if (guiButton.id == this.btn_toggle.id) {
-                final Mod mod = mods_slot.mods.get(this.mods_slot.selectedIndex);
+                final Mod mod = mods_slot.getSelectMod();
                 mod.toggle();
-                this.mc.displayGuiScreen(this.parentScreen);
+            } else if (guiButton.id == this.btn_setting.id) {
+                final Mod mod = mods_slot.getSelectMod();
+
+                Class<? extends ModSetting> settingClass;
+                ModSetting modSetting;
+                try {
+                    settingClass = (Class<? extends ModSetting>) Class.forName(mod.settingClassName);
+                    modSetting = settingClass.newInstance();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return;
+                }
+
+                modSetting.show();
             } else if (guiButton.id == this.btn_exit.id) {
                 this.mc.displayGuiScreen(this.parentScreen);
             } else {

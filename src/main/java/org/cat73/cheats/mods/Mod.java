@@ -7,6 +7,9 @@ public class Mod {
 
     public final String name;
     public final String description;
+    public final boolean shouInGui;
+    public final String settingClassName;
+    public final int defaultHotkey;
 
     protected boolean enabled = false;
     
@@ -14,6 +17,9 @@ public class Mod {
         final ModInfo info = this.getClass().getAnnotation(ModInfo.class);
         this.name = info.name();
         this.description = info.description();
+        this.shouInGui = info.showInGui();
+        this.settingClassName = info.settingClassName();
+        this.defaultHotkey = info.defaultHotkey();
     }
     
     public void toggle() {

@@ -1,4 +1,4 @@
-package org.cat73.cheats.mods.gui.main;
+package org.cat73.cheats.mods.xray.setting.main;
 
 import org.cat73.cheats.config.XrayBlock;
 import org.cat73.cheats.util.GuiUnit;

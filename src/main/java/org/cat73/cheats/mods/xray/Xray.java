@@ -23,9 +23,10 @@ import org.cat73.cheats.config.XrayBlock;
 import org.cat73.cheats.mods.Mod;
 import org.cat73.cheats.mods.ModInfo;
 import org.cat73.cheats.util.CatBlockPos;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-@ModInfo(name="Xray")
+@ModInfo(name="Xray", defaultHotkey=Keyboard.KEY_X, settingClassName="org.cat73.cheats.mods.xray.setting.Gui")
 public class Xray extends Mod implements Runnable {
     private final FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
 

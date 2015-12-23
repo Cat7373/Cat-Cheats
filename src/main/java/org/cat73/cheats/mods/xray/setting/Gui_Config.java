@@ -1,4 +1,4 @@
-package org.cat73.cheats.mods.gui;
+package org.cat73.cheats.mods.xray.setting;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
