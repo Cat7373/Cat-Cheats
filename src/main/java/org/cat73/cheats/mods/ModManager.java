@@ -7,7 +7,6 @@ import org.cat73.cheats.mods.creategive.CreateGive;
 import org.cat73.cheats.mods.freecam.FreeCam;
 import org.cat73.cheats.mods.fullbright.Fullbright;
 import org.cat73.cheats.mods.xray.Xray;
-import org.cat73.cheats.mods.xray.setting.Gui;
 
 import net.minecraftforge.fml.common.FMLCommonHandler;
 

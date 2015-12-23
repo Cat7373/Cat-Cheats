@@ -1,6 +1,8 @@
 package org.cat73.cheats.gui.main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Iterator;
 
 import org.cat73.cheats.mods.Mod;
@@ -12,7 +14,7 @@ import net.minecraft.client.gui.GuiSlot;
 public class Gui_Main_Mods_Slot extends GuiSlot {
     private static final Minecraft minecraft = Minecraft.getMinecraft();
     private final Gui_Main gui_Main;
-    protected final ArrayList<Mod> mods;
+    protected final Mod[] mods;
 
     protected int selectedIndex = -1;
 
@@ -20,18 +22,25 @@ public class Gui_Main_Mods_Slot extends GuiSlot {
         super(Minecraft.getMinecraft(), gui_Main.width, gui_Main.height, 16, gui_Main.height - 40, 24);
         this.gui_Main = gui_Main;
 
-        this.mods = new ArrayList<Mod>(ModManager.getMods());
+        ArrayList<Mod> mods = new ArrayList<Mod>(ModManager.getMods());
         Iterator<Mod> it = mods.iterator();
         while(it.hasNext()) {
             if(!it.next().shouInGui) {
                 it.remove();
             }
         }
+        this.mods = mods.toArray(new Mod[0]);
+        Arrays.sort(this.mods, new Comparator<Mod>() {
+            @Override
+            public int compare(Mod mod1, Mod mod2) {
+                return mod1.name.compareTo(mod2.name);
+            }
+        });
     }
 
     @Override
     protected int getSize() {
-        return ModManager.getSize();
+        return this.mods.length;
     }
 
     @Override
@@ -48,14 +57,13 @@ public class Gui_Main_Mods_Slot extends GuiSlot {
     protected void drawBackground() {
     }
 
-    //TODO 对 Mods 进行排序
     @Override
     protected void drawSlot(final int index, final int x, final int y, final int par4, final int mouseX, final int mouseY) {
         if (index < 0 || index >= getSize()) {
             return;
         }
 
-        final Mod mod = mods.get(index);
+        final Mod mod = mods[index];
         final String modName = mod.name;
         final String enable = mod.isEnabled() ? "enable" : "disable";
 
@@ -64,6 +72,6 @@ public class Gui_Main_Mods_Slot extends GuiSlot {
     }
     
     protected Mod getSelectMod() {
-        return this.mods.get(this.selectedIndex);
+        return this.mods[this.selectedIndex];
     }
 }

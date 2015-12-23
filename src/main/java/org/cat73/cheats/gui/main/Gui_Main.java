@@ -10,6 +10,7 @@ import com.github.lunatrius.core.client.gui.GuiScreenBase;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 
+//TODO 热键支持
 public class Gui_Main extends GuiScreenBase {
     private Gui_Main_Mods_Slot mods_slot;
     private GuiButton btn_toggle;
