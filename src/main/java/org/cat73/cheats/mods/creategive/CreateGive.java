@@ -52,7 +52,7 @@ public class CreateGive extends Mod {
         stack.setTagCompound(nbtTagCompound);
 
         // 将物品添加到物品栏
-        player.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(35 + slot, stack));
+        player.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(slot == 0 ? -1 : 35 + slot, stack));
     }
 
     public static void giveItem(final String command, final int slot) {

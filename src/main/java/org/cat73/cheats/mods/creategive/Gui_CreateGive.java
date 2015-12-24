@@ -30,7 +30,7 @@ public class Gui_CreateGive extends GuiScreenBase {
         value = this.numericSlot == null ? 1 : this.numericSlot.getValue();
         this.numericSlot = new GuiNumericField(this.fontRendererObj, id++, 90, 10, this.width - 95);
         this.numericSlot.setValue(value);
-        this.numericSlot.setMinimum(1);
+        this.numericSlot.setMinimum(0);
         this.numericSlot.setMaximum(9);
         this.buttonList.add(this.numericSlot);
 
@@ -65,7 +65,7 @@ public class Gui_CreateGive extends GuiScreenBase {
         this.btnGive_Command = new GuiButton(id++, this.width / 3, button_top, button_width, 20, "Give_Command");
         this.buttonList.add(this.btnGive_Command);
 
-        this.btnCancel = new GuiButton(id++, this.width / 3 * 2, button_top, button_width, 20, "Cancel");
+        this.btnCancel = new GuiButton(id++, this.width / 3 * 2, button_top, button_width, 20, "Exit");
         this.buttonList.add(this.btnCancel);
     }
 
