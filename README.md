@@ -7,32 +7,13 @@
 
 # 快速入门:
 1. 下载本 MOD 并放置到客户端的 mods 文件夹中。
-2. 进入游戏后按 X 来开启/关闭透视。
-3. 按 F6 来编辑配置。
-4. 其他功能请在按键设置内设置热键后使用(未来将会有 GUI 开关)。
+2. 进入游戏后按 X 来开关透视功能。
+3. 按 F6 来编辑配置，其他功能需在这里设置热键后使用。
 
-# 配置说明:
-* Add / Edit Block: 增加或编辑要透视的方块：
-  * BlockId: 方块的ID
-  * Damage: 方块的附加值(-1 表示不检测)
-  * Red-Value: 线条颜色的 红色占比
-  * Green-Value: 线条颜色的 绿色占比
-  * Blue-Value: 线条颜色的 蓝色占比
-  * Alpha-Value: 线条颜色的 透明度
-* Del Block: 删除选中的方块。
-* Config
-  * Radius: 透视方块半径，默认45。
-  * Interval: 刷新标记的方块列表的间隔，单位0.1秒，默认50。
-  * AntiAntiXrayLevel: 反假矿的启用等级，含义如下：
-    * 0: 不开启反假矿功能
-    * 1: 开启反假矿功能
-    * 2: 比上一项透视到的矿物更多，也更可能误报
-    * 3: 比上一项透视到的矿物更多，也更可能误报
-
-# 其他功能列表
-* CreateGive 在创造模式下模拟 give 指令。
-* FreeCam 本地观察者模式，可以穿墙查看周围，可以穿墙操作附近的东西。
-* Fullbright 夜视(同时会移除反胃 / 失明效果)。
+# 链接
+* [功能列表及详细说明](https://github.com/Cat7373/Cat-Cheats/wiki)
+* [下载Mod / 版本历史](https://github.com/Cat7373/Cat-Cheats/releases)
+* [反馈问题](https://github.com/Cat7373/Cat-Cheats/issues)
 
 # 感谢(字母顺序排列):
 * [Kradxn’s-X-ray-Mod](http://www.minecraftforum.net/topic/1921866-162-forge-x-ray-mod-forge-is-required/)
@@ -52,11 +33,8 @@
   * 增加一键合成。
   * 刷新显示列表单独一个线程。
   * 美化 GUI 配置页面。
-  * 在 GUI 增加各个功能的开关。
   * 检查代码是否有在关闭功能时需要手动释放的资源。
   * 优化代码效率。
   * 从 MOD 列表中隐藏这个 MOD。
 * 非代码部分:
-  * 创建一个 Wiki，把功能说明都挪到 Wiki 里。
   * 增加多国语言的README.md。
-  * 在大部分功能完成后将项目更名。
