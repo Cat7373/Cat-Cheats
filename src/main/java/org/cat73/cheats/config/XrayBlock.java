@@ -45,7 +45,7 @@ public class XrayBlock {
     public static void load() {
         blocks.clear();
 
-        final String[] configBlocksList = Config.instance().config.get("Xray", "Blocks", defaultBlocks, "Blocks for X-ray").getStringList();
+        final String[] configBlocksList = Config.instance().config.get("Cheats", "xray.blocks", defaultBlocks, "").getStringList();
 
         XrayBlock block;
         for(final String configBlock : configBlocksList) {
@@ -79,7 +79,7 @@ public class XrayBlock {
     }
 
     public static void save() {
-        final Property configBolcks = Config.instance().config.get("Xray", "Blocks", defaultBlocks, "");
+        final Property configBolcks = Config.instance().config.get("Cheats", "xray.blocks", defaultBlocks, "");
         final String[] configBlocksList = new String[getSize()];
         for(int i = 0; i < configBlocksList.length; i++) {
             configBlocksList[i] = blocks.get(i).toString();

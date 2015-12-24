@@ -32,6 +32,7 @@ public class Config {
         addIntConfig("xray.antiantixraylevel", 0, 0, 3);
 
         XrayBlock.load();
+        Hotkey.load();
     }
 
     public void save() {

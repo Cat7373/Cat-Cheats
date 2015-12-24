@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 import org.cat73.cheats.mods.Mod;
 import org.cat73.cheats.mods.ModManager;
+import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiSlot;
@@ -33,7 +34,7 @@ public class Gui_Main_Mods_Slot extends GuiSlot {
         Arrays.sort(this.mods, new Comparator<Mod>() {
             @Override
             public int compare(Mod mod1, Mod mod2) {
-                return mod1.name.compareTo(mod2.name);
+                return mod1.name.compareToIgnoreCase(mod2.name);
             }
         });
     }
@@ -57,6 +58,7 @@ public class Gui_Main_Mods_Slot extends GuiSlot {
     protected void drawBackground() {
     }
 
+    //TODO 显示MOD的详细描述
     @Override
     protected void drawSlot(final int index, final int x, final int y, final int par4, final int mouseX, final int mouseY) {
         if (index < 0 || index >= getSize()) {
@@ -66,9 +68,13 @@ public class Gui_Main_Mods_Slot extends GuiSlot {
         final Mod mod = mods[index];
         final String modName = mod.name;
         final String enable = mod.isEnabled() ? "enable" : "disable";
+        final int keyCode = ModManager.getHotkey(mod);
 
         gui_Main.drawString(Gui_Main_Mods_Slot.minecraft.fontRendererObj, modName, x + 24, y + 6, 0x00FFFFFF);
-        gui_Main.drawString(Gui_Main_Mods_Slot.minecraft.fontRendererObj, enable, x + 160, y + 6, 0x00FFFFFF);
+        gui_Main.drawString(Gui_Main_Mods_Slot.minecraft.fontRendererObj, enable, x + 120, y + 6, 0x00FFFFFF);
+        if(keyCode != Keyboard.KEY_NONE) {
+            gui_Main.drawString(Gui_Main_Mods_Slot.minecraft.fontRendererObj, Keyboard.getKeyName(keyCode), x + 180, y + 6, 0x00FFFFFF);
+        }
     }
     
     protected Mod getSelectMod() {
