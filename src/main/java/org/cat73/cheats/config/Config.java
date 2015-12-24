@@ -1,71 +1,54 @@
 package org.cat73.cheats.config;
 
 import java.io.File;
-
-import org.cat73.cheats.util.PlayerMessage;
+import java.util.HashMap;
 
 import net.minecraftforge.common.config.Configuration;
 
-// TODO 重构下配置部分
 public class Config {
-    protected static Configuration config;
-    private static int radius;
-    private static int interval;
-    private static int antiAntiXrayLevel;
+    private static Config instance; 
+    protected final Configuration config;
+    private final HashMap<String, Object> config_kv;
 
-    public static void init(final File file) {
-        Config.config = new Configuration(file);
+    public Config(final File file) {
+        Config.instance = this;
+
+        this.config = new Configuration(file);
+        this.config_kv = new HashMap<String, Object>();
         load();
         save();
     }
+    
+    public static Config instance() {
+        return Config.instance;
+    }
 
-    public static void load() {
-        Config.config.load();
+    public void load() {
+        this.config.load();
 
-        Config.radius = Config.config.get("Xray", "Radius", 45, "Radius for X-ray").getInt();
-        Config.interval = Config.config.get("Xray", "Interval", 50, "Interval for X-ray").getInt();
-        Config.antiAntiXrayLevel = Config.config.get("Xray", "AntiAntiXrayLevel", 0, "Anti Anti X-ray Level").getInt();
-
-        if(Config.radius < 0) {
-            PlayerMessage.warn("Radius setting error!");
-            Config.radius = 45;
-        }
-        if(Config.interval < 0) {
-            PlayerMessage.warn("Interval setting error!");
-            Config.interval = 50;
-        }
-        if(Config.antiAntiXrayLevel > 3 || Config.antiAntiXrayLevel < 0) {
-            PlayerMessage.warn("AntiAntiXrayLevel setting error!");
-            Config.antiAntiXrayLevel = 0;
-        }
+        this.config_kv.clear();
+        addIntConfig("xray.radius", 45, 0, Integer.MAX_VALUE);
+        addIntConfig("xray.interval", 50, 0, Integer.MAX_VALUE);
+        addIntConfig("xray.antiantixraylevel", 0, 0, 3);
 
         XrayBlock.load();
     }
 
-    public static void save() {
-        Config.config.save();
+    public void save() {
+        this.config.save();
+    }
+    
+    private void addIntConfig(String key, int defaultValue, int min, int max) {
+        int value = this.config.get("Cheats", key, defaultValue, "", min, max).getInt();
+        this.config_kv.put(key, value);
     }
 
-    public static int getRadius() {
-        return Config.radius;
+    public int getIntConfig(String key) {
+        return (Integer) this.config_kv.get(key);
     }
-    public static int getInterval() {
-        return Config.interval;
-    }
-    public static int getAntiAntiXrayLevel() {
-        return Config.antiAntiXrayLevel;
-    }
-
-    public static void setRadius(final int value) {
-        Config.radius = value;
-        Config.config.get("Xray", "Radius", 45, "Radius for X-ray").set(value);
-    }
-    public static void setInterval(final int value) {
-        Config.interval = value;
-        Config.config.get("Xray", "Interval", 50, "Interval for X-ray").set(value);
-    }
-    public static void setAntiAntiXrayLevel(final int value) {
-        Config.antiAntiXrayLevel = value;
-        Config.config.get("Xray", "AntiAntiXrayLevel", 0, "Anti Anti X-ray Level").set(value);
+    
+    public void setIntConfig(String key, int value) {
+        this.config.get("Cheats", key, 0, "").set(value);
+        this.config_kv.put(key, value);
     }
 }

@@ -23,24 +23,25 @@ public class Gui_Config extends GuiScreenBase {
     public void initGui() {
         super.initGui();
 
+        final Config config = Config.instance();
         final int button_top = this.height - 22;
         final int button_width = this.width / 2 - 3;
         int id = 0;
         int value;
 
-        value = this.numericRadius == null ? Config.getRadius() : this.numericRadius.getValue();
+        value = this.numericRadius == null ? config.getIntConfig("xray.radius") : this.numericRadius.getValue();
         this.numericRadius = new GuiNumericField(this.fontRendererObj, id++, 90, 10, this.width - 95);
         this.numericRadius.setMinimum(0);
         this.numericRadius.setValue(value);
         this.buttonList.add(this.numericRadius);
 
-        value = this.numericInterval == null ? Config.getInterval() : this.numericInterval.getValue();
+        value = this.numericInterval == null ? config.getIntConfig("xray.interval") : this.numericInterval.getValue();
         this.numericInterval = new GuiNumericField(this.fontRendererObj, id++, 90, 30, this.width - 95);
         this.numericInterval.setMinimum(0);
         this.numericInterval.setValue(value);
         this.buttonList.add(this.numericInterval);
 
-        value = this.numericAntiAntiXrayLevel == null ? Config.getAntiAntiXrayLevel() : this.numericAntiAntiXrayLevel.getValue();
+        value = this.numericAntiAntiXrayLevel == null ? config.getIntConfig("xray.antiantixraylevel") : this.numericAntiAntiXrayLevel.getValue();
         this.numericAntiAntiXrayLevel = new GuiNumericField(this.fontRendererObj, id++, 90, 50, this.width - 95);
         this.numericAntiAntiXrayLevel.setValue(value);
         this.numericAntiAntiXrayLevel.setMinimum(0);
@@ -69,10 +70,11 @@ public class Gui_Config extends GuiScreenBase {
     protected void actionPerformed(final GuiButton guiButton) {
         if (guiButton.enabled) {
             if (guiButton.id == this.btnSave.id) {
-                Config.setRadius(this.numericRadius.getValue());
-                Config.setInterval(this.numericInterval.getValue());
-                Config.setAntiAntiXrayLevel(this.numericAntiAntiXrayLevel.getValue());
-                Config.save();
+                final Config config = Config.instance();
+                config.setIntConfig("xray.radius", this.numericRadius.getValue());
+                config.setIntConfig("xray.interval", this.numericInterval.getValue());
+                config.setIntConfig("xray.antiantixraylevel", this.numericAntiAntiXrayLevel.getValue());
+                config.save();
                 this.mc.displayGuiScreen(this.parentScreen);
             } else if (guiButton.id == this.btnCancel.id) {
                 this.mc.displayGuiScreen(this.parentScreen);

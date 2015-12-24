@@ -43,7 +43,7 @@ public class Xray extends Mod implements Runnable {
     private int interval = 50;
 
     public Xray() {
-        final Thread refreshThread = new Thread(this, "Cat-Xray_Xray-Refresh");
+        final Thread refreshThread = new Thread(this, "Cat-Cheat Xray-Refresh");
         refreshThread.setDaemon(true);
         refreshThread.start();
     }
@@ -281,8 +281,9 @@ public class Xray extends Mod implements Runnable {
     }
 
     private void getConfig() {
-        this.radius = Config.getRadius();
-        this.interval = Config.getInterval();
-        this.antiAntiXrayLevel = Config.getAntiAntiXrayLevel();
+        final Config config = Config.instance();
+        this.radius = config.getIntConfig("xray.radius");
+        this.interval = config.getIntConfig("xray.interval");
+        this.antiAntiXrayLevel = config.getIntConfig("xray.antiantixraylevel");
     }
 }
