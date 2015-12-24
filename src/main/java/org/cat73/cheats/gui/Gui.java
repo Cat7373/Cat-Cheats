@@ -2,6 +2,7 @@ package org.cat73.cheats.gui;
 
 import org.cat73.cheats.gui.main.Gui_Main;
 import org.cat73.cheats.mods.Mod;
+import org.cat73.cheats.reference.Reference;
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.Minecraft;
@@ -18,7 +19,7 @@ public class Gui {
 
     public Gui() {
         FMLCommonHandler.instance().bus().register(this);
-        guiKey = new KeyBinding("Gui", Keyboard.KEY_F6, "Cat-Cheats");
+        guiKey = new KeyBinding("Gui", Keyboard.KEY_F6, Reference.NAME);
         ClientRegistry.registerKeyBinding(guiKey);
     }
 

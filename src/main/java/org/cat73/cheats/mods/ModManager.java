@@ -8,6 +8,7 @@ import org.cat73.cheats.mods.creategive.CreateGive;
 import org.cat73.cheats.mods.freecam.FreeCam;
 import org.cat73.cheats.mods.fullbright.Fullbright;
 import org.cat73.cheats.mods.xray.Xray;
+import org.cat73.cheats.reference.Reference;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -41,7 +42,7 @@ public final class ModManager {
                 if(keyCode == null) {
                     keyCode = mod.defaultHotkey;
                 }
-                final KeyBinding hotkey = new KeyBinding(mod.name, keyCode, "Cat-Cheats");
+                final KeyBinding hotkey = new KeyBinding(mod.name, keyCode, Reference.NAME);
                 ModManager.hotkeys.put(mod, hotkey);
             }
         }

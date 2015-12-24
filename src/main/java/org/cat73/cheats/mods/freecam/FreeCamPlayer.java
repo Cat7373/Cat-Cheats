@@ -25,6 +25,11 @@ public class FreeCamPlayer extends EntityPlayer {
             final MovementInput movementInput = player.movementInput;
             movementInput.updatePlayerMoveState();
 
+            // 防止原 Player 移动
+            player.motionX = 0.0D;
+            player.motionY = 0.0D;
+            player.motionZ = 0.0D;
+
             // 刷新角度 物品栏
             this.setHealth(player.getHealth());
             this.foodStats = player.getFoodStats();
