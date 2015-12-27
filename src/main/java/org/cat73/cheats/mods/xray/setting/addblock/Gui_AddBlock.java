@@ -5,10 +5,9 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 
 import org.cat73.cheats.config.XrayBlock;
+import org.cat73.cheats.gui.tool.GuiNumericField;
+import org.cat73.cheats.gui.tool.GuiScreenBase;
 import org.cat73.cheats.util.GuiUnit;
-
-import com.github.lunatrius.core.client.gui.GuiNumericField;
-import com.github.lunatrius.core.client.gui.GuiScreenBase;
 
 public class Gui_AddBlock extends GuiScreenBase {
     private GuiNumericField numericBlockId;

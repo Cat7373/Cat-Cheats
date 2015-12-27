@@ -1,4 +1,4 @@
-package com.github.lunatrius.core.client.gui;
+package org.cat73.cheats.gui.tool;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -13,7 +13,6 @@ import java.util.List;
 public class GuiScreenBase extends GuiScreen {
     protected final GuiScreen parentScreen;
 
-    @SuppressWarnings("unchecked")
     protected List<GuiButton> buttonList = super.buttonList;
     protected List<GuiTextField> textFields = new ArrayList<GuiTextField>();
 

@@ -16,6 +16,7 @@
 * [反馈问题](https://github.com/Cat7373/Cat-Cheats/issues)
 
 # 感谢(字母顺序排列):
+* CJB-Mod
 * [Kradxn’s-X-ray-Mod](http://www.minecraftforum.net/topic/1921866-162-forge-x-ray-mod-forge-is-required/)
 * [LunatriusCore](https://github.com/Lunatrius/LunatriusCore)
 * [Minecraft Forge](http://files.minecraftforge.net/)
@@ -31,6 +32,7 @@
   * 增加多国语言支持。
   * 增加弓箭瞄准辅助。
   * 增加一键合成。
+  * 增加自动与村民交易。
   * 刷新显示列表单独一个线程。
   * 美化 GUI 配置页面。
   * 检查代码是否有在关闭功能时需要手动释放的资源。

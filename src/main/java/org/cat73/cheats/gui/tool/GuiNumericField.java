@@ -1,4 +1,4 @@
-package com.github.lunatrius.core.client.gui;
+package org.cat73.cheats.gui.tool;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;

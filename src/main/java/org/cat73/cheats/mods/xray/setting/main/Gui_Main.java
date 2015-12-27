@@ -3,13 +3,12 @@ package org.cat73.cheats.mods.xray.setting.main;
 import java.io.IOException;
 
 import org.cat73.cheats.config.XrayBlock;
+import org.cat73.cheats.gui.tool.GuiScreenBase;
 import org.cat73.cheats.mods.xray.setting.Gui_Config;
 import org.cat73.cheats.mods.xray.setting.addblock.Gui_AddBlock;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-
-import com.github.lunatrius.core.client.gui.GuiScreenBase;
 
 public class Gui_Main extends GuiScreenBase {
     // TODO 增加方块顺序调整的功能

@@ -110,6 +110,7 @@ public class Xray extends Mod implements Runnable {
         }
     }
 
+    //TODO 在未加载的区块边界反假矿可能会失效
     private boolean antiAntiXray(final int x, final int y, final int z, final WorldClient world) {
         boolean[] isTranslucents;
         if(this.antiAntiXrayLevel >= 1) {

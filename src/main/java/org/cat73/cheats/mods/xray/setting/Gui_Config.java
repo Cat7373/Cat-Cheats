@@ -4,9 +4,8 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 
 import org.cat73.cheats.config.Config;
-
-import com.github.lunatrius.core.client.gui.GuiNumericField;
-import com.github.lunatrius.core.client.gui.GuiScreenBase;
+import org.cat73.cheats.gui.tool.GuiNumericField;
+import org.cat73.cheats.gui.tool.GuiScreenBase;
 
 public class Gui_Config extends GuiScreenBase {
     private GuiNumericField numericRadius;

@@ -2,12 +2,11 @@ package org.cat73.cheats.gui.main;
 
 import java.io.IOException;
 
+import org.cat73.cheats.gui.tool.GuiScreenBase;
 import org.cat73.cheats.mods.Mod;
 import org.cat73.cheats.mods.ModManager;
 import org.cat73.cheats.mods.ModSetting;
 import org.lwjgl.input.Keyboard;
-
-import com.github.lunatrius.core.client.gui.GuiScreenBase;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -91,7 +90,6 @@ public class Gui_Main extends GuiScreenBase {
         this.mods_slot.handleMouseInput();
     }
     
-    @SuppressWarnings("unchecked")
     @Override
     protected void actionPerformed(final GuiButton guiButton) {
         this.setHotkey = false;
