@@ -10,6 +10,5 @@ public @interface ModInfo {
     String name();
     String description() default "";
     boolean showInGui() default true;
-    String settingClassName() default "";
     int defaultHotkey() default Keyboard.KEY_NONE;
 }

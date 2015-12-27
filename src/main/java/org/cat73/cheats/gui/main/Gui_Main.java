@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.cat73.cheats.gui.tool.GuiScreenBase;
 import org.cat73.cheats.mods.Mod;
 import org.cat73.cheats.mods.ModManager;
-import org.cat73.cheats.mods.ModSetting;
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.gui.GuiButton;
@@ -68,7 +67,7 @@ public class Gui_Main extends GuiScreenBase {
         } else {
             this.btn_toggle.enabled = true;
 
-            if(mods_slot.getSelectMod().settingClassName.equals("")) {
+            if(mods_slot.getSelectMod().getSettingInstance() == null) {
                 this.btn_setting.enabled = false;
             } else {
                 this.btn_setting.enabled = true;
@@ -100,18 +99,7 @@ public class Gui_Main extends GuiScreenBase {
                 mod.toggle();
             } else if (guiButton.id == this.btn_setting.id) {
                 final Mod mod = mods_slot.getSelectMod();
-
-                Class<? extends ModSetting> settingClass;
-                ModSetting modSetting;
-                try {
-                    settingClass = (Class<? extends ModSetting>) Class.forName(mod.settingClassName);
-                    modSetting = settingClass.newInstance();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return;
-                }
-
-                modSetting.show();
+                mod.getSettingInstance().show();
             } else if (guiButton.id == this.btn_setHotkey.id) {
                 this.setHotkey = true;
                 this.btn_setHotkey.displayString = "> ? <";

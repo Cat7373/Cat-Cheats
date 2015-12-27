@@ -22,11 +22,12 @@ import org.cat73.cheats.config.Config;
 import org.cat73.cheats.config.XrayBlock;
 import org.cat73.cheats.mods.Mod;
 import org.cat73.cheats.mods.ModInfo;
+import org.cat73.cheats.mods.xray.setting.Gui_Xray;
 import org.cat73.cheats.util.CatBlockPos;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-@ModInfo(name="Xray", defaultHotkey=Keyboard.KEY_X, settingClassName="org.cat73.cheats.mods.xray.setting.Gui")
+@ModInfo(name="Xray", defaultHotkey=Keyboard.KEY_X)
 public class Xray extends Mod implements Runnable {
     private final FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
 
@@ -43,6 +44,7 @@ public class Xray extends Mod implements Runnable {
     private int interval = 50;
 
     public Xray() {
+        this.settingInstance = new Gui_Xray();
         final Thread refreshThread = new Thread(this, "Cat-Cheat Xray-Refresh");
         refreshThread.setDaemon(true);
         refreshThread.start();
