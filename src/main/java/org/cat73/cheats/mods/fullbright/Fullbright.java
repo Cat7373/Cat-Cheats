@@ -17,6 +17,7 @@ public class Fullbright extends Mod {
     
     public Fullbright() {
         this.gameSettings = Mod.minecraft.gameSettings;
+        // TODO 开着夜视功能时重启游戏无法自动关闭夜视
         setGamma();
         this.gameSettings.gammaSetting = this.gamma;
     }
