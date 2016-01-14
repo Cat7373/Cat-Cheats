@@ -24,6 +24,7 @@ import org.cat73.cheats.mods.Mod;
 import org.cat73.cheats.mods.ModInfo;
 import org.cat73.cheats.mods.xray.setting.Gui_Xray;
 import org.cat73.cheats.util.CatBlockPos;
+import org.cat73.cheats.util.ThreadUtil;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
@@ -57,10 +58,7 @@ public class Xray extends Mod implements Runnable {
                 refresh();
                 cooldown = interval;
             }
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-            }
+            ThreadUtil.sleep(100);
         }
     }
 

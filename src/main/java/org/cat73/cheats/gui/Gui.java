@@ -19,7 +19,7 @@ public class Gui {
 
     public Gui() {
         FMLCommonHandler.instance().bus().register(this);
-        guiKey = new KeyBinding("Gui", Keyboard.KEY_F6, Reference.NAME);
+        this.guiKey = new KeyBinding("Gui", Keyboard.KEY_F6, Reference.NAME);
         ClientRegistry.registerKeyBinding(guiKey);
     }
 

@@ -25,6 +25,7 @@ public class FreeCamPlayer extends EntityPlayer {
             final MovementInput movementInput = player.movementInput;
             movementInput.updatePlayerMoveState();
 
+            // TODO 防止 Shift Ctrl 对原玩家生效
             // 防止原 Player 移动
             player.motionX = 0.0D;
             player.motionY = 0.0D;
