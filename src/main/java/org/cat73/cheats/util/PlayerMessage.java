@@ -63,10 +63,31 @@ public class PlayerMessage {
 
     /**
      * 向玩家输出调试信息
-     * @param message 要输出的调试信息
+     * @param objs 要输出的数据列表
      */
-    public static void debug(final String message) {
+    public static void debug(final Object... objs) {
         if(Reference.DEBUG) {
+            String message = "";
+            for(Object obj : objs) {
+                message += obj.toString();
+                message += ", ";
+            }
+            message = message.substring(0, message.length() - 1);
+
+            FMLLog.log(Level.DEBUG, message);
+            message("[调试]" + message);
+        }
+    }
+    
+    /**
+     * 向玩家输出格式化的调试信息
+     * @param format 要输出的信息格式
+     * @param args 格式化时使用的数据列表
+     */
+    public static void debugFormat(final String format, final Object... args) {
+        if(Reference.DEBUG) {
+            String message = String.format(format, args);
+
             FMLLog.log(Level.DEBUG, message);
             message("[调试]" + message);
         }
