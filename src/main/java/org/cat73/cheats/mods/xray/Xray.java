@@ -85,7 +85,12 @@ public class Xray extends Mod implements Runnable {
                     this.pos.setX(x);
                     for (int z = sz; z <= endZ; z++) {
                         this.pos.setZ(z);
+                        
                         chunk = world.getChunkFromChunkCoords(x >> 4, z >> 4);
+                        if(!chunk.isLoaded()) {
+                            continue;
+                        }
+                        
                         for (int y = 0; y <= 255; y++) {
                             this.pos.setY(y);
                             blockState = chunk.getBlockState(this.pos);
@@ -110,7 +115,6 @@ public class Xray extends Mod implements Runnable {
         }
     }
 
-    //TODO 在未加载的区块边界反假矿可能会失效
     private boolean antiAntiXray(final int x, final int y, final int z, final WorldClient world) {
         boolean[] isTranslucents;
         if(this.antiAntiXrayLevel >= 1) {
@@ -172,7 +176,14 @@ public class Xray extends Mod implements Runnable {
 
     private boolean showBlock(final WorldClient world, final int x, final int y, final int z) {
         this.pos2.set(x, y, z);
-        final Block block = world.getBlockState(this.pos2).getBlock();
+
+        final Chunk chunk = world.getChunkFromBlockCoords(this.pos2);
+        if(!chunk.isLoaded()) {
+            return false;
+        }
+
+        final Block block = chunk.getBlockState(this.pos2).getBlock();
+
         return block == Blocks.lava ||
                !block.getMaterial().isOpaque() ||
                block == Blocks.water ||
