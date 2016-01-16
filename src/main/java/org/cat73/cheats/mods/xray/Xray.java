@@ -161,7 +161,7 @@ public class Xray extends Mod implements Runnable {
     private boolean showBlock(final WorldClient world, final int x, final int y, final int z) {
         final Block block = world.getBlock(x, y, z);
         return block == Blocks.lava ||
-               // TODO block.isTranslucent() ||
+               !block.getMaterial().isOpaque() ||
                block == Blocks.water ||
                block == Blocks.flowing_water ||
                block == Blocks.flowing_lava;
