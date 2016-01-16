@@ -44,7 +44,7 @@ public class Gui_Config extends GuiScreenBase {
         this.numericAntiAntiXrayLevel = new GuiNumericField(this.fontRendererObj, id++, 90, 50, this.width - 95);
         this.numericAntiAntiXrayLevel.setValue(value);
         this.numericAntiAntiXrayLevel.setMinimum(0);
-        this.numericAntiAntiXrayLevel.setMaximum(3);
+        this.numericAntiAntiXrayLevel.setMaximum(1);
         this.buttonList.add(this.numericAntiAntiXrayLevel);
 
         this.btnSave = new GuiButton(id++, 3, button_top, button_width, 20, "Save");

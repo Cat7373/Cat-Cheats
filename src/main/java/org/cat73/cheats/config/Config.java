@@ -30,7 +30,7 @@ public class Config {
         this.config_kv.clear();
         addIntConfig("xray.radius", 45, 0, Integer.MAX_VALUE);
         addIntConfig("xray.interval", 50, 0, Integer.MAX_VALUE);
-        addIntConfig("xray.antiantixraylevel", 0, 0, 3);
+        addIntConfig("xray.antiantixraylevel", 0, 0, 1); // TODO boolean
 
         XrayBlock.load();
         Hotkey.load();

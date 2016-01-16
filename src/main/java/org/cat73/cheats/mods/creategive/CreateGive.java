@@ -12,7 +12,6 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTException;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.client.C10PacketCreativeInventoryAction;
-import net.minecraft.util.ResourceLocation;
 
 @ModInfo(name="CreateGive")
 public class CreateGive extends Mod {
