@@ -22,6 +22,7 @@ import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -73,15 +74,22 @@ public class Xray extends Mod implements Runnable {
                 int blockId;
                 XrayBlock xrayBlock;
                 byte damage;
+                Chunk chunk;
 
                 for (int x = sx; x <= endX; x++) {
                     for (int z = sz; z <= endZ; z++) {
+                        
+                        chunk = world.getChunkFromChunkCoords(x >> 4, z >> 4);
+                        if(!chunk.isChunkLoaded) {
+                            continue;
+                        }
+                        
                         for (int y = 0; y <= 255; y++) {
-                            block = world.getBlock(x, y, z);
+                            block = chunk.getBlock(x & 15, y, z & 15);
 
                             if (block != Blocks.air) {
                                 blockId = this.blockRegistery.getId(block);
-                                damage = (byte) world.getBlockMetadata(x, y, z);
+                                damage = (byte) chunk.getBlockMetadata(x & 15, y, z & 15);
                                 xrayBlock = XrayBlock.find(blockId, damage);
 
                                 if (xrayBlock != null) {
@@ -98,7 +106,6 @@ public class Xray extends Mod implements Runnable {
         }
     }
 
-    //TODO 在未加载的区块边界反假矿可能会失效
     private boolean antiAntiXray(final int x, final int y, final int z, final WorldClient world) {
         boolean[] isTranslucents;
         if(this.antiAntiXrayLevel >= 1) {
@@ -159,7 +166,13 @@ public class Xray extends Mod implements Runnable {
     }
 
     private boolean showBlock(final WorldClient world, final int x, final int y, final int z) {
-        final Block block = world.getBlock(x, y, z);
+        final Chunk chunk = world.getChunkFromChunkCoords(x >> 4, z >> 4);
+        if(!chunk.isChunkLoaded) {
+            return false;
+        }
+        
+        final Block block = chunk.getBlock(x & 15, y, z & 15);
+
         return block == Blocks.lava ||
                !block.getMaterial().isOpaque() ||
                block == Blocks.water ||
