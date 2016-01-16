@@ -116,58 +116,19 @@ public class Xray extends Mod implements Runnable {
     }
 
     private boolean antiAntiXray(final int x, final int y, final int z, final WorldClient world) {
-        boolean[] isTranslucents;
-        if(this.antiAntiXrayLevel >= 1) {
-            isTranslucents = new boolean[6];
-            isTranslucents[0] = showBlock(world, x + 1, y, z);
-            isTranslucents[1] = showBlock(world, x - 1, y, z);
-            isTranslucents[2] = showBlock(world, x, y + 1, z);
-            isTranslucents[3] = showBlock(world, x, y - 1, z);
-            isTranslucents[4] = showBlock(world, x, y, z + 1);
-            isTranslucents[5] = showBlock(world, x, y, z - 1);
+        boolean[] isTranslucents = new boolean[7];
 
-            for(final boolean isTranslucent : isTranslucents) {
-                if(isTranslucent) {
-                    return true;
-                }
-            }
-        }
-        if(this.antiAntiXrayLevel >= 2) {
-            isTranslucents = new boolean[12];
-            isTranslucents[0] = showBlock(world, x + 1, y + 1, z);
-            isTranslucents[1] = showBlock(world, x + 1, y - 1, z);
-            isTranslucents[2] = showBlock(world, x - 1, y + 1, z);
-            isTranslucents[3] = showBlock(world, x - 1, y - 1, z);
-            isTranslucents[4] = showBlock(world, x, y + 1, z + 1);
-            isTranslucents[5] = showBlock(world, x, y + 1, z - 1);
-            isTranslucents[6] = showBlock(world, x, y - 1, z + 1);
-            isTranslucents[7] = showBlock(world, x, y - 1, z - 1);
-            isTranslucents[8] = showBlock(world, x + 1, y, z + 1);
-            isTranslucents[9] = showBlock(world, x - 1, y, z + 1);
-            isTranslucents[10] = showBlock(world, x + 1, y, z - 1);
-            isTranslucents[11] = showBlock(world, x - 1, y, z - 1);
+        isTranslucents[0] = showBlock(world, x + 1, y, z);
+        isTranslucents[1] = showBlock(world, x - 1, y, z);
+        isTranslucents[2] = showBlock(world, x, y + 1, z);
+        isTranslucents[3] = showBlock(world, x, y - 1, z);
+        isTranslucents[4] = showBlock(world, x, y, z + 1);
+        isTranslucents[5] = showBlock(world, x, y, z - 1);
+        isTranslucents[6] = showBlock(world, x, y, z);
 
-            for(final boolean isTranslucent : isTranslucents) {
-                if(isTranslucent) {
-                    return true;
-                }
-            }
-        }
-        if(this.antiAntiXrayLevel >= 3) {
-            isTranslucents = new boolean[8];
-            isTranslucents[0] = showBlock(world, x + 1, y + 1, z + 1);
-            isTranslucents[1] = showBlock(world, x + 1, y + 1, z - 1);
-            isTranslucents[2] = showBlock(world, x + 1, y - 1, z + 1);
-            isTranslucents[3] = showBlock(world, x + 1, y - 1, z - 1);
-            isTranslucents[4] = showBlock(world, x - 1, y + 1, z + 1);
-            isTranslucents[5] = showBlock(world, x - 1, y + 1, z - 1);
-            isTranslucents[6] = showBlock(world, x - 1, y - 1, z + 1);
-            isTranslucents[7] = showBlock(world, x - 1, y - 1, z - 1);
-
-            for(final boolean isTranslucent : isTranslucents) {
-                if(isTranslucent) {
-                    return true;
-                }
+        for(final boolean isTranslucent : isTranslucents) {
+            if(isTranslucent) {
+                return true;
             }
         }
 
@@ -184,11 +145,7 @@ public class Xray extends Mod implements Runnable {
 
         final Block block = chunk.getBlockState(this.pos2).getBlock();
 
-        return block == Blocks.lava ||
-               !block.getMaterial().isOpaque() ||
-               block == Blocks.water ||
-               block == Blocks.flowing_water ||
-               block == Blocks.flowing_lava;
+        return !block.isNormalCube();
     }
 
     @Override
