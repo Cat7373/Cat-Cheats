@@ -13,10 +13,12 @@ public class GuiSlider extends GuiButton {
         this.percent = percentage;
     }
 
+    @Override
     protected int getHoverState(boolean mouseOver) {
         return 0;
     }
 
+    @Override
     protected void mouseDragged(Minecraft mc, int mouseX, int mouseY) {
         if (this.visible) {
             if (this.isClicked) {
@@ -37,6 +39,7 @@ public class GuiSlider extends GuiButton {
         }
     }
 
+    @Override
     public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
         if (super.mousePressed(mc, mouseX, mouseY)) {
             this.percent = (float)(mouseX - (this.xPosition + 4)) / (float)(this.width - 8);
@@ -56,6 +59,7 @@ public class GuiSlider extends GuiButton {
         }
     }
 
+    @Override
     public void mouseReleased(int mouseX, int mouseY) {
         this.isClicked = false;
     }
