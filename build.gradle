@@ -1,0 +1,23 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+    }
+}
+
+apply plugin: 'forge'
+
+version = "${project.version_major}.${project.version_minor}.${project.version_micro}"
+archivesBaseName = "Cat-Cheats"
+
+compileJava.options.encoding = 'UTF-8'
+
+minecraft {
+    version = "1.7.2-10.12.0.1048"
+}
