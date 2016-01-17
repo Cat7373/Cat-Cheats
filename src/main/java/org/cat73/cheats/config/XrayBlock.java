@@ -20,6 +20,8 @@ public class XrayBlock {
         "minecraft:diamond_ore -1 0 -65 -1 -56"
     };
     private final static ArrayList<XrayBlock> blocks = new ArrayList<XrayBlock>();
+    private final static ArrayList<XrayBlock> blocks_checkDamage = new ArrayList<XrayBlock>();
+    private final static ArrayList<XrayBlock> blocks_noCheckDamage = new ArrayList<XrayBlock>();
 
     public final int id;
     public final byte damage;
@@ -43,7 +45,9 @@ public class XrayBlock {
     }
 
     public static void load() {
-        blocks.clear();
+        XrayBlock.blocks.clear();
+        XrayBlock.blocks_checkDamage.clear();
+        XrayBlock.blocks_noCheckDamage.clear();
 
         final String[] configBlocksList = Config.instance().config.get("Cheats", "xray.blocks", defaultBlocks, "").getStringList();
 
@@ -82,46 +86,72 @@ public class XrayBlock {
         final Property configBolcks = Config.instance().config.get("Cheats", "xray.blocks", defaultBlocks, "");
         final String[] configBlocksList = new String[getSize()];
         for(int i = 0; i < configBlocksList.length; i++) {
-            configBlocksList[i] = blocks.get(i).toString();
+            configBlocksList[i] = XrayBlock.blocks.get(i).toString();
         }
         configBolcks.set(configBlocksList);
         Config.instance().save();
     }
 
     public static XrayBlock find(final int id, final byte damage) {
-        for(final XrayBlock xrayBlock : blocks) {
+        for(final XrayBlock xrayBlock : XrayBlock.blocks_checkDamage) {
             if(xrayBlock.id == id && xrayBlock.damage == damage) {
                 return xrayBlock;
             }
         }
-        if(damage != -1) {
-            return find(id, (byte) -1);
+
+        for(final XrayBlock xrayBlock : XrayBlock.blocks_noCheckDamage) {
+            if(xrayBlock.id == id) {
+                return xrayBlock;
+            }
         }
+
         return null;
     }
 
     public static int getSize() {
-        return blocks.size();
+        return XrayBlock.blocks.size();
     }
 
     public static XrayBlock getByIndex(final int index) {
-        return blocks.get(index);
+        return XrayBlock.blocks.get(index);
     }
 
     public static void delByIndex(final int index) {
         // TODO 为空时自动替换为默认值
-        blocks.remove(index);
+        final XrayBlock block = XrayBlock.blocks.remove(index);
+        
+        if(block.damage == -1) {
+            XrayBlock.blocks_noCheckDamage.remove(block);
+        } else {
+            XrayBlock.blocks_checkDamage.remove(block);
+        }
     }
 
     public static void set(final XrayBlock block, final int index) {
-        // TODO meta -1 跟 非 -1 的分开存 优化性能
         // TODO 自动去重
-        blocks.set(index, block);
+        XrayBlock oldBlock = XrayBlock.blocks.set(index, block);
+        
+        if(oldBlock.damage == -1) {
+            XrayBlock.blocks_noCheckDamage.remove(oldBlock);
+        } else {
+            XrayBlock.blocks_checkDamage.remove(oldBlock);
+        }
+        
+        if(block.damage == -1) {
+            XrayBlock.blocks_noCheckDamage.add(block);
+        } else {
+            XrayBlock.blocks_checkDamage.add(block);
+        }
     }
     
     public static void add(final XrayBlock block) {
-        // TODO meta -1 跟 非 -1 的分开存 优化性能
         // TODO 自动去重
-        blocks.add(block);
+        XrayBlock.blocks.add(block);
+        
+        if(block.damage == -1) {
+            XrayBlock.blocks_noCheckDamage.add(block);
+        } else {
+            XrayBlock.blocks_checkDamage.add(block);
+        }
     }
 }
