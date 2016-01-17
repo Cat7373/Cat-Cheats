@@ -3,6 +3,16 @@ package org.cat73.cheats.mods.xray;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.cat73.cheats.config.Config;
+import org.cat73.cheats.config.XrayBlock;
+import org.cat73.cheats.mods.Mod;
+import org.cat73.cheats.mods.ModInfo;
+import org.cat73.cheats.mods.xray.setting.Gui_Xray;
+import org.cat73.cheats.util.CatBlockPos;
+import org.cat73.cheats.util.ThreadUtil;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -17,16 +27,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry;
 import net.minecraftforge.fml.common.registry.GameData;
-
-import org.cat73.cheats.config.Config;
-import org.cat73.cheats.config.XrayBlock;
-import org.cat73.cheats.mods.Mod;
-import org.cat73.cheats.mods.ModInfo;
-import org.cat73.cheats.mods.xray.setting.Gui_Xray;
-import org.cat73.cheats.util.CatBlockPos;
-import org.cat73.cheats.util.ThreadUtil;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
 
 @ModInfo(name="Xray", defaultHotkey=Keyboard.KEY_X)
 public class Xray extends Mod implements Runnable {

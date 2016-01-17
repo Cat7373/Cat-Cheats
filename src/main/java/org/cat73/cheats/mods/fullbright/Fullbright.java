@@ -9,11 +9,13 @@ import net.minecraft.potion.Potion;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 
 @ModInfo(name="Fullbright")
 public class Fullbright extends Mod {
     private final GameSettings gameSettings;
     private float gamma;
+    private int cooldown;
     
     public Fullbright() {
         this.gameSettings = Mod.minecraft.gameSettings;
@@ -26,6 +28,7 @@ public class Fullbright extends Mod {
     public void onEnable() {
         setGamma();
         this.gameSettings.gammaSetting = 16.0F;
+        this.cooldown = 0;
 
         FMLCommonHandler.instance().bus().register(this);
     }
@@ -39,10 +42,18 @@ public class Fullbright extends Mod {
     
     @SubscribeEvent
     public void onTickInGame(final ClientTickEvent event) {
-        final EntityPlayerSP player = Mod.minecraft.thePlayer;
-        if(player != null) {
-            player.removePotionEffectClient(Potion.blindness.id);
-            player.removePotionEffectClient(Potion.confusion.id);
+        if(event.phase != Phase.END) {
+            return;
+        }
+
+        if(this.cooldown-- == 0) {
+            final EntityPlayerSP player = Mod.minecraft.thePlayer;
+            if(player != null) {
+                player.removePotionEffectClient(Potion.blindness.id);
+                player.removePotionEffectClient(Potion.confusion.id);
+            }
+            
+            this.cooldown = 10;
         }
     }
     
