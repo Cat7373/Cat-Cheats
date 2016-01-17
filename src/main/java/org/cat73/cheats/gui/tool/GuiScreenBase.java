@@ -24,8 +24,15 @@ public class GuiScreenBase extends GuiScreen {
 
     @Override
     public void initGui() {
+        Keyboard.enableRepeatEvents(true);
+        
         this.buttonList.clear();
         this.textFields.clear();
+    }
+    
+    @Override
+    public void onGuiClosed() {
+        Keyboard.enableRepeatEvents(false);
     }
 
     @Override
