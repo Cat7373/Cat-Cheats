@@ -11,3 +11,12 @@ minecraft {
     version = "1.8-11.14.4.1563"
     mappings = "snapshot_20141130"
 }
+
+sourceSets.main{
+    java{
+        srcDirs 'src'
+    }
+    resources{
+        srcDirs 'resources'
+    }
+}
