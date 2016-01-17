@@ -55,7 +55,10 @@ public class Xray extends Mod implements Runnable {
     public void run() {
         while(true) {
             if(cooldown-- == 0) {
+                // long time = System.currentTimeMillis();
                 refresh();
+                // time = System.currentTimeMillis() - time;
+                // PlayerMessage.debugFormat("Xray 刷新结束, 耗时: %sms", time);
                 cooldown = interval;
             }
             ThreadUtil.sleep(100);
