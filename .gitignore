@@ -1,6 +1,7 @@
 /*
 !.gitignore
 !/src/
+!/resources/
 !README.md
 !LICENSE
 !build.bat
