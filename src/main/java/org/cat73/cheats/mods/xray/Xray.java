@@ -84,12 +84,13 @@ public class Xray extends Mod implements Runnable {
                 for (int x = sx; x <= endX; x++) {
                     this.pos.setX(x);
                     for (int z = sz; z <= endZ; z++) {
-                        this.pos.setZ(z);
-                        
+
                         chunk = world.getChunkFromChunkCoords(x >> 4, z >> 4);
                         if(!chunk.isLoaded()) {
                             continue;
                         }
+                        
+                        this.pos.setZ(z);
                         
                         for (int y = 0; y <= 255; y++) {
                             this.pos.setY(y);
@@ -110,6 +111,7 @@ public class Xray extends Mod implements Runnable {
                         }
                     }
                 }
+
                 refresh = true;
             }
         }
@@ -136,13 +138,12 @@ public class Xray extends Mod implements Runnable {
     }
 
     private boolean showBlock(final WorldClient world, final int x, final int y, final int z) {
-        this.pos2.set(x, y, z);
-
-        final Chunk chunk = world.getChunkFromBlockCoords(this.pos2);
+        final Chunk chunk = world.getChunkFromChunkCoords(x >> 4, z >> 4);
         if(!chunk.isLoaded()) {
             return false;
         }
-
+        
+        this.pos2.set(x, y, z);
         final Block block = chunk.getBlockState(this.pos2).getBlock();
 
         return !block.isNormalCube();
