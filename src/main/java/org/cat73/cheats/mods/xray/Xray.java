@@ -121,23 +121,13 @@ public class Xray extends Mod implements Runnable {
     }
 
     private boolean antiAntiXray(final int x, final int y, final int z, final WorldClient world) {
-        boolean[] isTranslucents = new boolean[7];
-
-        isTranslucents[0] = showBlock(world, x + 1, y, z);
-        isTranslucents[1] = showBlock(world, x - 1, y, z);
-        isTranslucents[2] = showBlock(world, x, y + 1, z);
-        isTranslucents[3] = showBlock(world, x, y - 1, z);
-        isTranslucents[4] = showBlock(world, x, y, z + 1);
-        isTranslucents[5] = showBlock(world, x, y, z - 1);
-        isTranslucents[6] = showBlock(world, x, y, z);
-
-        for(final boolean isTranslucent : isTranslucents) {
-            if(isTranslucent) {
-                return true;
-            }
-        }
-
-        return false;
+        return showBlock(world, x, y, z) ||
+               showBlock(world, x + 1, y, z) ||
+               showBlock(world, x - 1, y, z) ||
+               showBlock(world, x, y + 1, z) ||
+               showBlock(world, x, y - 1, z) ||
+               showBlock(world, x, y, z + 1) ||
+               showBlock(world, x, y, z - 1);
     }
 
     private boolean showBlock(final WorldClient world, final int x, final int y, final int z) {
