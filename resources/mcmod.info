@@ -1,9 +1,25 @@
-[{
-  "modid": "Cat-Cheats",
-  "name": "Cat-Cheats",
-  "description": "A cheat mod.",
-  "version": "0.4.1",
-  "mcversion": "1.7.2",
-  "url": "https://github.com/Cat7373/Cat-Cheats",
-  "authorList": ["Cat73"]
-}]
+{
+  "modListVersion": 2,
+  "modList": [
+    {
+      "modid": "Cat-Cheats",
+      "name": "Cat-Cheats",
+      "description": "A cheat mod.",
+      "version": "${version}",
+      "mcversion": "${mcversion}",
+      "dependencies": [
+        "Forge@[${minforgeversion},)"
+      ],
+      "requiredMods": [
+        "Forge@[${minforgeversion},)"
+      ],
+      "url": "https://github.com/Cat7373/Cat-Cheats",
+      "updateUrl": "https://github.com/Cat7373/Cat-Cheats/releases",
+      "authorList": [
+        "Cat73"
+      ],
+      "credits": "",
+      "useDependencyInformation": true
+    }
+  ]
+}

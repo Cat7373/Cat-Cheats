@@ -13,14 +13,13 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "${project.version_major}.${project.version_minor}.${project.version_micro}"
+ext.modversion = "${project.version_major}.${project.version_minor}.${project.version_micro}"
+
+version = "${project.version_minecraft_filename}-${modversion}"
+group = 'org.cat73.cheats'
 archivesBaseName = "Cat-Cheats"
 
 compileJava.options.encoding = 'UTF-8'
-
-minecraft {
-    version = "1.7.2-10.12.0.1048"
-}
 
 sourceSets.main{
     java{
@@ -31,3 +30,30 @@ sourceSets.main{
     }
 }
 
+minecraft {
+    version = "${project.version_minecraft}-${project.version_forge}"
+    if (project.hasProperty('version_mappings'))
+        mappings = project.version_mappings
+        
+    replaceIn 'reference/Reference.java'
+    replace '${version}', modversion
+}
+
+processResources {
+    inputs.property 'version', project.version
+    inputs.property 'mcversion', project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+
+        expand([
+                'version'        : modversion,
+                'mcversion'      : project.version_minecraft,
+                'minforgeversion': project.hasProperty('version_minforge') ? project.version_minforge : project.version_forge,
+        ])
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
