@@ -12,9 +12,11 @@ import net.minecraft.world.World;
 //TODO 像真正的观察者模式一样 可以吸附在其他生物身上
 public class FreeCamPlayer extends EntityPlayer {
     private final static Minecraft minecraft = Minecraft.getMinecraft();
+    protected final MovementInput movementInput;
 
-    public FreeCamPlayer(final World worldIn, final GameProfile gameProfile) {
+    public FreeCamPlayer(final World worldIn, final GameProfile gameProfile, MovementInput movementInput) {
         super(worldIn, gameProfile);
+        this.movementInput = movementInput;
     }
     
     @Override
@@ -22,10 +24,8 @@ public class FreeCamPlayer extends EntityPlayer {
         final EntityPlayerSP player = FreeCamPlayer.minecraft.thePlayer;
         if(player != null) {
             // 刷新键盘输入
-            final MovementInput movementInput = player.movementInput;
-            movementInput.updatePlayerMoveState();
+            this.movementInput.updatePlayerMoveState();
 
-            // TODO 防止 Shift Ctrl 对原玩家生效
             // 防止原 Player 移动
             player.motionX = 0.0D;
             player.motionY = 0.0D;
@@ -46,8 +46,8 @@ public class FreeCamPlayer extends EntityPlayer {
                 flySpeed *= 1.8;
             }
             
-            final float strafe = movementInput.moveStrafe * flySpeed * 6.0F;
-            final float forward = movementInput.moveForward * flySpeed * 6.0F;
+            final float strafe = this.movementInput.moveStrafe * flySpeed * 6.0F;
+            final float forward = this.movementInput.moveForward * flySpeed * 6.0F;
             final float sin = MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F);
             final float cos = MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F);
 
@@ -55,9 +55,9 @@ public class FreeCamPlayer extends EntityPlayer {
             final double motionX = strafe * cos - forward * sin;
             double motionY = 0.0D;
             final double motionZ = forward * cos + strafe * sin;
-            if(movementInput.jump) {
+            if(this.movementInput.jump) {
                 motionY = flySpeed * 5.0F;
-            } else if(movementInput.sneak) {
+            } else if(this.movementInput.sneak) {
                 motionY = flySpeed * -5.0F;
             }
             
