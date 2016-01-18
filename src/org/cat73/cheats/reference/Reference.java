@@ -6,4 +6,5 @@ public class Reference {
     public final static String VERSION = "${version}";
     public final static boolean DEBUG = true;
     public final static String PROXY_CLIENT = "org.cat73.cheats.proxy.ClientProxy";
+    public final static String PROXY_SERVER = "org.cat73.cheats.proxy.ServerProxy";
 }

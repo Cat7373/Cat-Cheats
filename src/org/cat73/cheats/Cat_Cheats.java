@@ -10,9 +10,9 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid=Reference.MODID, useMetadata=true, clientSideOnly=true)
+@Mod(modid=Reference.MODID, useMetadata=true)
 public class Cat_Cheats {
-    @SidedProxy(clientSide=Reference.PROXY_CLIENT)
+    @SidedProxy(clientSide=Reference.PROXY_CLIENT,serverSide=Reference.PROXY_SERVER)
     private static CommonProxy proxy;
 
     @EventHandler
