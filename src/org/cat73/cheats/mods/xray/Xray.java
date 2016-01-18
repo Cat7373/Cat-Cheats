@@ -37,36 +37,36 @@ public class Xray extends Mod implements Runnable {
     private final List<XrayBlockInfo> blockList = new ArrayList<XrayBlockInfo>();
 
     private int displayListid;
-    private boolean refresh = false;
-    private int cooldown = 0;
+    private boolean needCompileDL = false;
+    private boolean needRefresh = false;
 
     private int radius = 45;
     private int antiAntiXrayLevel = 0;
-    private int interval = 50;
+    private int interval = 5000;
 
     public Xray() {
         this.settingInstance = new Gui_Xray();
         final Thread refreshThread = new Thread(this, "Cat-Cheat Xray-Refresh");
         refreshThread.setDaemon(true);
+        refreshThread.setPriority((Thread.MAX_PRIORITY - Thread.MIN_PRIORITY) / 2);
         refreshThread.start();
     }
 
     @Override
     public void run() {
+        long time;
         while(true) {
-            if(cooldown-- == 0) {
-                // long time = System.currentTimeMillis();
-                refresh();
-                // time = System.currentTimeMillis() - time;
-                // PlayerMessage.debugFormat("Xray 刷新结束, 耗时: %sms", time);
-                cooldown = interval;
+            refresh();
+
+            time = System.currentTimeMillis();
+            while(!this.needRefresh && System.currentTimeMillis() - time < this.interval) {
+                ThreadUtil.sleep(5);
             }
-            ThreadUtil.sleep(100);
         }
     }
 
     private void refresh() {
-        if (this.enabled && this.refresh == false) {
+        if (this.enabled && this.needCompileDL == false) {
             final WorldClient world = Mod.minecraft.theWorld;
             final EntityPlayerSP player = Mod.minecraft.thePlayer;
             if (world != null && player != null) {
@@ -107,7 +107,7 @@ public class Xray extends Mod implements Runnable {
 
                                 if (xrayBlock != null) {
                                     if(this.antiAntiXrayLevel == 0 || antiAntiXray(x, y, z, world)) {
-                                        blockList.add(new XrayBlockInfo(x, y, z, xrayBlock));
+                                        this.blockList.add(new XrayBlockInfo(x, y, z, xrayBlock));
                                     }
                                 }
                             }
@@ -115,7 +115,8 @@ public class Xray extends Mod implements Runnable {
                     }
                 }
 
-                refresh = true;
+                this.needCompileDL = true;
+                this.needRefresh = false;
             }
         }
     }
@@ -146,7 +147,7 @@ public class Xray extends Mod implements Runnable {
     public void onEnable() {
         getConfig();
         this.displayListid = GL11.glGenLists(1);
-        cooldown = 0;
+        this.needRefresh = true;
         
         FMLCommonHandler.instance().bus().register(this);
         MinecraftForge.EVENT_BUS.register(this);
@@ -175,7 +176,7 @@ public class Xray extends Mod implements Runnable {
 
     @SubscribeEvent
     public void onTickInGame(final ClientTickEvent event) {
-        if (this.refresh && Mod.minecraft.theWorld != null) {
+        if (this.needCompileDL && Mod.minecraft.theWorld != null) {
             compileDL();
         }
     }
@@ -207,7 +208,7 @@ public class Xray extends Mod implements Runnable {
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glEndList();
 
-        this.refresh = false;
+        this.needCompileDL = false;
     }
 
     private void renderBlock(final int x, final int y, final int z) {
@@ -251,7 +252,7 @@ public class Xray extends Mod implements Runnable {
     private void getConfig() {
         final Config config = Config.instance();
         this.radius = config.getIntConfig("xray.radius");
-        this.interval = config.getIntConfig("xray.interval");
+        this.interval = config.getIntConfig("xray.interval") * 100;
         this.antiAntiXrayLevel = config.getIntConfig("xray.antiantixraylevel");
     }
 }
