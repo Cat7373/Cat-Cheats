@@ -190,8 +190,15 @@ public class Xray extends Mod implements Runnable {
 
         GL11.glBegin(GL11.GL_LINES);
 
+        XrayBlock xrayBlock = null;
+
         for(final XrayBlockInfo xrayBlockInfo : this.blockList) {
-            renderBlock(xrayBlockInfo.x, xrayBlockInfo.y, xrayBlockInfo.z, xrayBlockInfo.xrayBlock);
+            if(xrayBlockInfo.xrayBlock != xrayBlock) {
+                xrayBlock = xrayBlockInfo.xrayBlock;
+                GL11.glColor4ub(xrayBlock.r, xrayBlock.g, xrayBlock.b, xrayBlock.a);
+            }
+
+            renderBlock(xrayBlockInfo.x, xrayBlockInfo.y, xrayBlockInfo.z);
         }
 
         GL11.glEnd();
@@ -203,44 +210,42 @@ public class Xray extends Mod implements Runnable {
         this.refresh = false;
     }
 
-    private void renderBlock(final int x, final int y, final int z, final XrayBlock block) {
-        GL11.glColor4ub(block.r, block.g, block.b, block.a);
+    private void renderBlock(final int x, final int y, final int z) {
+        GL11.glVertex3i(x, y, z);
+        GL11.glVertex3i(x + 1, y, z);
 
-        GL11.glVertex3f(x, y, z);
-        GL11.glVertex3f(x + 1, y, z);
+        GL11.glVertex3i(x + 1, y, z);
+        GL11.glVertex3i(x + 1, y, z + 1);
 
-        GL11.glVertex3f(x + 1, y, z);
-        GL11.glVertex3f(x + 1, y, z + 1);
+        GL11.glVertex3i(x, y, z);
+        GL11.glVertex3i(x, y, z + 1);
 
-        GL11.glVertex3f(x, y, z);
-        GL11.glVertex3f(x, y, z + 1);
+        GL11.glVertex3i(x, y, z + 1);
+        GL11.glVertex3i(x + 1, y, z + 1);
 
-        GL11.glVertex3f(x, y, z + 1);
-        GL11.glVertex3f(x + 1, y, z + 1);
+        GL11.glVertex3i(x, y + 1, z);
+        GL11.glVertex3i(x + 1, y + 1, z);
 
-        GL11.glVertex3f(x, y + 1, z);
-        GL11.glVertex3f(x + 1, y + 1, z);
+        GL11.glVertex3i(x + 1, y + 1, z);
+        GL11.glVertex3i(x + 1, y + 1, z + 1);
 
-        GL11.glVertex3f(x + 1, y + 1, z);
-        GL11.glVertex3f(x + 1, y + 1, z + 1);
+        GL11.glVertex3i(x, y + 1, z);
+        GL11.glVertex3i(x, y + 1, z + 1);
 
-        GL11.glVertex3f(x, y + 1, z);
-        GL11.glVertex3f(x, y + 1, z + 1);
+        GL11.glVertex3i(x, y + 1, z + 1);
+        GL11.glVertex3i(x + 1, y + 1, z + 1);
 
-        GL11.glVertex3f(x, y + 1, z + 1);
-        GL11.glVertex3f(x + 1, y + 1, z + 1);
+        GL11.glVertex3i(x, y, z);
+        GL11.glVertex3i(x, y + 1, z);
 
-        GL11.glVertex3f(x, y, z);
-        GL11.glVertex3f(x, y + 1, z);
+        GL11.glVertex3i(x, y, z + 1);
+        GL11.glVertex3i(x, y + 1, z + 1);
 
-        GL11.glVertex3f(x, y, z + 1);
-        GL11.glVertex3f(x, y + 1, z + 1);
+        GL11.glVertex3i(x + 1, y, z);
+        GL11.glVertex3i(x + 1, y + 1, z);
 
-        GL11.glVertex3f(x + 1, y, z);
-        GL11.glVertex3f(x + 1, y + 1, z);
-
-        GL11.glVertex3f(x + 1, y, z + 1);
-        GL11.glVertex3f(x + 1, y + 1, z + 1);
+        GL11.glVertex3i(x + 1, y, z + 1);
+        GL11.glVertex3i(x + 1, y + 1, z + 1);
     }
 
     private void getConfig() {
