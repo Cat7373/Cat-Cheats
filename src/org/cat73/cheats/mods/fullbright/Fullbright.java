@@ -19,8 +19,6 @@ public class Fullbright extends Mod {
     
     public Fullbright() {
         this.gameSettings = Mod.minecraft.gameSettings;
-        setGamma();
-        this.gameSettings.gammaSetting = this.gamma;
     }
 
     @Override
@@ -36,6 +34,13 @@ public class Fullbright extends Mod {
     public void onDisable() {
         FMLCommonHandler.instance().bus().unregister(this);
 
+        this.gameSettings.gammaSetting = this.gamma;
+    }
+    
+    @Override
+    public void onFirstTick() {
+        // 如果上次退出游戏的时候仍然开着夜视功能, 则在这里恢复到正常的 Gamma
+        setGamma();
         this.gameSettings.gammaSetting = this.gamma;
     }
     

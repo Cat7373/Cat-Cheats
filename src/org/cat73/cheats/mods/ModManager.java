@@ -13,6 +13,7 @@ import org.cat73.cheats.reference.Reference;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 
@@ -25,12 +26,13 @@ public final class ModManager {
     public ModManager() {
         FMLCommonHandler.instance().bus().register(this);
 
-        putMod(new Xray());
-        putMod(new Fullbright());
-        putMod(new FreeCam());
-        putMod(new CreateGive());
+        registerMod(new Xray());
+        registerMod(new Fullbright());
+        registerMod(new FreeCam());
+        registerMod(new CreateGive());
         
         registerHotkeys();
+        registerFirstTick();
     }
 
     private void registerHotkeys() {
@@ -47,8 +49,23 @@ public final class ModManager {
             }
         }
     }
+    
+    private void registerFirstTick() {
+        // FirstTick 通知
+        FMLCommonHandler.instance().bus().register(new Object() {
+            @SubscribeEvent
+            public void onTickInGame(final ClientTickEvent event) {
+                FMLCommonHandler.instance().bus().unregister(this);
 
-    private void putMod(final Mod mod) {
+                // 执行每一个 Mod 的 onFirstTick
+                for(final Mod mod : ModManager.mods.values()) {
+                    mod.onFirstTick();
+                }
+            }
+        });
+    }
+
+    private void registerMod(final Mod mod) {
         mods.put(mod.name, mod);
     }
 
