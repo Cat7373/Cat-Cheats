@@ -45,4 +45,5 @@ public class Mod {
 
     public void onEnable() {}
     public void onDisable() {}
+    public void onFirstTick() {}
 }
