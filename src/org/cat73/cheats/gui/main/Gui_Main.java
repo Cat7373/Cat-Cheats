@@ -5,12 +5,20 @@ import java.io.IOException;
 import org.cat73.cheats.gui.tool.GuiScreenBase;
 import org.cat73.cheats.mods.Mod;
 import org.cat73.cheats.mods.ModManager;
+import org.cat73.cheats.reference.Names;
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
 
 public class Gui_Main extends GuiScreenBase {
+    private final String str_toggle = I18n.format(Names.Gui.TOGGLE);
+    private final String str_setting = I18n.format(Names.Gui.SETTING);
+    private final String str_setHotkey = I18n.format(Names.Gui.SETHOTKEY);
+    private final String str_deleteHotkey = I18n.format(Names.Gui.DELETEHOTKEY);
+    private final String str_exit = I18n.format(Names.Gui.EXIT);
+
     private Gui_Main_Mods_Slot mods_slot;
     private GuiButton btn_toggle;
     private GuiButton btn_setting;
@@ -31,19 +39,19 @@ public class Gui_Main extends GuiScreenBase {
         final int button_width = this.width / 10 * 2 - 2;
         int id = 0;
 
-        this.btn_toggle = new GuiButton(id++, 1, button_top, button_width, 20, "Toggle Mod");
+        this.btn_toggle = new GuiButton(id++, 1, button_top, button_width, 20, this.str_toggle);
         this.buttonList.add(this.btn_toggle);
 
-        this.btn_setting = new GuiButton(id++, this.width / 10 * 2 + 1, button_top, button_width, 20, "Mod Setting");
+        this.btn_setting = new GuiButton(id++, this.width / 10 * 2 + 1, button_top, button_width, 20, this.str_setting);
         this.buttonList.add(this.btn_setting);
         
-        this.btn_setHotkey = new GuiButton(id++, this.width / 10 * 4 + 1, button_top, button_width, 20, "Set Hotkey");
+        this.btn_setHotkey = new GuiButton(id++, this.width / 10 * 4 + 1, button_top, button_width, 20, this.str_setHotkey);
         this.buttonList.add(this.btn_setHotkey);
 
-        this.btn_deleteHotkey = new GuiButton(id++, this.width / 10 * 6 + 1, button_top, button_width, 20, "Del Hotkey");
+        this.btn_deleteHotkey = new GuiButton(id++, this.width / 10 * 6 + 1, button_top, button_width, 20, this.str_deleteHotkey);
         this.buttonList.add(this.btn_deleteHotkey);
 
-        this.btn_exit = new GuiButton(id++, this.width / 10 * 8 + 1, button_top, button_width, 20, "Exit");
+        this.btn_exit = new GuiButton(id++, this.width / 10 * 8 + 1, button_top, button_width, 20, this.str_exit);
         this.buttonList.add(this.btn_exit);
 
         this.mods_slot = new Gui_Main_Mods_Slot(this);

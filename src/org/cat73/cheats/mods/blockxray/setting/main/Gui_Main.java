@@ -1,11 +1,11 @@
-package org.cat73.cheats.mods.xray.setting.main;
+package org.cat73.cheats.mods.blockxray.setting.main;
 
 import java.io.IOException;
 
 import org.cat73.cheats.config.XrayBlock;
 import org.cat73.cheats.gui.tool.GuiScreenBase;
-import org.cat73.cheats.mods.xray.setting.Gui_Config;
-import org.cat73.cheats.mods.xray.setting.addblock.Gui_AddBlock;
+import org.cat73.cheats.mods.blockxray.setting.Gui_Config;
+import org.cat73.cheats.mods.blockxray.setting.addblock.Gui_AddBlock;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

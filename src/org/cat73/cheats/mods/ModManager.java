@@ -4,10 +4,10 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import org.cat73.cheats.config.Hotkey;
+import org.cat73.cheats.mods.blockxray.BlockXray;
 import org.cat73.cheats.mods.creategive.CreateGive;
 import org.cat73.cheats.mods.freecam.FreeCam;
 import org.cat73.cheats.mods.fullbright.Fullbright;
-import org.cat73.cheats.mods.xray.Xray;
 import org.cat73.cheats.reference.Reference;
 
 import net.minecraft.client.Minecraft;
@@ -37,7 +37,7 @@ public final class ModManager {
         FMLCommonHandler.instance().bus().register(this);
 
         // 注册 Mod
-        registerMod(new Xray());
+        registerMod(new BlockXray());
         registerMod(new Fullbright());
         registerMod(new FreeCam());
         registerMod(new CreateGive());

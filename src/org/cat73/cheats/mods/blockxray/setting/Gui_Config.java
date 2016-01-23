@@ -1,4 +1,4 @@
-package org.cat73.cheats.mods.xray.setting;
+package org.cat73.cheats.mods.blockxray.setting;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -28,19 +28,19 @@ public class Gui_Config extends GuiScreenBase {
         int id = 0;
         int value;
 
-        value = this.numericRadius == null ? config.getIntConfig("xray.radius") : this.numericRadius.getValue();
+        value = this.numericRadius == null ? config.getIntConfig("blockxray.radius") : this.numericRadius.getValue();
         this.numericRadius = new GuiNumericField(this.fontRendererObj, id++, 90, 10, this.width - 95);
         this.numericRadius.setMinimum(0);
         this.numericRadius.setValue(value);
         this.buttonList.add(this.numericRadius);
 
-        value = this.numericInterval == null ? config.getIntConfig("xray.interval") : this.numericInterval.getValue();
+        value = this.numericInterval == null ? config.getIntConfig("blockxray.interval") : this.numericInterval.getValue();
         this.numericInterval = new GuiNumericField(this.fontRendererObj, id++, 90, 30, this.width - 95);
         this.numericInterval.setMinimum(0);
         this.numericInterval.setValue(value);
         this.buttonList.add(this.numericInterval);
 
-        value = this.numericAntiAntiXrayLevel == null ? config.getIntConfig("xray.antiantixraylevel") : this.numericAntiAntiXrayLevel.getValue();
+        value = this.numericAntiAntiXrayLevel == null ? config.getIntConfig("blockxray.antiantixraylevel") : this.numericAntiAntiXrayLevel.getValue();
         this.numericAntiAntiXrayLevel = new GuiNumericField(this.fontRendererObj, id++, 90, 50, this.width - 95);
         this.numericAntiAntiXrayLevel.setValue(value);
         this.numericAntiAntiXrayLevel.setMinimum(0);
@@ -70,9 +70,9 @@ public class Gui_Config extends GuiScreenBase {
         if (guiButton.enabled) {
             if (guiButton.id == this.btnSave.id) {
                 final Config config = Config.instance();
-                config.setIntConfig("xray.radius", this.numericRadius.getValue());
-                config.setIntConfig("xray.interval", this.numericInterval.getValue());
-                config.setIntConfig("xray.antiantixraylevel", this.numericAntiAntiXrayLevel.getValue());
+                config.setIntConfig("blockxray.radius", this.numericRadius.getValue());
+                config.setIntConfig("blockxray.interval", this.numericInterval.getValue());
+                config.setIntConfig("blockxray.antiantixraylevel", this.numericAntiAntiXrayLevel.getValue());
                 config.save();
                 this.mc.displayGuiScreen(this.parentScreen);
             } else if (guiButton.id == this.btnCancel.id) {

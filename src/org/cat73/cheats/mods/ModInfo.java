@@ -1,7 +1,9 @@
 package org.cat73.cheats.mods;
 
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 import org.lwjgl.input.Keyboard;
 /**
@@ -9,6 +11,7 @@ import org.lwjgl.input.Keyboard;
  * @author Cat73
  */
 @Retention(RetentionPolicy.RUNTIME)
+@Target(value=ElementType.TYPE)
 public @interface ModInfo {
     /** Mod 的名称 */
     String name();

@@ -1,4 +1,4 @@
-package org.cat73.cheats.mods.xray;
+package org.cat73.cheats.mods.blockxray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.cat73.cheats.config.Config;
 import org.cat73.cheats.config.XrayBlock;
 import org.cat73.cheats.mods.Mod;
 import org.cat73.cheats.mods.ModInfo;
-import org.cat73.cheats.mods.xray.setting.Gui_Xray;
+import org.cat73.cheats.mods.blockxray.setting.Gui_Xray;
 import org.cat73.cheats.util.CatBlockPos;
 import org.cat73.cheats.util.ThreadUtil;
 import org.lwjgl.input.Keyboard;
@@ -28,8 +28,8 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry;
 import net.minecraftforge.fml.common.registry.GameData;
 
-@ModInfo(name="Xray", defaultHotkey=Keyboard.KEY_X)
-public class Xray extends Mod implements Runnable {
+@ModInfo(name="BlockXray", defaultHotkey=Keyboard.KEY_X)
+public class BlockXray extends Mod implements Runnable {
     private final FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
 
     private final CatBlockPos pos = new CatBlockPos();
@@ -44,9 +44,9 @@ public class Xray extends Mod implements Runnable {
     private int antiAntiXrayLevel = 0;
     private int interval = 5000;
 
-    public Xray() {
+    public BlockXray() {
         this.settingInstance = new Gui_Xray();
-        final Thread refreshThread = new Thread(this, "Cat-Cheat Xray-Refresh");
+        final Thread refreshThread = new Thread(this, "Cat-Cheat BlockXray-Refresh");
         refreshThread.setDaemon(true);
         refreshThread.setPriority((Thread.MAX_PRIORITY - Thread.MIN_PRIORITY) / 2);
         refreshThread.start();
@@ -251,8 +251,8 @@ public class Xray extends Mod implements Runnable {
 
     private void getConfig() {
         final Config config = Config.instance();
-        this.radius = config.getIntConfig("xray.radius");
-        this.interval = config.getIntConfig("xray.interval") * 100;
-        this.antiAntiXrayLevel = config.getIntConfig("xray.antiantixraylevel");
+        this.radius = config.getIntConfig("blockxray.radius");
+        this.interval = config.getIntConfig("blockxray.interval") * 100;
+        this.antiAntiXrayLevel = config.getIntConfig("blockxray.antiantixraylevel");
     }
 }

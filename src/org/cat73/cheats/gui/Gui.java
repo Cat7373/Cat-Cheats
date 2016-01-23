@@ -2,6 +2,7 @@ package org.cat73.cheats.gui;
 
 import org.cat73.cheats.gui.main.Gui_Main;
 import org.cat73.cheats.mods.Mod;
+import org.cat73.cheats.reference.Names;
 import org.cat73.cheats.reference.Reference;
 import org.lwjgl.input.Keyboard;
 
@@ -19,7 +20,7 @@ public class Gui {
 
     public Gui() {
         FMLCommonHandler.instance().bus().register(this);
-        this.guiKey = new KeyBinding("Gui", Keyboard.KEY_F6, Reference.NAME);
+        this.guiKey = new KeyBinding(Names.Keys.GUI, Keyboard.KEY_F6, Reference.NAME);
         ClientRegistry.registerKeyBinding(guiKey);
     }
 

@@ -1,8 +1,8 @@
-package org.cat73.cheats.mods.xray.setting;
+package org.cat73.cheats.mods.blockxray.setting;
 
 import org.cat73.cheats.mods.Mod;
 import org.cat73.cheats.mods.ModSetting;
-import org.cat73.cheats.mods.xray.setting.main.Gui_Main;
+import org.cat73.cheats.mods.blockxray.setting.main.Gui_Main;
 
 public class Gui_Xray implements ModSetting {
     @Override

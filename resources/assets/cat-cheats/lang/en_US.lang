@@ -1,0 +1,17 @@
+# Keys
+catcheats.keys.gui=Gui
+
+# Gui
+catcheats.gui.enable=Enable
+catcheats.gui.disable=Disable
+catcheats.gui.toggle=Toggle Mod
+catcheats.gui.setting=Mod Setting
+catcheats.gui.sethotkey=Set Hotkey
+catcheats.gui.deletehotkey=Del Hotkey
+catcheats.gui.exit=Exit
+
+# Mods
+catcheats.mods.blockxray.name=Block Xray
+catcheats.mods.creategive.name=Create Give
+catcheats.mods.freecam.name=FreeCam
+catcheats.mods.fullbright.name=Fullbright
