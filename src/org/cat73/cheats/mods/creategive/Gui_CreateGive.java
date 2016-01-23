@@ -74,7 +74,6 @@ public class Gui_CreateGive extends GuiScreenBase {
         
         super.drawScreen(par1, par2, par3);
 
-        // TODO 尝试利用super的labelList
         drawString(this.fontRendererObj, "Slot:", 5, 14, 0xFFFFFF);
         drawString(this.fontRendererObj, "ItemId:", 5, 44, 0xFFFFFF);
         drawString(this.fontRendererObj, "Damage:", 5, 64, 0xFFFFFF);
@@ -86,7 +85,6 @@ public class Gui_CreateGive extends GuiScreenBase {
     protected void actionPerformed(final GuiButton guiButton) {
         if (guiButton.enabled) {
             if (guiButton.id == this.btnGive.id) {
-                // TODO 增加数量设置
                 CreateGive.giveItem(this.numericItemId.getValue(), this.numericDamage.getValue(), this.numericSlot.getValue(), 1, this.textNbt_Json.getText());
                 this.mc.displayGuiScreen(this.parentScreen);
             } else if (guiButton.id == this.btnGive_Command.id) {

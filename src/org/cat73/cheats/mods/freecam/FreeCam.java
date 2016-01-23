@@ -7,7 +7,6 @@ import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.util.MovementInput;
 
-// TODO 防止离的太远的区块卸载
 @ModInfo(name="FreeCam")
 public class FreeCam extends Mod {
     private EntityClientPlayerMP player = null;

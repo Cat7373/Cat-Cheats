@@ -9,7 +9,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 
 public class Gui_Main extends GuiScreenBase {
-    // TODO 增加方块顺序调整的功能
     private Gui_Main_Block_Slot gui_Main_Block_Slot;
     private GuiButton btnAddBlock;
     private GuiButton btnEditBlock;

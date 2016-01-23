@@ -11,7 +11,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovementInput;
 import net.minecraft.world.World;
 
-//TODO 像真正的观察者模式一样 可以吸附在其他生物身上
 public class FreeCamPlayer extends EntityPlayer {
     private final static Minecraft minecraft = Minecraft.getMinecraft();
     protected final MovementInput movementInput;
@@ -41,7 +40,6 @@ public class FreeCamPlayer extends EntityPlayer {
             this.rotationYawHead = player.rotationYawHead;
             this.inventory = player.inventory;
 
-            // TODO 更平滑的加速与减速
             // 刷新速度
             float flySpeed = this.capabilities.getFlySpeed();
             if(FreeCamPlayer.minecraft.gameSettings.keyBindSprint.getIsKeyPressed()) {

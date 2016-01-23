@@ -117,7 +117,6 @@ public class XrayBlock {
     }
 
     public static void delByIndex(final int index) {
-        // TODO 为空时自动替换为默认值
         final XrayBlock block = XrayBlock.blocks.remove(index);
         
         if(block.damage == -1) {
@@ -128,7 +127,6 @@ public class XrayBlock {
     }
 
     public static void set(final XrayBlock block, final int index) {
-        // TODO 自动去重
         XrayBlock oldBlock = XrayBlock.blocks.set(index, block);
         
         if(oldBlock.damage == -1) {
@@ -145,7 +143,6 @@ public class XrayBlock {
     }
     
     public static void add(final XrayBlock block) {
-        // TODO 自动去重
         XrayBlock.blocks.add(block);
         
         if(block.damage == -1) {

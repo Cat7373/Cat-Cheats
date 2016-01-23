@@ -20,9 +20,7 @@ public class Gui {
     public Gui() {
         FMLCommonHandler.instance().bus().register(this);
         this.guiKey = new KeyBinding("Gui", Keyboard.KEY_F6, Reference.NAME);
-        // TODO 多语言
-        // this.guiKey = new KeyBinding("catcheats.key.gui", Keyboard.KEY_F6, "catcheats.key.category");
-        // this.guiKey = new KeyBinding("catcheats.key.gui", Keyboard.KEY_F6, "Cat-Cheats");
+
         ClientRegistry.registerKeyBinding(guiKey);
     }
 

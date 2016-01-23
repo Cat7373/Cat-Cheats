@@ -59,7 +59,6 @@ public class Gui_Main_Mods_Slot extends GuiSlot {
     protected void drawBackground() {
     }
 
-    //TODO 显示MOD的详细描述
     @Override
     protected void drawSlot(final int index, final int x, final int y, final int par4, Tessellator tessellator, final int mouseX, final int mouseY) {
         if (index < 0 || index >= getSize()) {
