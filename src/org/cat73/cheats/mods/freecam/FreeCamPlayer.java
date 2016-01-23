@@ -9,7 +9,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovementInput;
 import net.minecraft.world.World;
 
-//TODO 像真正的观察者模式一样 可以吸附在其他生物身上
 public class FreeCamPlayer extends EntityPlayer {
     private final static Minecraft minecraft = Minecraft.getMinecraft();
     protected final MovementInput movementInput;
