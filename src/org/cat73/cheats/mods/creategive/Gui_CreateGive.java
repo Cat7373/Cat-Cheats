@@ -74,7 +74,6 @@ public class Gui_CreateGive extends GuiScreenBase {
         
         super.drawScreen(par1, par2, par3);
 
-        // TODO 尝试利用super的labelList
         drawString(this.fontRendererObj, "Slot:", 5, 14, 0xFFFFFF);
         drawString(this.fontRendererObj, "ItemId:", 5, 44, 0xFFFFFF);
         drawString(this.fontRendererObj, "Damage:", 5, 64, 0xFFFFFF);

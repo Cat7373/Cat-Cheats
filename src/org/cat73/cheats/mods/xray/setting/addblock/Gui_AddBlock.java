@@ -62,7 +62,7 @@ public class Gui_AddBlock extends GuiScreenBase {
         this.buttonList.add(this.slider_b);
         this.slider_a = new GuiSlider(id++, this.width - 160, this.height / 10 * 8, "Alpha-Value", this.slider_a == null ? this.xrayBlock == null ? 1.0f : (this.xrayBlock.a & 255) / 255.0f : this.slider_a.percent);
         this.buttonList.add(this.slider_a);
-        // TODO 增加这一项的开关
+        // TODO 增加开关允许暂时禁用这一项
 
         this.btnSave = new GuiButton(id++, 3, button_top, button_width, 20, "Save");
         this.buttonList.add(this.btnSave);
