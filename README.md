@@ -11,30 +11,6 @@
 3. 按 F6 来编辑配置，其他功能需在这里设置热键后使用。
 
 # 链接
-* [功能列表及详细说明](https://github.com/Cat7373/Cat-Cheats/wiki)
+* [功能列表 / 详细说明 / 其他信息](https://github.com/Cat7373/Cat-Cheats/wiki)
 * [下载Mod / 版本历史](https://github.com/Cat7373/Cat-Cheats/releases)
 * [反馈问题](https://github.com/Cat7373/Cat-Cheats/issues)
-
-# 感谢(字母顺序排列):
-* CJB-Mod
-* [Kradxn’s-X-ray-Mod](http://www.minecraftforum.net/topic/1921866-162-forge-x-ray-mod-forge-is-required/)
-* [LunatriusCore](https://github.com/Lunatrius/LunatriusCore)
-* [Minecraft Forge](http://files.minecraftforge.net/)
-* [NotEnoughItems](https://github.com/Chicken-Bones/NotEnoughItems)
-* [Schematica](https://github.com/Lunatrius/Schematica)
-* [WorldEdit](https://github.com/sk89q/WorldEdit)
-* [Wurst](https://github.com/Wurst-Imperium/Wurst-Client)
-
-# TODO:
-* 代码部分:
-  * 增加生物透视功能。
-  * 增加飞行作弊功能。
-  * 增加多国语言支持。
-  * 增加弓箭瞄准辅助。
-  * 增加一键合成。
-  * 增加自动与村民交易。
-  * 增加获得自定义药水效果。
-  * 从 MOD 列表中隐藏这个 MOD。
-  * 给代码增加注释。
-* 非代码部分:
-  * 增加多国语言的README.md。
