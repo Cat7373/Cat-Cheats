@@ -2,26 +2,29 @@ package org.cat73.cheats.mods.creategive;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.client.resources.I18n;
 
 import org.cat73.cheats.gui.tool.GuiNumericField;
 import org.cat73.cheats.gui.tool.GuiScreenBase;
+import org.cat73.cheats.reference.Names;
 
 public class Gui_CreateGive extends GuiScreenBase {
-    private GuiNumericField numericItemId;
-    private GuiNumericField numericDamage;
+    private final String str_execute = I18n.format(Names.Mods.CreateGive.Gui.EXECUTE);
+    private final String str_exit = I18n.format(Names.Mods.CreateGive.Gui.EXIT);
+    private final String str_slot = I18n.format(Names.Mods.CreateGive.Gui.SLOT);
+    private final String str_command = I18n.format(Names.Mods.CreateGive.Gui.COMMAND);
+    
     private GuiNumericField numericSlot;
-    private GuiTextField textNbt_Json;
     private GuiTextField textCommand;
-    private GuiButton btnGive;
-    private GuiButton btnGive_Command;
-    private GuiButton btnCancel;
+    private GuiButton btnExecute;
+    private GuiButton btnExit;
 
     @Override
     public void initGui() {
         super.initGui();
 
         final int button_top = this.height - 22;
-        final int button_width = this.width / 3 - 3;
+        final int button_width = this.width / 2 - 3;
         int id = 0;
         int value;
         String value_s;
@@ -33,39 +36,17 @@ public class Gui_CreateGive extends GuiScreenBase {
         this.numericSlot.setMaximum(9);
         this.buttonList.add(this.numericSlot);
 
-        value = this.numericItemId == null ? 1 : this.numericItemId.getValue();
-        this.numericItemId = new GuiNumericField(this.fontRendererObj, id++, 90, 40, this.width - 95);
-        this.numericItemId.setMinimum(0);
-        this.numericItemId.setValue(value);
-        this.buttonList.add(this.numericItemId);
-
-        value = this.numericDamage == null ? 0 : this.numericDamage.getValue();
-        this.numericDamage = new GuiNumericField(this.fontRendererObj, id++, 90, 60, this.width - 95);
-        this.numericDamage.setMinimum(0);
-        this.numericDamage.setMaximum(32767);
-        this.numericDamage.setValue(value);
-        this.buttonList.add(this.numericDamage);
-        
-        value_s = this.textNbt_Json == null ? "{}" : this.textNbt_Json.getText();
-        this.textNbt_Json = new GuiTextField(0, this.fontRendererObj, 90, 80, this.width - 100, 20);
-        this.textNbt_Json.setMaxStringLength(Integer.MAX_VALUE);
-        this.textNbt_Json.setText(value_s);
-        this.textFields.add(this.textNbt_Json);
-
         value_s = this.textCommand == null ? "/give Cat73 minecraft:stone 64 0 {display:{Name:\"Cat73 stone\"}}" : this.textCommand.getText();
-        this.textCommand = new GuiTextField(0, this.fontRendererObj, 90, 110, this.width - 100, 20);
+        this.textCommand = new GuiTextField(0, this.fontRendererObj, 90, 35, this.width - 100, 20);
         this.textCommand.setMaxStringLength(Integer.MAX_VALUE);
         this.textCommand.setText(value_s);
         this.textFields.add(this.textCommand);
         
-        this.btnGive = new GuiButton(id++, 3, button_top, button_width, 20, "Give");
-        this.buttonList.add(this.btnGive);
-        
-        this.btnGive_Command = new GuiButton(id++, this.width / 3, button_top, button_width, 20, "Give_Command");
-        this.buttonList.add(this.btnGive_Command);
+        this.btnExecute = new GuiButton(id++, 2, button_top, button_width, 20, str_execute);
+        this.buttonList.add(this.btnExecute);
 
-        this.btnCancel = new GuiButton(id++, this.width / 3 * 2, button_top, button_width, 20, "Exit");
-        this.buttonList.add(this.btnCancel);
+        this.btnExit = new GuiButton(id++, this.width / 2, button_top, button_width, 20, str_exit);
+        this.buttonList.add(this.btnExit);
     }
 
     @Override
@@ -74,24 +55,17 @@ public class Gui_CreateGive extends GuiScreenBase {
         
         super.drawScreen(par1, par2, par3);
 
-        drawString(this.fontRendererObj, "Slot:", 5, 14, 0xFFFFFF);
-        drawString(this.fontRendererObj, "ItemId:", 5, 44, 0xFFFFFF);
-        drawString(this.fontRendererObj, "Damage:", 5, 64, 0xFFFFFF);
-        drawString(this.fontRendererObj, "NBT_Json:", 5, 84, 0xFFFFFF);
-        drawString(this.fontRendererObj, "Give Command:", 5, 114, 0xFFFFFF);
+        drawString(this.fontRendererObj, str_slot, 5, 14, 0xFFFFFF);
+        drawString(this.fontRendererObj, str_command, 5, 39, 0xFFFFFF);
     }
 
     @Override
     protected void actionPerformed(final GuiButton guiButton) {
         if (guiButton.enabled) {
-            if (guiButton.id == this.btnGive.id) {
-                // TODO 增加数量设置
-                CreateGive.giveItem(this.numericItemId.getValue(), this.numericDamage.getValue(), this.numericSlot.getValue(), 1, this.textNbt_Json.getText());
-                this.mc.displayGuiScreen(this.parentScreen);
-            } else if (guiButton.id == this.btnGive_Command.id) {
+            if (guiButton.id == this.btnExecute.id) {
                 CreateGive.giveItem(textCommand.getText(), this.numericSlot.getValue());
                 this.mc.displayGuiScreen(this.parentScreen);
-            } else if (guiButton.id == this.btnCancel.id) {
+            } else if (guiButton.id == this.btnExit.id) {
                 this.mc.displayGuiScreen(this.parentScreen);
             }
         }

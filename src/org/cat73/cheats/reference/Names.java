@@ -21,5 +21,14 @@ public class Names {
                 
             }
         }
+        
+        public final static class CreateGive {
+            public final static class Gui {
+                public final static String EXECUTE = "catcheats.mods.creategive.gui.execute";
+                public final static String EXIT = "catcheats.mods.creategive.gui.exit";
+                public final static String SLOT = "catcheats.mods.creategive.gui.slot";
+                public final static String COMMAND = "catcheats.mods.creategive.gui.command";
+            }
+        }
     }
 }

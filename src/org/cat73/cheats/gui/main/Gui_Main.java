@@ -124,7 +124,7 @@ public class Gui_Main extends GuiScreenBase {
     protected void keyTyped(char character, int code) throws IOException {
         if (this.setHotkey && code != Keyboard.KEY_ESCAPE) {
             this.setHotkey = false;
-            this.btn_setHotkey.displayString = "Set Hotkey";
+            this.btn_setHotkey.displayString = str_setHotkey;
             ModManager.setHotKey(mods_slot.getSelectMod(), code);
         }
 

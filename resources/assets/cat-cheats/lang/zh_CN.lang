@@ -15,3 +15,9 @@ catcheats.mods.blockxray.name=方块透视
 catcheats.mods.creategive.name=创造模拟Give
 catcheats.mods.freecam.name=本地观察者模式
 catcheats.mods.fullbright.name=夜视
+
+# Mods -> CreateGive
+catcheats.mods.creategive.gui.execute=执行 Give 指令
+catcheats.mods.creategive.gui.exit=退出
+# catcheats.mods.creategive.gui.slot=
+catcheats.mods.creategive.gui.command=Give 指令:

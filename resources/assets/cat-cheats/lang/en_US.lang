@@ -15,3 +15,9 @@ catcheats.mods.blockxray.name=Block Xray
 catcheats.mods.creategive.name=Create Give
 catcheats.mods.freecam.name=FreeCam
 catcheats.mods.fullbright.name=Fullbright
+
+# Mods -> CreateGive
+catcheats.mods.creategive.gui.execute=Execute give Command
+catcheats.mods.creategive.gui.exit=Exit
+catcheats.mods.creategive.gui.slot=Slot:
+catcheats.mods.creategive.gui.command=Give Command:

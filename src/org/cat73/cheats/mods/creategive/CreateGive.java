@@ -31,14 +31,8 @@ public class CreateGive extends Mod {
             return;
         }
 
-        ItemStack stack;
-        // 输入检查
-        // damage = damage > item.getMaxDamage() ? item.getMaxDamage() : damage;
-        // stack = new ItemStack(item, 1, damage);
-        // count = count > item.getItemStackLimit(stack) ? item.getItemStackLimit(stack) : count;
-        
         // 获取物品
-        stack = new ItemStack(item, count, damage);
+        ItemStack stack = new ItemStack(item, count, damage);
 
         // 设置NBT
         NBTTagCompound nbtTagCompound;
@@ -61,6 +55,7 @@ public class CreateGive extends Mod {
             PlayerMessage.error("缺少参数: " + command);
         }
 
+        // TODO 更精准的错误提示
         try {
             final int itemId = getItemByText(args[2]);
             final int count = args.length >= 4 ? Integer.parseInt(args[3]) : 1;
