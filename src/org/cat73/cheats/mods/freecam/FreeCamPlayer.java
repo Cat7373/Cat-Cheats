@@ -1,8 +1,9 @@
 package org.cat73.cheats.mods.freecam;
 
+import org.cat73.cheats.mods.Mod;
+
 import com.mojang.authlib.GameProfile;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
@@ -10,7 +11,6 @@ import net.minecraft.util.MovementInput;
 import net.minecraft.world.World;
 
 public class FreeCamPlayer extends EntityPlayer {
-    private final static Minecraft minecraft = Minecraft.getMinecraft();
     protected final MovementInput movementInput;
 
     public FreeCamPlayer(final World worldIn, final GameProfile gameProfile, MovementInput movementInput) {
@@ -20,7 +20,7 @@ public class FreeCamPlayer extends EntityPlayer {
     
     @Override
     public void onLivingUpdate() {
-        final EntityPlayerSP player = FreeCamPlayer.minecraft.thePlayer;
+        final EntityPlayerSP player = Mod.minecraft.thePlayer;
         if(player != null) {
             // 刷新键盘输入
             this.movementInput.updatePlayerMoveState();
@@ -41,7 +41,7 @@ public class FreeCamPlayer extends EntityPlayer {
             // TODO 更平滑的加速与减速
             // 刷新速度
             float flySpeed = this.capabilities.getFlySpeed();
-            if(FreeCamPlayer.minecraft.gameSettings.keyBindSprint.isKeyDown()) {
+            if(Mod.minecraft.gameSettings.keyBindSprint.isKeyDown()) {
                 flySpeed *= 1.8;
             }
             
