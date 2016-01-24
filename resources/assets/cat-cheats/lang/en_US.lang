@@ -27,9 +27,26 @@ catcheats.mods.creategive.gui.exit=Exit
 catcheats.mods.creategive.gui.slot=Slot:
 catcheats.mods.creategive.gui.command=Give Command:
 
+# Mods -> BlockXray -> Gui -> Main
+catcheats.mods.blockxray.gui.main.addblock=Add Block
+catcheats.mods.blockxray.gui.main.editblock=Edit Block
+catcheats.mods.blockxray.gui.main.deleteblock=Del Block
+catcheats.mods.blockxray.gui.main.config=Config
+catcheats.mods.blockxray.gui.main.exit=Exit
+
 # Mods -> BlockXray -> Gui -> Config
 catcheats.mods.blockxray.gui.config.save=Save
 catcheats.mods.blockxray.gui.config.cancel=Cancel
 catcheats.mods.blockxray.gui.config.radius=Radius:
 catcheats.mods.blockxray.gui.config.interval=Intercal:
 catcheats.mods.blockxray.gui.config.antiantixray=AntiAntiXray:
+
+# Mods -> BlockXray -> Gui -> AddBlock
+catcheats.mods.blockxray.gui.addblock.save=Save
+catcheats.mods.blockxray.gui.addblock.cancel=Cancel
+catcheats.mods.blockxray.gui.addblock.blockid=Block Id:
+catcheats.mods.blockxray.gui.addblock.damage=Damage:
+catcheats.mods.blockxray.gui.addblock.r=Red-Value
+catcheats.mods.blockxray.gui.addblock.g=Green-Value
+catcheats.mods.blockxray.gui.addblock.b=Blue-Value
+catcheats.mods.blockxray.gui.addblock.a=Alpha-Value

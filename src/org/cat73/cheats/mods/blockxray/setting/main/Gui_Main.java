@@ -6,11 +6,19 @@ import org.cat73.cheats.config.XrayBlock;
 import org.cat73.cheats.gui.tool.GuiScreenBase;
 import org.cat73.cheats.mods.blockxray.setting.Gui_Config;
 import org.cat73.cheats.mods.blockxray.setting.addblock.Gui_AddBlock;
+import org.cat73.cheats.reference.Names;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
 
 public class Gui_Main extends GuiScreenBase {
+    private final String str_addBlock = I18n.format(Names.Mods.BlockXray.Gui.Main.ADDBLOCK);
+    private final String str_editBlock = I18n.format(Names.Mods.BlockXray.Gui.Main.EDITBLOCK);
+    private final String str_deleteBlock = I18n.format(Names.Mods.BlockXray.Gui.Main.DELETEBLOCK);
+    private final String str_config = I18n.format(Names.Mods.BlockXray.Gui.Main.CONFIG);
+    private final String str_exit = I18n.format(Names.Mods.BlockXray.Gui.Main.EXIT);
+
     // TODO 增加方块顺序调整的功能
     private Gui_Main_Block_Slot gui_Main_Block_Slot;
     private GuiButton btnAddBlock;
@@ -31,21 +39,21 @@ public class Gui_Main extends GuiScreenBase {
         final int button_width = this.width / 5 - 2;
         int id = 0;
 
-        this.btnAddBlock = new GuiButton(id++, 1, button_top, button_width, 20, "Add Block");
+        this.btnAddBlock = new GuiButton(id++, 1, button_top, button_width, 20, this.str_addBlock);
         this.buttonList.add(this.btnAddBlock);
 
-        this.btnEditBlock = new GuiButton(id++, this.width / 5 + 1, button_top, button_width, 20, "Edit Block");
+        this.btnEditBlock = new GuiButton(id++, this.width / 5 + 1, button_top, button_width, 20, this.str_editBlock);
         this.buttonList.add(this.btnEditBlock);
         this.btnEditBlock.enabled = false;
 
-        this.btnDeleteBlock = new GuiButton(id++, this.width / 5 * 2 + 1, button_top, button_width, 20, "Del Block");
+        this.btnDeleteBlock = new GuiButton(id++, this.width / 5 * 2 + 1, button_top, button_width, 20, this.str_deleteBlock);
         this.buttonList.add(this.btnDeleteBlock);
         this.btnDeleteBlock.enabled = false;
 
-        this.btnConfig = new GuiButton(id++, this.width / 5 * 3 + 1, button_top, button_width, 20, "Config");
+        this.btnConfig = new GuiButton(id++, this.width / 5 * 3 + 1, button_top, button_width, 20, this.str_config);
         this.buttonList.add(this.btnConfig);
 
-        this.btnExit = new GuiButton(id++, this.width / 5 * 4 + 1, button_top, button_width, 20, "Exit");
+        this.btnExit = new GuiButton(id++, this.width / 5 * 4 + 1, button_top, button_width, 20, this.str_exit);
         this.buttonList.add(this.btnExit);
 
         this.gui_Main_Block_Slot = new Gui_Main_Block_Slot(this);

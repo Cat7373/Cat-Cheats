@@ -27,9 +27,26 @@ catcheats.mods.creategive.gui.exit=退出
 # catcheats.mods.creategive.gui.slot=
 catcheats.mods.creategive.gui.command=Give 指令:
 
+# Mods -> BlockXray -> Gui -> Main
+catcheats.mods.blockxray.gui.main.addblock=添加方块
+catcheats.mods.blockxray.gui.main.editblock=编辑方块
+catcheats.mods.blockxray.gui.main.deleteblock=删除方块
+catcheats.mods.blockxray.gui.main.config=透视配置
+catcheats.mods.blockxray.gui.main.exit=退出
+
 # Mods -> BlockXray -> Gui -> Config
 catcheats.mods.blockxray.gui.config.save=保存
 catcheats.mods.blockxray.gui.config.cancel=取消
 catcheats.mods.blockxray.gui.config.radius=透视半径:
 catcheats.mods.blockxray.gui.config.interval=刷新间隔:
 catcheats.mods.blockxray.gui.config.antiantixray=反假矿开关:
+
+# Mods -> BlockXray -> Gui -> AddBlock
+catcheats.mods.blockxray.gui.addblock.save=保存
+catcheats.mods.blockxray.gui.addblock.cancel=取消
+catcheats.mods.blockxray.gui.addblock.blockid=方块ID:
+catcheats.mods.blockxray.gui.addblock.damage=损害值:
+catcheats.mods.blockxray.gui.addblock.r=红
+catcheats.mods.blockxray.gui.addblock.g=绿
+catcheats.mods.blockxray.gui.addblock.b=蓝
+catcheats.mods.blockxray.gui.addblock.a=透明
