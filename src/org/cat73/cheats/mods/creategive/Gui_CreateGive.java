@@ -42,10 +42,10 @@ public class Gui_CreateGive extends GuiScreenBase {
         this.textCommand.setText(value_s);
         this.textFields.add(this.textCommand);
         
-        this.btnExecute = new GuiButton(id++, 1, button_top, button_width, 20, str_execute);
+        this.btnExecute = new GuiButton(id++, 1, button_top, button_width, 20, this.str_execute);
         this.buttonList.add(this.btnExecute);
 
-        this.btnExit = new GuiButton(id++, this.width / 2 + 1, button_top, button_width, 20, str_exit);
+        this.btnExit = new GuiButton(id++, this.width / 2 + 1, button_top, button_width, 20, this.str_exit);
         this.buttonList.add(this.btnExit);
     }
 
@@ -55,8 +55,8 @@ public class Gui_CreateGive extends GuiScreenBase {
         
         super.drawScreen(par1, par2, par3);
 
-        drawString(this.fontRendererObj, str_slot, 5, 14, 0xFFFFFF);
-        drawString(this.fontRendererObj, str_command, 5, 39, 0xFFFFFF);
+        drawString(this.fontRendererObj, this.str_slot, 5, 14, 0xFFFFFF);
+        drawString(this.fontRendererObj, this.str_command, 5, 39, 0xFFFFFF);
     }
 
     @Override

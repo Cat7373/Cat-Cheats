@@ -26,3 +26,10 @@ catcheats.mods.creategive.gui.execute=Execute give Command
 catcheats.mods.creategive.gui.exit=Exit
 catcheats.mods.creategive.gui.slot=Slot:
 catcheats.mods.creategive.gui.command=Give Command:
+
+# Mods -> BlockXray -> Gui -> Config
+catcheats.mods.blockxray.gui.config.save=Save
+catcheats.mods.blockxray.gui.config.cancel=Cancel
+catcheats.mods.blockxray.gui.config.radius=Radius:
+catcheats.mods.blockxray.gui.config.interval=Intercal:
+catcheats.mods.blockxray.gui.config.antiantixray=AntiAntiXray:

@@ -26,3 +26,10 @@ catcheats.mods.creategive.gui.execute=执行 Give 指令
 catcheats.mods.creategive.gui.exit=退出
 # catcheats.mods.creategive.gui.slot=
 catcheats.mods.creategive.gui.command=Give 指令:
+
+# Mods -> BlockXray -> Gui -> Config
+catcheats.mods.blockxray.gui.config.save=保存
+catcheats.mods.blockxray.gui.config.cancel=取消
+catcheats.mods.blockxray.gui.config.radius=透视半径:
+catcheats.mods.blockxray.gui.config.interval=刷新间隔:
+catcheats.mods.blockxray.gui.config.antiantixray=反假矿开关:

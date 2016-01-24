@@ -73,7 +73,7 @@ public class Gui_Main_Mods_Slot extends GuiSlot {
 
         final Mod mod = mods[index];
         final String modName = I18n.format("catcheats.mods." + mod.name.toLowerCase() + ".name");
-        final String enable = mod.isEnabled() ? str_enable : str_disable;
+        final String enable = mod.isEnabled() ? this.str_enable : this.str_disable;
         final int keyCode = ModManager.getHotkey(mod);
 
         gui_Main.drawString(Gui_Main_Mods_Slot.minecraft.fontRendererObj, modName, x + 24, y + 6, 0x00FFFFFF);

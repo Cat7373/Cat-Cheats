@@ -17,7 +17,13 @@ public class Names {
     public final static class Mods {
         public final static class BlockXray {
             public final static class Gui {
-                
+                public final static class Config {
+                    public final static String SAVE = "catcheats.mods.blockxray.gui.config.save";
+                    public final static String CANCEL = "catcheats.mods.blockxray.gui.config.cancel";
+                    public final static String RADIUS = "catcheats.mods.blockxray.gui.config.radius";
+                    public final static String INTERVAL = "catcheats.mods.blockxray.gui.config.interval";
+                    public final static String ANTIANTIXRAY = "catcheats.mods.blockxray.gui.config.antiantixray";
+                }
             }
         }
         
