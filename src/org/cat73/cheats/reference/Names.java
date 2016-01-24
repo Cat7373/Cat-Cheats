@@ -11,7 +11,6 @@ public class Names {
         public final static String TOGGLE = "catcheats.gui.toggle";
         public final static String SETTING = "catcheats.gui.setting";
         public final static String SETHOTKEY = "catcheats.gui.sethotkey";
-        public final static String DELETEHOTKEY = "catcheats.gui.deletehotkey";
         public final static String EXIT = "catcheats.gui.exit";
     }
     

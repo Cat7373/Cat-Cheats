@@ -24,7 +24,7 @@ public class Gui_CreateGive extends GuiScreenBase {
         super.initGui();
 
         final int button_top = this.height - 22;
-        final int button_width = this.width / 2 - 3;
+        final int button_width = this.width / 2 - 2;
         int id = 0;
         int value;
         String value_s;
@@ -42,10 +42,10 @@ public class Gui_CreateGive extends GuiScreenBase {
         this.textCommand.setText(value_s);
         this.textFields.add(this.textCommand);
         
-        this.btnExecute = new GuiButton(id++, 2, button_top, button_width, 20, str_execute);
+        this.btnExecute = new GuiButton(id++, 1, button_top, button_width, 20, str_execute);
         this.buttonList.add(this.btnExecute);
 
-        this.btnExit = new GuiButton(id++, this.width / 2, button_top, button_width, 20, str_exit);
+        this.btnExit = new GuiButton(id++, this.width / 2 + 1, button_top, button_width, 20, str_exit);
         this.buttonList.add(this.btnExit);
     }
 

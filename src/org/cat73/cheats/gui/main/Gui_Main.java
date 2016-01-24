@@ -16,14 +16,12 @@ public class Gui_Main extends GuiScreenBase {
     private final String str_toggle = I18n.format(Names.Gui.TOGGLE);
     private final String str_setting = I18n.format(Names.Gui.SETTING);
     private final String str_setHotkey = I18n.format(Names.Gui.SETHOTKEY);
-    private final String str_deleteHotkey = I18n.format(Names.Gui.DELETEHOTKEY);
     private final String str_exit = I18n.format(Names.Gui.EXIT);
 
     private Gui_Main_Mods_Slot mods_slot;
     private GuiButton btn_toggle;
     private GuiButton btn_setting;
     private GuiButton btn_setHotkey;
-    private GuiButton btn_deleteHotkey;
     private GuiButton btn_exit;
     private boolean setHotkey;
 
@@ -36,22 +34,19 @@ public class Gui_Main extends GuiScreenBase {
         super.initGui();
 
         final int button_top = this.height - 22;
-        final int button_width = this.width / 10 * 2 - 2;
+        final int button_width = this.width / 4 - 2;
         int id = 0;
 
         this.btn_toggle = new GuiButton(id++, 1, button_top, button_width, 20, this.str_toggle);
         this.buttonList.add(this.btn_toggle);
 
-        this.btn_setting = new GuiButton(id++, this.width / 10 * 2 + 1, button_top, button_width, 20, this.str_setting);
+        this.btn_setting = new GuiButton(id++, this.width / 4 + 1, button_top, button_width, 20, this.str_setting);
         this.buttonList.add(this.btn_setting);
         
-        this.btn_setHotkey = new GuiButton(id++, this.width / 10 * 4 + 1, button_top, button_width, 20, this.str_setHotkey);
+        this.btn_setHotkey = new GuiButton(id++, this.width / 4 * 2 + 1, button_top, button_width, 20, this.str_setHotkey);
         this.buttonList.add(this.btn_setHotkey);
 
-        this.btn_deleteHotkey = new GuiButton(id++, this.width / 10 * 6 + 1, button_top, button_width, 20, this.str_deleteHotkey);
-        this.buttonList.add(this.btn_deleteHotkey);
-
-        this.btn_exit = new GuiButton(id++, this.width / 10 * 8 + 1, button_top, button_width, 20, this.str_exit);
+        this.btn_exit = new GuiButton(id++, this.width / 4 * 3 + 1, button_top, button_width, 20, this.str_exit);
         this.buttonList.add(this.btn_exit);
 
         this.mods_slot = new Gui_Main_Mods_Slot(this);
@@ -70,7 +65,6 @@ public class Gui_Main extends GuiScreenBase {
             this.btn_toggle.enabled = false;
             this.btn_setting.enabled = false;
             this.btn_setHotkey.enabled = false;
-            this.btn_deleteHotkey.enabled = false;
         } else {
             this.btn_toggle.enabled = true;
 
@@ -81,12 +75,6 @@ public class Gui_Main extends GuiScreenBase {
             }
             
             this.btn_setHotkey.enabled = true;
-            
-            if(ModManager.getHotkey(mods_slot.getSelectMod()) != Keyboard.KEY_NONE) {
-                this.btn_deleteHotkey.enabled = true;
-            } else {
-                this.btn_deleteHotkey.enabled = false;
-            }
         }
     }
     
@@ -110,8 +98,6 @@ public class Gui_Main extends GuiScreenBase {
             } else if (guiButton.id == this.btn_setHotkey.id) {
                 this.setHotkey = true;
                 this.btn_setHotkey.displayString = "> ? <";
-            } else if (guiButton.id == this.btn_deleteHotkey.id) {
-                ModManager.setHotKey(mods_slot.getSelectMod(), Keyboard.KEY_NONE);
             } else if (guiButton.id == this.btn_exit.id) {
                 this.mc.displayGuiScreen(this.parentScreen);
             } else {
@@ -122,12 +108,15 @@ public class Gui_Main extends GuiScreenBase {
     
     @Override
     protected void keyTyped(char character, int code) throws IOException {
-        if (this.setHotkey && code != Keyboard.KEY_ESCAPE) {
+        if (this.setHotkey) {
             this.setHotkey = false;
+
+            code = code != Keyboard.KEY_ESCAPE ? code : Keyboard.KEY_NONE;
+            
             this.btn_setHotkey.displayString = str_setHotkey;
             ModManager.setHotKey(mods_slot.getSelectMod(), code);
+        } else {
+            super.keyTyped(character, code);
         }
-
-        super.keyTyped(character, code);
     }
 }

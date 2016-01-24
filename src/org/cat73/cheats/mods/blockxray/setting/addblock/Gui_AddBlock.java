@@ -37,7 +37,7 @@ public class Gui_AddBlock extends GuiScreenBase {
         super.initGui();
 
         final int button_top = this.height - 22;
-        final int button_width = this.width / 2 - 3;
+        final int button_width = this.width / 2 - 2;
         int id = 0;
         int value;
 
@@ -64,10 +64,10 @@ public class Gui_AddBlock extends GuiScreenBase {
         this.buttonList.add(this.slider_a);
         // TODO 增加开关允许暂时禁用这一项
 
-        this.btnSave = new GuiButton(id++, 3, button_top, button_width, 20, "Save");
+        this.btnSave = new GuiButton(id++, 1, button_top, button_width, 20, "Save");
         this.buttonList.add(this.btnSave);
 
-        this.btnCancel = new GuiButton(id++, this.width / 2, button_top, button_width, 20, "Cancel");
+        this.btnCancel = new GuiButton(id++, this.width / 2 + 1, button_top, button_width, 20, "Cancel");
         this.buttonList.add(this.btnCancel);
     }
 

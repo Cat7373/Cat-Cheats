@@ -7,7 +7,6 @@ catcheats.gui.disable=禁用
 catcheats.gui.toggle=功能开关
 catcheats.gui.setting=功能设置
 catcheats.gui.sethotkey=设置热键
-catcheats.gui.deletehotkey=删除热键
 catcheats.gui.exit=退出
 
 # Mods
