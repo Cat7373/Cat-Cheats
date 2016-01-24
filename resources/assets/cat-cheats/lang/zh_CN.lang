@@ -2,8 +2,8 @@
 catcheats.keys.gui=打开功能配置
 
 # Gui
-catcheats.gui.enable=启用
-catcheats.gui.disable=禁用
+catcheats.gui.enable=开启
+catcheats.gui.disable=关闭
 catcheats.gui.toggle=功能开关
 catcheats.gui.setting=功能设置
 catcheats.gui.sethotkey=设置热键
