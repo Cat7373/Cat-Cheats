@@ -6,6 +6,8 @@ import net.minecraft.client.gui.GuiScreen;
 import org.cat73.cheats.config.Config;
 import org.cat73.cheats.gui.tool.GuiNumericField;
 import org.cat73.cheats.gui.tool.GuiScreenBase;
+import org.cat73.cheats.mods.ModManager;
+import org.cat73.cheats.mods.blockxray.BlockXray;
 
 public class Gui_Config extends GuiScreenBase {
     private GuiNumericField numericRadius;
@@ -74,6 +76,8 @@ public class Gui_Config extends GuiScreenBase {
                 config.setIntConfig("blockxray.interval", this.numericInterval.getValue());
                 config.setIntConfig("blockxray.antiantixraylevel", this.numericAntiAntiXrayLevel.getValue());
                 config.save();
+                
+                ((BlockXray) ModManager.getMod("BlockXray")).reloadConfig();
                 this.mc.displayGuiScreen(this.parentScreen);
             } else if (guiButton.id == this.btnCancel.id) {
                 this.mc.displayGuiScreen(this.parentScreen);

@@ -145,7 +145,7 @@ public class BlockXray extends Mod implements Runnable {
 
     @Override
     public void onEnable() {
-        getConfig();
+        reloadConfig();
         this.displayListid = GL11.glGenLists(1);
         this.needRefresh = true;
         
@@ -249,7 +249,7 @@ public class BlockXray extends Mod implements Runnable {
         GL11.glVertex3i(x + 1, y + 1, z + 1);
     }
 
-    private void getConfig() {
+    public void reloadConfig() {
         final Config config = Config.instance();
         this.radius = config.getIntConfig("blockxray.radius");
         this.interval = config.getIntConfig("blockxray.interval") * 100;
