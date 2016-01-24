@@ -2,9 +2,11 @@ package org.cat73.cheats.mods.creategive;
 
 import org.cat73.cheats.mods.Mod;
 import org.cat73.cheats.mods.ModInfo;
+import org.cat73.cheats.reference.Names;
 import org.cat73.cheats.util.PlayerMessage;
 
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.JsonToNBT;
@@ -27,7 +29,7 @@ public class CreateGive extends Mod {
         // 获取item
         final Item item = Item.getItemById(itemId);
         if(item == null) {
-            PlayerMessage.error("没有找到物品: " + itemId);
+            PlayerMessage.error(I18n.format(Names.Mods.CreateGive.Error.ITEM_NOT_FOUND, itemId));
             return;
         }
 
@@ -39,7 +41,7 @@ public class CreateGive extends Mod {
         try {
             nbtTagCompound = JsonToNBT.func_180713_a(NBT_Json);
         } catch (NBTException e) {
-            PlayerMessage.error("无法解析NBT_Json: " + NBT_Json);
+            PlayerMessage.error(I18n.format(Names.Mods.CreateGive.Error.NBT_ERROR, NBT_Json));
             e.printStackTrace();
             return;
         }
@@ -52,20 +54,44 @@ public class CreateGive extends Mod {
     public static void giveItem(final String command, final int slot) {
         final String[] args = command.split(" ");
         if(args.length < 3) {
-            PlayerMessage.error("缺少参数: " + command);
+            PlayerMessage.error(I18n.format(Names.Mods.CreateGive.Error.MISSING_PARAM));
         }
 
-        // TODO 更精准的错误提示
+        int itemId = 0, count = 0, damage = 0;
+        
+        // itemId
         try {
-            final int itemId = getItemByText(args[2]);
-            final int count = args.length >= 4 ? Integer.parseInt(args[3]) : 1;
-            final int damage = args.length >= 5 ? Integer.parseInt(args[4]): 0;
+            itemId = getItemByText(args[2]);
+        } catch(Exception e) {
+            PlayerMessage.error(I18n.format(Names.Mods.CreateGive.Error.UNKNOW_ITEM_NAME, args[2]));
+            e.printStackTrace();
+            return;
+        }
+        
+        // count
+        try {
+            count = args.length >= 4 ? Integer.parseInt(args[3]) : 1;
+        } catch(Exception e) {
+            PlayerMessage.error(I18n.format(Names.Mods.CreateGive.Error.COUNT_ERROR, args[3]));
+            e.printStackTrace();
+            return;
+        }
+        
+        // damage
+        try {
+            damage = args.length >= 5 ? Integer.parseInt(args[4]) : 0;
+        } catch(Exception e) {
+            PlayerMessage.error(I18n.format(Names.Mods.CreateGive.Error.DAMAGE_ERROR, args[4]));
+            e.printStackTrace();
+            return;
+        }
+        
+        // give
+        try {
             String nbt_JSON = args.length >= 6 ? getNbtJSON(args, 5) : "{}";
             giveItem(itemId, damage, slot, count, nbt_JSON);
-        } catch(NumberFormatException e) {
-            PlayerMessage.error("未知的物品名称或数量 / 损害值设置错误: " + args[2]);
         } catch (Exception e) {
-            PlayerMessage.error("无法解析Command: " + command);
+            PlayerMessage.error(I18n.format(Names.Mods.CreateGive.Error.UNKNOW_ERROR, command));
             e.printStackTrace();
         }
     }

@@ -59,8 +59,7 @@ public class XrayBlock {
                     add(block);
                 }
             } catch(Exception e) {
-                PlayerMessage.warn("Load xray block info fali!");
-                PlayerMessage.warn(configBlock);
+                PlayerMessage.warn("Load xray block info fali: %s", configBlock);
             }
         }
     }
@@ -70,7 +69,7 @@ public class XrayBlock {
 
         final int id = blockRegistery.getId(info[0]);
         if(id == -1) {
-            PlayerMessage.warn("Block " + info[0] + " not found!");
+            PlayerMessage.warn("Block %s not found!", info[0]);
             return null;
         }
         final byte meta = Byte.parseByte(info[1]);

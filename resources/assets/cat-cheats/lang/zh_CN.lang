@@ -16,7 +16,13 @@ catcheats.mods.creategive.name=创造模拟Give
 catcheats.mods.freecam.name=本地观察者模式
 catcheats.mods.fullbright.name=夜视
 
-# Mods -> CreateGive
+# Mods -> CreateGive -> Error
+catcheats.mods.creategive.error.unknow_item_name=物品名称错误: %s
+catcheats.mods.creategive.error.count_error=物品数量错误: %s
+catcheats.mods.creategive.error.damage_error=物品损害值错误: %s
+catcheats.mods.creategive.error.unknow_error=未知错误: %s
+
+# Mods -> CreateGive -> Gui
 catcheats.mods.creategive.gui.execute=执行 Give 指令
 catcheats.mods.creategive.gui.exit=退出
 # catcheats.mods.creategive.gui.slot=

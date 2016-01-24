@@ -23,6 +23,15 @@ public class Names {
         }
         
         public final static class CreateGive {
+            public final static class Error {
+                public final static String ITEM_NOT_FOUND = "commands.give.notFound";
+                public final static String NBT_ERROR = "commands.give.tagError";
+                public final static String MISSING_PARAM = "commands.give.usage";
+                public final static String UNKNOW_ITEM_NAME = "catcheats.mods.creategive.error.unknow_item_name";
+                public final static String COUNT_ERROR = "catcheats.mods.creategive.error.count_error";
+                public final static String DAMAGE_ERROR = "catcheats.mods.creategive.error.damage_error";
+                public final static String UNKNOW_ERROR = "catcheats.mods.creategive.error.unknow_error";
+            }
             public final static class Gui {
                 public final static String EXECUTE = "catcheats.mods.creategive.gui.execute";
                 public final static String EXIT = "catcheats.mods.creategive.gui.exit";

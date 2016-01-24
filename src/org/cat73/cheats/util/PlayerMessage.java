@@ -16,56 +16,60 @@ public class PlayerMessage {
 
     /**
      * 给玩家发送一条消息
-     * @param message 要发送的消息
+     * @param format 要发送的信息格式
+     * @param args 格式化时使用的数据列表
      */
-    public static void message(final String message) {
-        if(message != null && !message.trim().isEmpty()) {
-            if(mc.thePlayer != null) {
-                mc.thePlayer.addChatMessage(new ChatComponentText(message));
-            }
+    public static void message(final String format, final Object... args) {
+        final String message = String.format(format, args);
+        if(mc.thePlayer != null) {
+            mc.thePlayer.addChatMessage(new ChatComponentText(message));
         }
     }
 
     /**
      * 向玩家输出信息
-     * @param message 要输出的信息
+     * @param format 要输出的信息格式
+     * @param args 格式化时使用的数据列表
      */
-    public static void info(final String message) {
-        FMLLog.info(message);
-        message("[信息]" + message);
+    public static void info(final String format, final Object... args) {
+        FMLLog.info(format, args);
+        message("[信息]" + format, args);
     }
 
     /**
      * 向玩家输出警告
-     * @param message 要输出的信息
+     * @param format 要输出的信息格式
+     * @param args 格式化时使用的数据列表
      */
-    public static void warning(final String message) {
-        warn(message);
+    public static void warning(final String format, final Object... args) {
+        warn(format, args);
     }
 
     /**
      * 向玩家输出警告
-     * @param message 要输出的信息
+     * @param format 要输出的信息格式
+     * @param args 格式化时使用的数据列表
      */
-    public static void warn(final String message) {
-        FMLLog.warning(message);
-        message("[警告]" + message);
+    public static void warn(final String format, final Object... args) {
+        FMLLog.warning(format, args);
+        message("[警告]" + format, args);
     }
 
     /**
      * 向玩家输出错误
-     * @param message 要输出的信息
+     * @param format 要输出的信息格式
+     * @param args 格式化时使用的数据列表
      */
-    public static void error(final String message) {
-        FMLLog.log(Level.ERROR, message);
-        message("[错误]" + message);
+    public static void error(final String format, final Object... args) {
+        FMLLog.log(Level.ERROR, format, args);
+        message("[错误]" + format, args);
     }
 
     /**
      * 向玩家输出调试信息
      * @param objs 要输出的数据列表
      */
-    public static void debug(final Object... objs) {
+    public static void debugs(final Object... objs) {
         if(Reference.DEBUG) {
             String message = "";
             for(Object obj : objs) {
@@ -84,12 +88,10 @@ public class PlayerMessage {
      * @param format 要输出的信息格式
      * @param args 格式化时使用的数据列表
      */
-    public static void debugFormat(final String format, final Object... args) {
+    public static void debug(final String format, final Object... args) {
         if(Reference.DEBUG) {
-            String message = String.format(format, args);
-
-            FMLLog.log(Level.DEBUG, message);
-            message("[调试]" + message);
+            FMLLog.log(Level.DEBUG, format, args);
+            message("[调试]" + format, args);
         }
     }
 }
