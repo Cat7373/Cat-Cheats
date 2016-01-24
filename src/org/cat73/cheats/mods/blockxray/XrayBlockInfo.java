@@ -1,4 +1,4 @@
-package org.cat73.cheats.mods.xray;
+package org.cat73.cheats.mods.blockxray;
 
 import org.cat73.cheats.config.XrayBlock;
 

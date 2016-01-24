@@ -1,4 +1,4 @@
-package org.cat73.cheats.mods.xray.setting.addblock;
+package org.cat73.cheats.mods.blockxray.setting.addblock;
 
 import org.lwjgl.opengl.GL11;
 

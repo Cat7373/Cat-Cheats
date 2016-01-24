@@ -5,15 +5,21 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 
+import org.cat73.cheats.gui.Gui;
 import org.cat73.cheats.mods.Mod;
 import org.cat73.cheats.mods.ModManager;
+import org.cat73.cheats.reference.Names;
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiSlot;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.resources.I18n;
 
 public class Gui_Main_Mods_Slot extends GuiSlot {
+    private final String str_enable = I18n.format(Names.Gui.ENABLE);
+    private final String str_disable = I18n.format(Names.Gui.DISABLE);
+    
     private static final Minecraft minecraft = Minecraft.getMinecraft();
     private final Gui_Main gui_Main;
     protected final Mod[] mods;
@@ -21,7 +27,7 @@ public class Gui_Main_Mods_Slot extends GuiSlot {
     protected int selectedIndex = -1;
 
     public Gui_Main_Mods_Slot(final Gui_Main gui_Main) {
-        super(Minecraft.getMinecraft(), gui_Main.width, gui_Main.height, 16, gui_Main.height - 40, 24);
+        super(Gui.minecraft, gui_Main.width, gui_Main.height, 16, gui_Main.height - 40, 24);
         this.gui_Main = gui_Main;
 
         ArrayList<Mod> mods = new ArrayList<Mod>(ModManager.getMods());
@@ -31,7 +37,7 @@ public class Gui_Main_Mods_Slot extends GuiSlot {
                 it.remove();
             }
         }
-        this.mods = mods.toArray(new Mod[0]);
+        this.mods = mods.toArray(new Mod[mods.size()]);
         Arrays.sort(this.mods, new Comparator<Mod>() {
             @Override
             public int compare(Mod mod1, Mod mod2) {
@@ -66,8 +72,8 @@ public class Gui_Main_Mods_Slot extends GuiSlot {
         }
 
         final Mod mod = mods[index];
-        final String modName = mod.name;
-        final String enable = mod.isEnabled() ? "enable" : "disable";
+        final String modName = I18n.format("catcheats.mods." + mod.name.toLowerCase() + ".name");
+        final String enable = mod.isEnabled() ? this.str_enable : this.str_disable;
         final int keyCode = ModManager.getHotkey(mod);
 
         gui_Main.drawString(Gui_Main_Mods_Slot.minecraft.fontRenderer, modName, x + 24, y + 6, 0x00FFFFFF);

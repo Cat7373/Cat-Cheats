@@ -28,9 +28,9 @@ public class Config {
         this.config.load();
 
         this.config_kv.clear();
-        addIntConfig("xray.radius", 45, 0, Integer.MAX_VALUE);
-        addIntConfig("xray.interval", 50, 0, Integer.MAX_VALUE);
-        addIntConfig("xray.antiantixraylevel", 0, 0, 1);
+        addIntConfig("blockxray.radius", 45, 0, Integer.MAX_VALUE);
+        addIntConfig("blockxray.interval", 50, 0, Integer.MAX_VALUE);
+        addIntConfig("blockxray.antiantixraylevel", 0, 0, 1);
 
         XrayBlock.load();
         Hotkey.load();

@@ -4,10 +4,10 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import org.cat73.cheats.config.Hotkey;
+import org.cat73.cheats.mods.blockxray.BlockXray;
 import org.cat73.cheats.mods.creategive.CreateGive;
 import org.cat73.cheats.mods.freecam.FreeCam;
 import org.cat73.cheats.mods.fullbright.Fullbright;
-import org.cat73.cheats.mods.xray.Xray;
 import org.cat73.cheats.reference.Reference;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -26,13 +26,13 @@ public final class ModManager {
     public ModManager() {
         FMLCommonHandler.instance().bus().register(this);
 
-        registerMod(new Xray());
+        registerMod(new BlockXray());
         registerMod(new Fullbright());
         registerMod(new FreeCam());
         registerMod(new CreateGive());
         
         registerHotkeys();
-        registerFirstTick();
+        FirstTickListener.init();
     }
 
     private void registerHotkeys() {
@@ -48,21 +48,6 @@ public final class ModManager {
                 ModManager.hotkeys.put(mod, hotkey);
             }
         }
-    }
-    
-    private void registerFirstTick() {
-        // FirstTick 通知
-        FMLCommonHandler.instance().bus().register(new Object() {
-            @SubscribeEvent
-            public void onTickInGame(final ClientTickEvent event) {
-                FMLCommonHandler.instance().bus().unregister(this);
-
-                // 执行每一个 Mod 的 onFirstTick
-                for(final Mod mod : ModManager.mods.values()) {
-                    mod.onFirstTick();
-                }
-            }
-        });
     }
 
     private void registerMod(final Mod mod) {

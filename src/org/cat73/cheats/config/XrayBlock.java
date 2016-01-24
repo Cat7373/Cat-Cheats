@@ -49,7 +49,7 @@ public class XrayBlock {
         XrayBlock.blocks_checkDamage.clear();
         XrayBlock.blocks_noCheckDamage.clear();
 
-        final String[] configBlocksList = Config.instance().config.get("Cheats", "xray.blocks", defaultBlocks, "").getStringList();
+        final String[] configBlocksList = Config.instance().config.get("Cheats", "blockxray.blocks", defaultBlocks, "").getStringList();
 
         XrayBlock block;
         for(final String configBlock : configBlocksList) {
@@ -59,8 +59,7 @@ public class XrayBlock {
                     add(block);
                 }
             } catch(Exception e) {
-                PlayerMessage.warn("Load xray block info fali!");
-                PlayerMessage.warn(configBlock);
+                PlayerMessage.warn("Load xray block info fali: %s", configBlock);
             }
         }
     }
@@ -70,7 +69,7 @@ public class XrayBlock {
 
         final int id = blockRegistery.getId(info[0]);
         if(id == -1) {
-            PlayerMessage.warn("Block " + info[0] + " not found!");
+            PlayerMessage.warn("Block %s not found!", info[0]);
             return null;
         }
         final byte meta = Byte.parseByte(info[1]);
@@ -83,7 +82,7 @@ public class XrayBlock {
     }
 
     public static void save() {
-        final Property configBolcks = Config.instance().config.get("Cheats", "xray.blocks", defaultBlocks, "");
+        final Property configBolcks = Config.instance().config.get("Cheats", "blockxray.blocks", defaultBlocks, "");
         final String[] configBlocksList = new String[getSize()];
         for(int i = 0; i < configBlocksList.length; i++) {
             configBlocksList[i] = XrayBlock.blocks.get(i).toString();
