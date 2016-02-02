@@ -8,10 +8,13 @@ import java.lang.annotation.Target;
 import org.lwjgl.input.Keyboard;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(value=ElementType.TYPE)
+@Target(value = ElementType.TYPE)
 public @interface ModInfo {
-    String name();
-    String description() default "";
-    boolean showInGui() default true;
     int defaultHotkey() default Keyboard.KEY_NONE;
+
+    String description() default "";
+
+    String name();
+
+    boolean showInGui() default true;
 }

@@ -15,15 +15,30 @@ public class FreeCamPlayer extends EntityPlayer {
     private final static Minecraft minecraft = Minecraft.getMinecraft();
     protected final MovementInput movementInput;
 
-    public FreeCamPlayer(final World worldIn, final GameProfile gameProfile, MovementInput movementInput) {
+    public FreeCamPlayer(final World worldIn, final GameProfile gameProfile, final MovementInput movementInput) {
         super(worldIn, gameProfile);
         this.movementInput = movementInput;
     }
-    
+
+    @Override
+    public void addChatMessage(final IChatComponent message) {
+        FreeCamPlayer.minecraft.thePlayer.addChatMessage(message);
+    }
+
+    @Override
+    public boolean canCommandSenderUseCommand(final int p_70003_1_, final String p_70003_2_) {
+        return FreeCamPlayer.minecraft.thePlayer.canCommandSenderUseCommand(p_70003_1_, p_70003_2_);
+    }
+
+    @Override
+    public ChunkCoordinates getPlayerCoordinates() {
+        return FreeCamPlayer.minecraft.thePlayer.getPlayerCoordinates();
+    }
+
     @Override
     public void onLivingUpdate() {
         final EntityClientPlayerMP player = FreeCamPlayer.minecraft.thePlayer;
-        if(player != null) {
+        if (player != null) {
             // 刷新键盘输入
             this.movementInput.updatePlayerMoveState();
 
@@ -42,44 +57,29 @@ public class FreeCamPlayer extends EntityPlayer {
 
             // 刷新速度
             float flySpeed = this.capabilities.getFlySpeed();
-            if(FreeCamPlayer.minecraft.gameSettings.keyBindSprint.getIsKeyPressed()) {
+            if (FreeCamPlayer.minecraft.gameSettings.keyBindSprint.getIsKeyPressed()) {
                 flySpeed *= 1.8;
             }
-            
+
             final float strafe = this.movementInput.moveStrafe * flySpeed * 6.0F;
             final float forward = this.movementInput.moveForward * flySpeed * 6.0F;
-            final float sin = MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F);
-            final float cos = MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F);
+            final float sin = MathHelper.sin((this.rotationYaw * (float) Math.PI) / 180.0F);
+            final float cos = MathHelper.cos((this.rotationYaw * (float) Math.PI) / 180.0F);
 
             // 运动量计算
-            final double motionX = strafe * cos - forward * sin;
+            final double motionX = (strafe * cos) - (forward * sin);
             double motionY = 0.0D;
-            final double motionZ = forward * cos + strafe * sin;
-            if(this.movementInput.jump) {
+            final double motionZ = (forward * cos) + (strafe * sin);
+            if (this.movementInput.jump) {
                 motionY = flySpeed * 5.0F;
-            } else if(this.movementInput.sneak) {
+            } else if (this.movementInput.sneak) {
                 motionY = flySpeed * -5.0F;
             }
-            
+
             // 移动实体
             this.posX += motionX;
             this.posY += motionY;
             this.posZ += motionZ;
         }
-    }
-
-    @Override
-    public void addChatMessage(IChatComponent message) {
-        FreeCamPlayer.minecraft.thePlayer.addChatMessage(message);
-    }
-
-    @Override
-    public boolean canCommandSenderUseCommand(int p_70003_1_, String p_70003_2_) {
-        return FreeCamPlayer.minecraft.thePlayer.canCommandSenderUseCommand(p_70003_1_, p_70003_2_);
-    }
-
-    @Override
-    public ChunkCoordinates getPlayerCoordinates() {
-        return FreeCamPlayer.minecraft.thePlayer.getPlayerCoordinates();
     }
 }

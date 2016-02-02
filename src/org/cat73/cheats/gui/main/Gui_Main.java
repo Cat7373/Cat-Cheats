@@ -26,55 +26,6 @@ public class Gui_Main extends GuiScreenBase {
     public Gui_Main(final GuiScreen guiScreen) {
         super(guiScreen);
     }
-    
-    @Override
-    public void initGui() {
-        super.initGui();
-
-        final int button_top = this.height - 22;
-        final int button_width = this.width / 4 - 2;
-        int id = 0;
-
-        this.btn_toggle = new GuiButton(id++, 1, button_top, button_width, 20, this.str_toggle);
-        this.buttonList.add(this.btn_toggle);
-
-        this.btn_setting = new GuiButton(id++, this.width / 4 + 1, button_top, button_width, 20, this.str_setting);
-        this.buttonList.add(this.btn_setting);
-        
-        this.btn_setHotkey = new GuiButton(id++, this.width / 4 * 2 + 1, button_top, button_width, 20, this.str_setHotkey);
-        this.buttonList.add(this.btn_setHotkey);
-
-        this.btn_exit = new GuiButton(id++, this.width / 4 * 3 + 1, button_top, button_width, 20, this.str_exit);
-        this.buttonList.add(this.btn_exit);
-
-        this.mods_slot = new Gui_Main_Mods_Slot(this);
-        
-        this.setHotkey = false;
-    }
-    
-    @Override
-    public void drawScreen(final int par1, final int par2, final float par3) {
-        drawDefaultBackground();
-
-        this.mods_slot.drawScreen(par1, par2, par3);
-        super.drawScreen(par1, par2, par3);
-
-        if(this.mods_slot.selectedIndex == -1) {
-            this.btn_toggle.enabled = false;
-            this.btn_setting.enabled = false;
-            this.btn_setHotkey.enabled = false;
-        } else {
-            this.btn_toggle.enabled = true;
-
-            if(mods_slot.getSelectMod().getSettingInstance() == null) {
-                this.btn_setting.enabled = false;
-            } else {
-                this.btn_setting.enabled = true;
-            }
-            
-            this.btn_setHotkey.enabled = true;
-        }
-    }
 
     @Override
     protected void actionPerformed(final GuiButton guiButton) {
@@ -82,10 +33,10 @@ public class Gui_Main extends GuiScreenBase {
 
         if (guiButton.enabled) {
             if (guiButton.id == this.btn_toggle.id) {
-                final Mod mod = mods_slot.getSelectMod();
+                final Mod mod = this.mods_slot.getSelectMod();
                 mod.toggle();
             } else if (guiButton.id == this.btn_setting.id) {
-                final Mod mod = mods_slot.getSelectMod();
+                final Mod mod = this.mods_slot.getSelectMod();
                 mod.getSettingInstance().show();
             } else if (guiButton.id == this.btn_setHotkey.id) {
                 this.setHotkey = true;
@@ -97,16 +48,65 @@ public class Gui_Main extends GuiScreenBase {
             }
         }
     }
-    
+
     @Override
-    protected void keyTyped(char character, int code) {
+    public void drawScreen(final int par1, final int par2, final float par3) {
+        this.drawDefaultBackground();
+
+        this.mods_slot.drawScreen(par1, par2, par3);
+        super.drawScreen(par1, par2, par3);
+
+        if (this.mods_slot.selectedIndex == -1) {
+            this.btn_toggle.enabled = false;
+            this.btn_setting.enabled = false;
+            this.btn_setHotkey.enabled = false;
+        } else {
+            this.btn_toggle.enabled = true;
+
+            if (this.mods_slot.getSelectMod().getSettingInstance() == null) {
+                this.btn_setting.enabled = false;
+            } else {
+                this.btn_setting.enabled = true;
+            }
+
+            this.btn_setHotkey.enabled = true;
+        }
+    }
+
+    @Override
+    public void initGui() {
+        super.initGui();
+
+        final int button_top = this.height - 22;
+        final int button_width = (this.width / 4) - 2;
+        int id = 0;
+
+        this.btn_toggle = new GuiButton(id++, 1, button_top, button_width, 20, this.str_toggle);
+        this.buttonList.add(this.btn_toggle);
+
+        this.btn_setting = new GuiButton(id++, (this.width / 4) + 1, button_top, button_width, 20, this.str_setting);
+        this.buttonList.add(this.btn_setting);
+
+        this.btn_setHotkey = new GuiButton(id++, ((this.width / 4) * 2) + 1, button_top, button_width, 20, this.str_setHotkey);
+        this.buttonList.add(this.btn_setHotkey);
+
+        this.btn_exit = new GuiButton(id++, ((this.width / 4) * 3) + 1, button_top, button_width, 20, this.str_exit);
+        this.buttonList.add(this.btn_exit);
+
+        this.mods_slot = new Gui_Main_Mods_Slot(this);
+
+        this.setHotkey = false;
+    }
+
+    @Override
+    protected void keyTyped(final char character, int code) {
         if (this.setHotkey) {
             this.setHotkey = false;
 
             code = code != Keyboard.KEY_ESCAPE ? code : Keyboard.KEY_NONE;
-            
-            this.btn_setHotkey.displayString = str_setHotkey;
-            ModManager.setHotKey(mods_slot.getSelectMod(), code);
+
+            this.btn_setHotkey.displayString = this.str_setHotkey;
+            ModManager.setHotKey(this.mods_slot.getSelectMod(), code);
         } else {
             super.keyTyped(character, code);
         }

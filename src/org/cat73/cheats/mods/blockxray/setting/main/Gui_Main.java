@@ -29,51 +29,6 @@ public class Gui_Main extends GuiScreenBase {
     }
 
     @Override
-    public void initGui() {
-        super.initGui();
-
-        final int button_top = this.height - 22;
-        final int button_width = this.width / 5 - 2;
-        int id = 0;
-
-        this.btnAddBlock = new GuiButton(id++, 1, button_top, button_width, 20, this.str_addBlock);
-        this.buttonList.add(this.btnAddBlock);
-
-        this.btnEditBlock = new GuiButton(id++, this.width / 5 + 1, button_top, button_width, 20, this.str_editBlock);
-        this.buttonList.add(this.btnEditBlock);
-        this.btnEditBlock.enabled = false;
-
-        this.btnDeleteBlock = new GuiButton(id++, this.width / 5 * 2 + 1, button_top, button_width, 20, this.str_deleteBlock);
-        this.buttonList.add(this.btnDeleteBlock);
-        this.btnDeleteBlock.enabled = false;
-
-        this.btnConfig = new GuiButton(id++, this.width / 5 * 3 + 1, button_top, button_width, 20, this.str_config);
-        this.buttonList.add(this.btnConfig);
-
-        this.btnExit = new GuiButton(id++, this.width / 5 * 4 + 1, button_top, button_width, 20, this.str_exit);
-        this.buttonList.add(this.btnExit);
-
-        this.gui_Main_Block_Slot = new Gui_Main_Block_Slot(this);
-    }
-
-    @Override
-    public void drawScreen(final int par1, final int par2, final float par3) {
-        drawDefaultBackground();
-
-        this.gui_Main_Block_Slot.drawScreen(par1, par2, par3);
-
-        if(this.gui_Main_Block_Slot.selectedIndex == -1) {
-            this.btnEditBlock.enabled = false;
-            this.btnDeleteBlock.enabled = false;
-        } else {
-            this.btnEditBlock.enabled = true;
-            this.btnDeleteBlock.enabled = true;
-        }
-
-        super.drawScreen(par1, par2, par3);
-    }
-
-    @Override
     protected void actionPerformed(final GuiButton guiButton) {
         if (guiButton.enabled) {
             if (guiButton.id == this.btnAddBlock.id) {
@@ -91,5 +46,50 @@ public class Gui_Main extends GuiScreenBase {
                 this.gui_Main_Block_Slot.actionPerformed(guiButton);
             }
         }
+    }
+
+    @Override
+    public void drawScreen(final int par1, final int par2, final float par3) {
+        this.drawDefaultBackground();
+
+        this.gui_Main_Block_Slot.drawScreen(par1, par2, par3);
+
+        if (this.gui_Main_Block_Slot.selectedIndex == -1) {
+            this.btnEditBlock.enabled = false;
+            this.btnDeleteBlock.enabled = false;
+        } else {
+            this.btnEditBlock.enabled = true;
+            this.btnDeleteBlock.enabled = true;
+        }
+
+        super.drawScreen(par1, par2, par3);
+    }
+
+    @Override
+    public void initGui() {
+        super.initGui();
+
+        final int button_top = this.height - 22;
+        final int button_width = (this.width / 5) - 2;
+        int id = 0;
+
+        this.btnAddBlock = new GuiButton(id++, 1, button_top, button_width, 20, this.str_addBlock);
+        this.buttonList.add(this.btnAddBlock);
+
+        this.btnEditBlock = new GuiButton(id++, (this.width / 5) + 1, button_top, button_width, 20, this.str_editBlock);
+        this.buttonList.add(this.btnEditBlock);
+        this.btnEditBlock.enabled = false;
+
+        this.btnDeleteBlock = new GuiButton(id++, ((this.width / 5) * 2) + 1, button_top, button_width, 20, this.str_deleteBlock);
+        this.buttonList.add(this.btnDeleteBlock);
+        this.btnDeleteBlock.enabled = false;
+
+        this.btnConfig = new GuiButton(id++, ((this.width / 5) * 3) + 1, button_top, button_width, 20, this.str_config);
+        this.buttonList.add(this.btnConfig);
+
+        this.btnExit = new GuiButton(id++, ((this.width / 5) * 4) + 1, button_top, button_width, 20, this.str_exit);
+        this.buttonList.add(this.btnExit);
+
+        this.gui_Main_Block_Slot = new Gui_Main_Block_Slot(this);
     }
 }

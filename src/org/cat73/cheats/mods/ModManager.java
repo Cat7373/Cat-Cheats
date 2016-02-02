@@ -13,7 +13,6 @@ import org.cat73.cheats.reference.Reference;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 
@@ -22,26 +21,64 @@ public final class ModManager {
 
     private final static HashMap<String, Mod> mods = new HashMap<String, Mod>();
     private final static HashMap<Mod, KeyBinding> hotkeys = new HashMap<Mod, KeyBinding>();
-    
+
+    public static int getHotkey(final Mod mod) {
+        final KeyBinding key = ModManager.hotkeys.get(mod);
+        return key.getKeyCode();
+    }
+
+    public static Mod getMod(final String name) {
+        return ModManager.mods.get(name);
+    }
+
+    public static Collection<Mod> getMods() {
+        return ModManager.mods.values();
+    }
+
+    public static int getSize() {
+        return ModManager.mods.size();
+    }
+
+    public static void setHotKey(final Mod mod, final int key) {
+        final KeyBinding hotkey = ModManager.hotkeys.get(mod);
+        hotkey.setKeyCode(key);
+        KeyBinding.resetKeyBindingArrayAndHash();
+
+        final HashMap<String, Integer> hotkeys = Hotkey.getHotkeys();
+        hotkeys.put(mod.name, key);
+        Hotkey.save();
+    }
+
     public ModManager() {
         FMLCommonHandler.instance().bus().register(this);
 
-        registerMod(new BlockXray());
-        registerMod(new Fullbright());
-        registerMod(new FreeCam());
-        registerMod(new CreateGive());
-        
-        registerHotkeys();
+        this.registerMod(new BlockXray());
+        this.registerMod(new Fullbright());
+        this.registerMod(new FreeCam());
+        this.registerMod(new CreateGive());
+
+        this.registerHotkeys();
         FirstTickListener.init();
+    }
+
+    @SubscribeEvent
+    public void keyboardEvent(final KeyInputEvent event) {
+        if (ModManager.minecraft.currentScreen == null) {
+            for (final Mod mod : ModManager.hotkeys.keySet()) {
+                if (ModManager.hotkeys.get(mod).isPressed()) {
+                    mod.toggle();
+                }
+            }
+        }
     }
 
     private void registerHotkeys() {
         final HashMap<String, Integer> hotkeys = Hotkey.getHotkeys();
-        for(String key : ModManager.mods.keySet()) {
-            final Mod mod = getMod(key);
+        for (final String key : ModManager.mods.keySet()) {
+            final Mod mod = ModManager.getMod(key);
             Integer keyCode = hotkeys.get(key);
-            if(mod.shouInGui) {
-                if(keyCode == null) {
+            if (mod.shouInGui) {
+                if (keyCode == null) {
                     keyCode = mod.defaultHotkey;
                 }
                 final KeyBinding hotkey = new KeyBinding(mod.name, keyCode, Reference.NAME);
@@ -51,44 +88,6 @@ public final class ModManager {
     }
 
     private void registerMod(final Mod mod) {
-        mods.put(mod.name, mod);
-    }
-
-    public static Mod getMod(String name) {
-        return mods.get(name);
-    }
-    
-    public static Collection<Mod> getMods() {
-        return mods.values();
-    }
-    
-    public static int getSize() {
-        return mods.size();
-    }
-    
-    public static void setHotKey(Mod mod, int key) {
-        final KeyBinding hotkey = ModManager.hotkeys.get(mod);
-        hotkey.setKeyCode(key);
-        KeyBinding.resetKeyBindingArrayAndHash();
-        
-        final HashMap<String, Integer> hotkeys = Hotkey.getHotkeys();
-        hotkeys.put(mod.name, key);
-        Hotkey.save();
-    }
-    
-    public static int getHotkey(Mod mod) {
-        KeyBinding key = ModManager.hotkeys.get(mod);
-        return key.getKeyCode();
-    }
-    
-    @SubscribeEvent
-    public void keyboardEvent(final KeyInputEvent event) {
-        if (ModManager.minecraft.currentScreen == null) {
-            for(Mod mod : hotkeys.keySet()) {
-                if(ModManager.hotkeys.get(mod).isPressed()) {
-                    mod.toggle();
-                }
-            }
-        }
+        ModManager.mods.put(mod.name, mod);
     }
 }

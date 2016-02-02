@@ -12,8 +12,8 @@ import net.minecraft.client.gui.GuiSlot;
 import net.minecraft.client.renderer.Tessellator;
 
 public class Gui_Main_Block_Slot extends GuiSlot {
-    private final Minecraft minecraft = Minecraft.getMinecraft();
     private final static FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.blockRegistry;
+    private final Minecraft minecraft = Minecraft.getMinecraft();
     private final Gui_Main gui_Main;
 
     protected int selectedIndex = -1;
@@ -24,8 +24,23 @@ public class Gui_Main_Block_Slot extends GuiSlot {
     }
 
     @Override
-    protected int getSize() {
-        return XrayBlock.getSize();
+    protected void drawBackground() {
+    }
+
+    @Override
+    protected void drawSlot(final int index, final int x, final int y, final int par4, final Tessellator tessellator, final int mouseX, final int mouseY) {
+        if ((index < 0) || (index >= this.getSize())) {
+            return;
+        }
+
+        final XrayBlock xrayBlock = XrayBlock.getByIndex(index);
+        final Block block = Gui_Main_Block_Slot.blockRegistery.getObjectById(xrayBlock.id);
+        final String blockName = block.getLocalizedName();
+
+        final int color = GuiUnit.colorToARGB(xrayBlock.r, xrayBlock.g, xrayBlock.b, xrayBlock.a);
+
+        this.gui_Main.drawString(this.minecraft.fontRenderer, blockName, x + 24, y + 6, 0x00FFFFFF);
+        Gui.drawRect(x + 170, y, x + 200, y + 20, color);
     }
 
     @Override
@@ -34,28 +49,13 @@ public class Gui_Main_Block_Slot extends GuiSlot {
     }
 
     @Override
+    protected int getSize() {
+        return XrayBlock.getSize();
+    }
+
+    @Override
     protected boolean isSelected(final int slotIndex) {
         return slotIndex == this.selectedIndex;
-    }
-
-    @Override
-    protected void drawBackground() {
-    }
-
-    @Override
-    protected void drawSlot(final int index, final int x, final int y, final int par4, final Tessellator tessellator, final int mouseX, final int mouseY) {
-        if (index < 0 || index >= getSize()) {
-            return;
-        }
-
-        final XrayBlock xrayBlock = XrayBlock.getByIndex(index);
-        final Block block = blockRegistery.getObjectById(xrayBlock.id);
-        final String blockName = block.getLocalizedName();
-
-        final int color = GuiUnit.colorToARGB(xrayBlock.r, xrayBlock.g, xrayBlock.b, xrayBlock.a); 
-
-        gui_Main.drawString(this.minecraft.fontRenderer, blockName, x + 24, y + 6, 0x00FFFFFF);
-        Gui.drawRect(x + 170, y, x + 200, y + 20, color);
     }
 
 }

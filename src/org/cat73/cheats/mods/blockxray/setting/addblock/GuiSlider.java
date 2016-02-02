@@ -9,21 +9,21 @@ public class GuiSlider extends GuiButton {
     protected float percent;
     private boolean isClicked;
 
-    public GuiSlider(int id, int x, int y, String name, float percentage) {
+    public GuiSlider(final int id, final int x, final int y, final String name, final float percentage) {
         super(id, x, y, 150, 20, name);
         this.percent = percentage;
     }
 
     @Override
-    public int getHoverState(boolean mouseOver) {
+    public int getHoverState(final boolean mouseOver) {
         return 0;
     }
 
     @Override
-    protected void mouseDragged(Minecraft mc, int mouseX, int mouseY) {
+    protected void mouseDragged(final Minecraft mc, final int mouseX, final int mouseY) {
         if (this.visible) {
             if (this.isClicked) {
-                this.percent = (float)(mouseX - (this.xPosition + 4)) / (float)(this.width - 8);
+                this.percent = (float) (mouseX - (this.xPosition + 4)) / (float) (this.width - 8);
 
                 if (this.percent < 0.0F) {
                     this.percent = 0.0F;
@@ -35,15 +35,15 @@ public class GuiSlider extends GuiButton {
             }
 
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            this.drawTexturedModalRect(this.xPosition + (int)(this.percent * (float)(this.width - 8)), this.yPosition, 0, 66, 4, 20);
-            this.drawTexturedModalRect(this.xPosition + (int)(this.percent * (float)(this.width - 8)) + 4, this.yPosition, 196, 66, 4, 20);
+            this.drawTexturedModalRect(this.xPosition + (int) (this.percent * (this.width - 8)), this.yPosition, 0, 66, 4, 20);
+            this.drawTexturedModalRect(this.xPosition + (int) (this.percent * (this.width - 8)) + 4, this.yPosition, 196, 66, 4, 20);
         }
     }
 
     @Override
-    public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
+    public boolean mousePressed(final Minecraft mc, final int mouseX, final int mouseY) {
         if (super.mousePressed(mc, mouseX, mouseY)) {
-            this.percent = (float)(mouseX - (this.xPosition + 4)) / (float)(this.width - 8);
+            this.percent = (float) (mouseX - (this.xPosition + 4)) / (float) (this.width - 8);
 
             if (this.percent < 0.0F) {
                 this.percent = 0.0F;
@@ -61,7 +61,7 @@ public class GuiSlider extends GuiButton {
     }
 
     @Override
-    public void mouseReleased(int mouseX, int mouseY) {
+    public void mouseReleased(final int mouseX, final int mouseY) {
         this.isClicked = false;
     }
 }

@@ -10,13 +10,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxy extends CommonProxy {
     @Override
-    public void preInit(final FMLPreInitializationEvent event) {
-        super.preInit(event);
-
-        new Config(event.getSuggestedConfigurationFile());
-    }
-
-    @Override
     public void init(final FMLInitializationEvent event) {
         super.init(event);
     }
@@ -27,5 +20,12 @@ public class ClientProxy extends CommonProxy {
 
         new ModManager();
         new Gui();
+    }
+
+    @Override
+    public void preInit(final FMLPreInitializationEvent event) {
+        super.preInit(event);
+
+        new Config(event.getSuggestedConfigurationFile());
     }
 }

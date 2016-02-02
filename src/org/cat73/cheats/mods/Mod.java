@@ -12,7 +12,7 @@ public class Mod {
     public final int defaultHotkey;
 
     protected boolean enabled = false;
-    
+
     public Mod() {
         final ModInfo info = this.getClass().getAnnotation(ModInfo.class);
         this.name = info.name();
@@ -20,30 +20,35 @@ public class Mod {
         this.shouInGui = info.showInGui();
         this.defaultHotkey = info.defaultHotkey();
     }
-    
-    public void toggle() {
-        setEnabled(!this.enabled);
-    }
-    
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
 
-        if(this.enabled) {
-            onEnable();
-        } else {
-            onDisable();
-        }
-    }
-    
-    public boolean isEnabled() {
-        return this.enabled;
-    }
-    
     public ModSetting getSettingInstance() {
         return this.settingInstance;
     }
 
-    public void onEnable() {}
-    public void onDisable() {}
-    public void onFirstTick() {}
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+
+    public void onDisable() {
+    }
+
+    public void onEnable() {
+    }
+
+    public void onFirstTick() {
+    }
+
+    public void setEnabled(final boolean enabled) {
+        this.enabled = enabled;
+
+        if (this.enabled) {
+            this.onEnable();
+        } else {
+            this.onDisable();
+        }
+    }
+
+    public void toggle() {
+        this.setEnabled(!this.enabled);
+    }
 }

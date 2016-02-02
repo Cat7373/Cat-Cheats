@@ -1,10 +1,10 @@
 package org.cat73.cheats.util;
 
 public class ThreadUtil {
-    public static void sleep(long millis) {
+    public static void sleep(final long millis) {
         try {
             Thread.sleep(millis);
-        } catch (InterruptedException e) {
+        } catch (final InterruptedException e) {
             e.printStackTrace();
         }
     }
