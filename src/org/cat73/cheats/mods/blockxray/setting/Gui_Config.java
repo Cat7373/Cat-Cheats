@@ -1,9 +1,5 @@
 package org.cat73.cheats.mods.blockxray.setting;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.resources.I18n;
-
 import org.cat73.cheats.config.Config;
 import org.cat73.cheats.gui.tool.GuiNumericField;
 import org.cat73.cheats.gui.tool.GuiScreenBase;
@@ -11,13 +7,17 @@ import org.cat73.cheats.mods.ModManager;
 import org.cat73.cheats.mods.blockxray.BlockXray;
 import org.cat73.cheats.reference.Names;
 
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
+
 public class Gui_Config extends GuiScreenBase {
     private final String str_save = I18n.format(Names.Mods.BlockXray.Gui.Config.SAVE);
     private final String str_cancel = I18n.format(Names.Mods.BlockXray.Gui.Config.CANCEL);
     private final String str_radius = I18n.format(Names.Mods.BlockXray.Gui.Config.RADIUS);
     private final String str_interval = I18n.format(Names.Mods.BlockXray.Gui.Config.INTERVAL);
     private final String str_antiantixray = I18n.format(Names.Mods.BlockXray.Gui.Config.ANTIANTIXRAY);
-    
+
     private GuiNumericField numericRadius;
     private GuiNumericField numericInterval;
     private GuiNumericField numericAntiAntiXrayLevel;
@@ -29,12 +29,41 @@ public class Gui_Config extends GuiScreenBase {
     }
 
     @Override
+    protected void actionPerformed(final GuiButton guiButton) {
+        if (guiButton.enabled) {
+            if (guiButton.id == this.btnSave.id) {
+                final Config config = Config.instance();
+                config.setIntConfig("blockxray.radius", this.numericRadius.getValue());
+                config.setIntConfig("blockxray.interval", this.numericInterval.getValue());
+                config.setIntConfig("blockxray.antiantixraylevel", this.numericAntiAntiXrayLevel.getValue());
+                config.save();
+
+                ((BlockXray) ModManager.getMod("BlockXray")).reloadConfig();
+                this.mc.displayGuiScreen(this.parentScreen);
+            } else if (guiButton.id == this.btnCancel.id) {
+                this.mc.displayGuiScreen(this.parentScreen);
+            }
+        }
+    }
+
+    @Override
+    public void drawScreen(final int par1, final int par2, final float par3) {
+        this.drawDefaultBackground();
+
+        this.drawString(this.fontRendererObj, this.str_radius, 5, 14, 0xFFFFFF);
+        this.drawString(this.fontRendererObj, this.str_interval, 5, 34, 0xFFFFFF);
+        this.drawString(this.fontRendererObj, this.str_antiantixray, 5, 54, 0xFFFFFF);
+
+        super.drawScreen(par1, par2, par3);
+    }
+
+    @Override
     public void initGui() {
         super.initGui();
 
         final Config config = Config.instance();
         final int button_top = this.height - 22;
-        final int button_width = this.width / 2 - 3;
+        final int button_width = (this.width / 2) - 3;
         int id = 0;
         int value;
 
@@ -62,34 +91,5 @@ public class Gui_Config extends GuiScreenBase {
 
         this.btnCancel = new GuiButton(id++, this.width / 2, button_top, button_width, 20, this.str_cancel);
         this.buttonList.add(this.btnCancel);
-    }
-
-    @Override
-    public void drawScreen(final int par1, final int par2, final float par3) {
-        drawDefaultBackground();
-
-        drawString(this.fontRendererObj, this.str_radius, 5, 14, 0xFFFFFF);
-        drawString(this.fontRendererObj, this.str_interval, 5, 34, 0xFFFFFF);
-        drawString(this.fontRendererObj, this.str_antiantixray, 5, 54, 0xFFFFFF);
-
-        super.drawScreen(par1, par2, par3);
-    }
-
-    @Override
-    protected void actionPerformed(final GuiButton guiButton) {
-        if (guiButton.enabled) {
-            if (guiButton.id == this.btnSave.id) {
-                final Config config = Config.instance();
-                config.setIntConfig("blockxray.radius", this.numericRadius.getValue());
-                config.setIntConfig("blockxray.interval", this.numericInterval.getValue());
-                config.setIntConfig("blockxray.antiantixraylevel", this.numericAntiAntiXrayLevel.getValue());
-                config.save();
-                
-                ((BlockXray) ModManager.getMod("BlockXray")).reloadConfig();
-                this.mc.displayGuiScreen(this.parentScreen);
-            } else if (guiButton.id == this.btnCancel.id) {
-                this.mc.displayGuiScreen(this.parentScreen);
-            }
-        }
     }
 }

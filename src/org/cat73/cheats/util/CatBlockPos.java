@@ -11,6 +11,21 @@ public class CatBlockPos extends BlockPos {
         super(0, 0, 0);
     }
 
+    @Override
+    public int getX() {
+        return this.x;
+    }
+
+    @Override
+    public int getY() {
+        return this.y;
+    }
+
+    @Override
+    public int getZ() {
+        return this.z;
+    }
+
     public void set(final int x, final int y, final int z) {
         this.x = x;
         this.y = y;
@@ -27,20 +42,5 @@ public class CatBlockPos extends BlockPos {
 
     public void setZ(final int z) {
         this.z = z;
-    }
-
-    @Override
-    public int getX() {
-        return this.x;
-    }
-
-    @Override
-    public int getY() {
-        return this.y;
-    }
-
-    @Override
-    public int getZ() {
-        return this.z;
     }
 }

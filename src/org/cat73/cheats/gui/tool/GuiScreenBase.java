@@ -1,14 +1,14 @@
 package org.cat73.cheats.gui.tool;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiTextField;
-
-import org.lwjgl.input.Keyboard;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.lwjgl.input.Keyboard;
+
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiTextField;
 
 public class GuiScreenBase extends GuiScreen {
     protected final GuiScreen parentScreen;
@@ -25,53 +25,41 @@ public class GuiScreenBase extends GuiScreen {
     }
 
     @Override
+    public void drawScreen(final int mouseX, final int mouseY, final float partialTicks) {
+        super.drawScreen(mouseX, mouseY, partialTicks);
+
+        for (final GuiTextField textField : this.textFields) {
+            textField.drawTextBox();
+        }
+    }
+
+    @Override
     public void initGui() {
         Keyboard.enableRepeatEvents(true);
 
         this.buttonList.clear();
         this.textFields.clear();
     }
-    
-    @Override
-    public void onGuiClosed() {
-        Keyboard.enableRepeatEvents(false);
-    }
 
     @Override
-    protected void mouseClicked(int mouseX, int mouseY, int mouseEvent) throws IOException {
-        for (GuiButton button : this.buttonList) {
-            if (button instanceof GuiNumericField) {
-                GuiNumericField numericField = (GuiNumericField) button;
-                numericField.mouseClicked(mouseX, mouseY, mouseEvent);
-            }
-        }
-
-        for (GuiTextField textField : this.textFields) {
-            textField.mouseClicked(mouseX, mouseY, mouseEvent);
-        }
-
-        super.mouseClicked(mouseX, mouseY, mouseEvent);
-    }
-
-    @Override
-    protected void keyTyped(char character, int code) throws IOException {
+    protected void keyTyped(final char character, final int code) throws IOException {
         if (code == Keyboard.KEY_ESCAPE) {
             this.mc.displayGuiScreen(this.parentScreen);
             return;
         }
 
-        for (GuiButton button : this.buttonList) {
+        for (final GuiButton button : this.buttonList) {
             if (button instanceof GuiNumericField) {
-                GuiNumericField numericField = (GuiNumericField) button;
+                final GuiNumericField numericField = (GuiNumericField) button;
                 numericField.keyTyped(character, code);
 
                 if (numericField.isFocused()) {
-                    actionPerformed(numericField);
+                    this.actionPerformed(numericField);
                 }
             }
         }
 
-        for (GuiTextField textField : this.textFields) {
+        for (final GuiTextField textField : this.textFields) {
             textField.textboxKeyTyped(character, code);
         }
 
@@ -79,27 +67,39 @@ public class GuiScreenBase extends GuiScreen {
     }
 
     @Override
+    protected void mouseClicked(final int mouseX, final int mouseY, final int mouseEvent) throws IOException {
+        for (final GuiButton button : this.buttonList) {
+            if (button instanceof GuiNumericField) {
+                final GuiNumericField numericField = (GuiNumericField) button;
+                numericField.mouseClicked(mouseX, mouseY, mouseEvent);
+            }
+        }
+
+        for (final GuiTextField textField : this.textFields) {
+            textField.mouseClicked(mouseX, mouseY, mouseEvent);
+        }
+
+        super.mouseClicked(mouseX, mouseY, mouseEvent);
+    }
+
+    @Override
+    public void onGuiClosed() {
+        Keyboard.enableRepeatEvents(false);
+    }
+
+    @Override
     public void updateScreen() {
         super.updateScreen();
 
-        for (GuiButton button : this.buttonList) {
+        for (final GuiButton button : this.buttonList) {
             if (button instanceof GuiNumericField) {
-                GuiNumericField numericField = (GuiNumericField) button;
+                final GuiNumericField numericField = (GuiNumericField) button;
                 numericField.updateCursorCounter();
             }
         }
 
-        for (GuiTextField textField : this.textFields) {
+        for (final GuiTextField textField : this.textFields) {
             textField.updateCursorCounter();
-        }
-    }
-
-    @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        super.drawScreen(mouseX, mouseY, partialTicks);
-
-        for (GuiTextField textField : this.textFields) {
-            textField.drawTextBox();
         }
     }
 }

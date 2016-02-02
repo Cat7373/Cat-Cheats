@@ -15,25 +15,25 @@ import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 
 public class Gui {
     public final static Minecraft minecraft = Minecraft.getMinecraft();
-    
-    private KeyBinding guiKey;
+
+    private final KeyBinding guiKey;
 
     public Gui() {
         FMLCommonHandler.instance().bus().register(this);
         this.guiKey = new KeyBinding(Names.Keys.GUI, Keyboard.KEY_F6, Reference.NAME);
-        ClientRegistry.registerKeyBinding(guiKey);
+        ClientRegistry.registerKeyBinding(this.guiKey);
+    }
+
+    private void enabledGui() {
+        Gui.minecraft.displayGuiScreen(new Gui_Main(Mod.minecraft.currentScreen));
     }
 
     @SubscribeEvent
     public void keyboardEvent(final KeyInputEvent event) {
         if (Gui.minecraft.currentScreen == null) {
-            if (guiKey.isPressed()) {
-                enabledGui();
+            if (this.guiKey.isPressed()) {
+                this.enabledGui();
             }
         }
-    }
-
-    private void enabledGui() {
-        Gui.minecraft.displayGuiScreen(new Gui_Main(Mod.minecraft.currentScreen));
     }
 }

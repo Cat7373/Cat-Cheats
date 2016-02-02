@@ -13,15 +13,20 @@ import net.minecraft.world.World;
 public class FreeCamPlayer extends EntityPlayer {
     protected final MovementInput movementInput;
 
-    public FreeCamPlayer(final World worldIn, final GameProfile gameProfile, MovementInput movementInput) {
+    public FreeCamPlayer(final World worldIn, final GameProfile gameProfile, final MovementInput movementInput) {
         super(worldIn, gameProfile);
         this.movementInput = movementInput;
     }
-    
+
+    @Override
+    public boolean isSpectator() {
+        return true;
+    }
+
     @Override
     public void onLivingUpdate() {
         final EntityPlayerSP player = Mod.minecraft.thePlayer;
-        if(player != null) {
+        if (player != null) {
             // 刷新键盘输入
             this.movementInput.updatePlayerMoveState();
 
@@ -41,34 +46,29 @@ public class FreeCamPlayer extends EntityPlayer {
             // TODO 更平滑的加速与减速
             // 刷新速度
             float flySpeed = this.capabilities.getFlySpeed();
-            if(Mod.minecraft.gameSettings.keyBindSprint.isKeyDown()) {
+            if (Mod.minecraft.gameSettings.keyBindSprint.isKeyDown()) {
                 flySpeed *= 1.8;
             }
-            
+
             final float strafe = this.movementInput.moveStrafe * flySpeed * 6.0F;
             final float forward = this.movementInput.moveForward * flySpeed * 6.0F;
-            final float sin = MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F);
-            final float cos = MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F);
+            final float sin = MathHelper.sin((this.rotationYaw * (float) Math.PI) / 180.0F);
+            final float cos = MathHelper.cos((this.rotationYaw * (float) Math.PI) / 180.0F);
 
             // 运动量计算
-            final double motionX = strafe * cos - forward * sin;
+            final double motionX = (strafe * cos) - (forward * sin);
             double motionY = 0.0D;
-            final double motionZ = forward * cos + strafe * sin;
-            if(this.movementInput.jump) {
+            final double motionZ = (forward * cos) + (strafe * sin);
+            if (this.movementInput.jump) {
                 motionY = flySpeed * 5.0F;
-            } else if(this.movementInput.sneak) {
+            } else if (this.movementInput.sneak) {
                 motionY = flySpeed * -5.0F;
             }
-            
+
             // 移动实体
             this.posX += motionX;
             this.posY += motionY;
             this.posZ += motionZ;
         }
-    }
-
-    @Override
-    public boolean isSpectator() {
-        return true;
     }
 }
