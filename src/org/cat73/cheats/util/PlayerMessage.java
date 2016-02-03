@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.FMLLog;
 
 /**
  * 玩家信息类
- * 
+ *
  * @author Cat73
  */
 public class PlayerMessage {
@@ -17,7 +17,7 @@ public class PlayerMessage {
 
     /**
      * 向玩家输出格式化的调试信息
-     * 
+     *
      * @param format 要输出的信息格式
      * @param args 格式化时使用的数据列表
      */
@@ -30,7 +30,7 @@ public class PlayerMessage {
 
     /**
      * 向玩家输出调试信息
-     * 
+     *
      * @param objs 要输出的数据列表
      */
     public static void debugs(final Object... objs) {
@@ -49,7 +49,7 @@ public class PlayerMessage {
 
     /**
      * 向玩家输出错误
-     * 
+     *
      * @param format 要输出的信息格式
      * @param args 格式化时使用的数据列表
      */
@@ -60,7 +60,7 @@ public class PlayerMessage {
 
     /**
      * 向玩家输出信息
-     * 
+     *
      * @param format 要输出的信息格式
      * @param args 格式化时使用的数据列表
      */
@@ -71,7 +71,7 @@ public class PlayerMessage {
 
     /**
      * 给玩家发送一条消息
-     * 
+     *
      * @param format 要发送的信息格式
      * @param args 格式化时使用的数据列表
      */
@@ -84,7 +84,7 @@ public class PlayerMessage {
 
     /**
      * 向玩家输出警告
-     * 
+     *
      * @param format 要输出的信息格式
      * @param args 格式化时使用的数据列表
      */
@@ -95,7 +95,7 @@ public class PlayerMessage {
 
     /**
      * 向玩家输出警告
-     * 
+     *
      * @param format 要输出的信息格式
      * @param args 格式化时使用的数据列表
      */

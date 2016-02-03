@@ -9,7 +9,7 @@ import org.lwjgl.input.Keyboard;
 
 /**
  * Mod 信息
- * 
+ *
  * @author Cat73
  */
 @Retention(RetentionPolicy.RUNTIME)

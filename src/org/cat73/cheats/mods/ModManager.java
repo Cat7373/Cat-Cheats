@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 
 /**
  * MOD 管理器
- * 
+ *
  * @author Cat73
  */
 public final class ModManager {
@@ -32,7 +32,7 @@ public final class ModManager {
 
     /**
      * 获取指定 Mod 的热键
-     * 
+     *
      * @param mod 要获取热键的 Mod
      * @return 指定 Mod 的热键
      */
@@ -43,7 +43,7 @@ public final class ModManager {
 
     /**
      * 通过 Mod 的名称获取 Mod
-     * 
+     *
      * @param name 要被获取的 Mod 的名称
      * @return 该名称对应的 Mod, 如果名称不存在则返回 null
      */
@@ -53,7 +53,7 @@ public final class ModManager {
 
     /**
      * 获取所有 Mod
-     * 
+     *
      * @return 所有 Mod
      */
     public static Collection<Mod> getMods() {
@@ -62,7 +62,7 @@ public final class ModManager {
 
     /**
      * 获取 Mod 的总数
-     * 
+     *
      * @return Mod 的总数
      */
     public static int getSize() {
@@ -71,7 +71,7 @@ public final class ModManager {
 
     /**
      * 给一个 Mod 设置热键
-     * 
+     *
      * @param mod 要被设置热键的 Mod
      * @param key 要设置的热键值
      */
@@ -171,7 +171,7 @@ public final class ModManager {
 
     /**
      * 注册 Mod
-     * 
+     *
      * @param mod 要被注册的 Mod
      */
     private void registerMod(final Mod mod) {

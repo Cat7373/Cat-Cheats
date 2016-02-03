@@ -6,6 +6,7 @@ import org.cat73.cheats.reference.Reference;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -24,6 +25,11 @@ public class Cat_Cheats {
     @Mod.EventHandler
     public void init(final FMLInitializationEvent event) {
         Cat_Cheats.proxy.init(event);
+    }
+
+    @Mod.EventHandler
+    public void loadComplete(final FMLLoadCompleteEvent event) {
+        Cat_Cheats.proxy.loadComplete(event);
     }
 
     @Mod.EventHandler
