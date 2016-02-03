@@ -45,6 +45,12 @@ minecraft {
     replace '${version}', modversion
 }
 
+jar {
+    manifest {
+        attributes 'FMLCorePlugin': 'org.cat73.cheats.hideself.asm.FMLCorePlugin'
+    }
+}
+
 processResources {
     inputs.property 'version', project.version
     inputs.property 'mcversion', project.minecraft.version

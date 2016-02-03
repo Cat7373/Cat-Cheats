@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.ModContainer;
 
 public class HideSelf {
     /**
+     * 0 = no hide
      * 1 = hide self
      * 2 = hide fml
      */
