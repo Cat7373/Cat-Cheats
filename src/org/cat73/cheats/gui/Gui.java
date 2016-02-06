@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 
 public class Gui {
-    public final static Minecraft minecraft = Minecraft.getMinecraft();
+    public static final Minecraft minecraft = Minecraft.getMinecraft();
 
     private final KeyBinding guiKey;
 

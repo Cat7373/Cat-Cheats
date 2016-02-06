@@ -5,7 +5,7 @@ import java.util.HashMap;
 import net.minecraftforge.common.config.Property;
 
 public class Hotkey {
-    private final static HashMap<String, Integer> hotkeys = new HashMap<String, Integer>();
+    private static final HashMap<String, Integer> hotkeys = new HashMap<String, Integer>();
 
     public static HashMap<String, Integer> getHotkeys() {
         return Hotkey.hotkeys;

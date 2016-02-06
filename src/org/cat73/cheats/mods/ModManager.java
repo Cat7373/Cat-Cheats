@@ -23,12 +23,12 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
  * @author Cat73
  */
 public final class ModManager {
-    public final static Minecraft minecraft = Minecraft.getMinecraft();
+    public static final Minecraft minecraft = Minecraft.getMinecraft();
 
     /** MOD 列表 */
-    private final static HashMap<String, Mod> mods = new HashMap<String, Mod>();
+    private static final HashMap<String, Mod> mods = new HashMap<String, Mod>();
     /** 热键列表 */
-    private final static HashMap<Mod, KeyBinding> hotkeys = new HashMap<Mod, KeyBinding>();
+    private static final HashMap<Mod, KeyBinding> hotkeys = new HashMap<Mod, KeyBinding>();
 
     /**
      * 获取指定 Mod 的热键
