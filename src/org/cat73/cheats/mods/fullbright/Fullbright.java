@@ -6,7 +6,7 @@ import org.cat73.cheats.mods.ModInfo;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.potion.Potion;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
@@ -23,7 +23,7 @@ public class Fullbright extends Mod {
 
     @Override
     public void onDisable() {
-        FMLCommonHandler.instance().bus().unregister(this);
+        MinecraftForge.EVENT_BUS.unregister(this);
 
         this.gameSettings.gammaSetting = this.gamma;
     }
@@ -34,7 +34,7 @@ public class Fullbright extends Mod {
         this.gameSettings.gammaSetting = 16.0F;
         this.cooldown = 0;
 
-        FMLCommonHandler.instance().bus().register(this);
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     @Override
@@ -53,8 +53,8 @@ public class Fullbright extends Mod {
         if (this.cooldown-- == 0) {
             final EntityPlayerSP player = Mod.minecraft.thePlayer;
             if (player != null) {
-                player.removePotionEffectClient(Potion.blindness.id);
-                player.removePotionEffectClient(Potion.confusion.id);
+                player.removePotionEffect(Potion.getPotionFromResourceLocation("blindness"));
+                player.removePotionEffect(Potion.getPotionFromResourceLocation("nausea"));
             }
 
             this.cooldown = 10;

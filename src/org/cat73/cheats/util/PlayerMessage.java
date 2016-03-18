@@ -4,7 +4,7 @@ import org.apache.logging.log4j.Level;
 import org.cat73.cheats.reference.Reference;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.FMLLog;
 
 /**
@@ -78,7 +78,7 @@ public class PlayerMessage {
     public static void message(final String format, final Object... args) {
         final String message = String.format(format, args);
         if (PlayerMessage.mc.thePlayer != null) {
-            PlayerMessage.mc.thePlayer.addChatMessage(new ChatComponentText(message));
+            PlayerMessage.mc.thePlayer.addChatMessage(new TextComponentTranslation(message));
         }
     }
 

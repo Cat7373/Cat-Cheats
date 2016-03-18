@@ -22,7 +22,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry;
@@ -88,7 +87,6 @@ public class BlockXray extends Mod implements Runnable {
 
     @Override
     public void onDisable() {
-        FMLCommonHandler.instance().bus().unregister(this);
         MinecraftForge.EVENT_BUS.unregister(this);
 
         GL11.glDeleteLists(this.displayListid, 1);
@@ -100,7 +98,6 @@ public class BlockXray extends Mod implements Runnable {
         this.displayListid = GL11.glGenLists(1);
         this.needRefresh = true;
 
-        FMLCommonHandler.instance().bus().register(this);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -245,8 +242,9 @@ public class BlockXray extends Mod implements Runnable {
         }
 
         this.pos2.set(x, y, z);
-        final Block block = chunk.getBlockState(this.pos2).getBlock();
+        final IBlockState blockState = chunk.getBlockState(this.pos2);
+        final Block block = blockState.getBlock();
 
-        return !block.isNormalCube();
+        return !block.isNormalCube(blockState);
     }
 }

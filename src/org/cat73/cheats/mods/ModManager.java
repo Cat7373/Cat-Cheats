@@ -12,7 +12,7 @@ import org.cat73.cheats.reference.Reference;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
@@ -94,7 +94,7 @@ public final class ModManager {
      */
     public ModManager() {
         // 注册热键事件
-        FMLCommonHandler.instance().bus().register(this);
+        MinecraftForge.EVENT_BUS.register(this);
 
         // 注册 Mod
         this.registerMod(new BlockXray());
@@ -128,10 +128,10 @@ public final class ModManager {
      */
     private void registerFirstTick() {
         // FirstTick 通知
-        FMLCommonHandler.instance().bus().register(new Object() {
+        MinecraftForge.EVENT_BUS.register(new Object() {
             @SubscribeEvent
             public void onTickInGame(final ClientTickEvent event) {
-                FMLCommonHandler.instance().bus().unregister(this);
+                MinecraftForge.EVENT_BUS.unregister(this);
 
                 // 执行每一个 Mod 的 onFirstTick
                 for (final Mod mod : ModManager.mods.values()) {

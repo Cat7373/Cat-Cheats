@@ -6,8 +6,8 @@ import com.mojang.authlib.GameProfile;
 
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovementInput;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class FreeCamPlayer extends EntityPlayer {
@@ -70,5 +70,10 @@ public class FreeCamPlayer extends EntityPlayer {
             this.posY += motionY;
             this.posZ += motionZ;
         }
+    }
+
+    @Override
+    public boolean isCreative() {
+        return false;
     }
 }

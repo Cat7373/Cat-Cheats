@@ -6,6 +6,7 @@ import org.cat73.cheats.util.BlockUnit;
 import org.cat73.cheats.util.PlayerMessage;
 
 import net.minecraft.block.Block;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry;
 import net.minecraftforge.fml.common.registry.GameData;
@@ -57,8 +58,9 @@ public class XrayBlock {
 
     public static XrayBlock fromString(final String s) {
         final String[] info = s.split(" ");
-
-        final int id = XrayBlock.blockRegistery.getId(info[0]);
+        
+        final Block block = XrayBlock.blockRegistery.getObject(new ResourceLocation(info[0]));
+        final int id = XrayBlock.blockRegistery.getId(block);
         if (id == -1) {
             PlayerMessage.warn("Block %s not found!", info[0]);
             return null;

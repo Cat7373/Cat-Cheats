@@ -1,6 +1,6 @@
 package org.cat73.cheats.util;
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 
 public class CatBlockPos extends BlockPos {
     private int x;

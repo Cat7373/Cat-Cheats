@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.nbt.NBTException;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.play.client.C10PacketCreativeInventoryAction;
+import net.minecraft.network.play.client.CPacketCreativeInventoryAction;
 import net.minecraft.util.ResourceLocation;
 
 @ModInfo(name = "CreateGive")
@@ -58,7 +58,7 @@ public class CreateGive extends Mod {
         // 设置NBT
         NBTTagCompound nbtTagCompound;
         try {
-            nbtTagCompound = JsonToNBT.func_180713_a(NBT_Json);
+            nbtTagCompound = JsonToNBT.getTagFromJson(NBT_Json);
         } catch (final NBTException e) {
             PlayerMessage.error(I18n.format(Names.Mods.CreateGive.Error.NBT_ERROR, NBT_Json));
             e.printStackTrace();
@@ -67,7 +67,7 @@ public class CreateGive extends Mod {
         stack.setTagCompound(nbtTagCompound);
 
         // 将物品添加到物品栏
-        player.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(slot == 0 ? -1 : 35 + slot, stack));
+        player.sendQueue.addToSendQueue(new CPacketCreativeInventoryAction(slot == 0 ? -1 : 35 + slot, stack));
     }
 
     public static void giveItem(final String command, final int slot) {
