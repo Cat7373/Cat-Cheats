@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry;
 import net.minecraftforge.fml.common.registry.GameData;
 
 public class Gui_Main_Block_Slot extends GuiSlot {
-    private final static FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
+    private static final FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
     private final Minecraft minecraft = Minecraft.getMinecraft();
     private final Gui_Main gui_Main;
 

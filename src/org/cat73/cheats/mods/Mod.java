@@ -3,7 +3,7 @@ package org.cat73.cheats.mods;
 import net.minecraft.client.Minecraft;
 
 public class Mod {
-    public final static Minecraft minecraft = Minecraft.getMinecraft();
+    public static final Minecraft minecraft = Minecraft.getMinecraft();
 
     public final String name;
     public final String description;

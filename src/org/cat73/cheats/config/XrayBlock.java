@@ -11,11 +11,11 @@ import net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry;
 import net.minecraftforge.fml.common.registry.GameData;
 
 public class XrayBlock {
-    private final static FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
-    private final static String[] defaultBlocks = new String[] {"minecraft:lapis_ore -1 0 0 -128 -56", "minecraft:redstone_ore -1 -1 0 0 -56", "minecraft:gold_ore -1 -1 -1 0 -56", "minecraft:emerald_ore -1 0 -1 0 -56", "minecraft:diamond_ore -1 0 -65 -1 -56"};
-    private final static ArrayList<XrayBlock> blocks = new ArrayList<XrayBlock>();
-    private final static ArrayList<XrayBlock> blocks_checkDamage = new ArrayList<XrayBlock>();
-    private final static ArrayList<XrayBlock> blocks_noCheckDamage = new ArrayList<XrayBlock>();
+    private static final FMLControlledNamespacedRegistry<Block> blockRegistery = GameData.getBlockRegistry();
+    private static final String[] defaultBlocks = new String[] {"minecraft:lapis_ore -1 0 0 -128 -56", "minecraft:redstone_ore -1 -1 0 0 -56", "minecraft:gold_ore -1 -1 -1 0 -56", "minecraft:emerald_ore -1 0 -1 0 -56", "minecraft:diamond_ore -1 0 -65 -1 -56"};
+    private static final ArrayList<XrayBlock> blocks = new ArrayList<XrayBlock>();
+    private static final ArrayList<XrayBlock> blocks_checkDamage = new ArrayList<XrayBlock>();
+    private static final ArrayList<XrayBlock> blocks_noCheckDamage = new ArrayList<XrayBlock>();
 
     public static void add(final XrayBlock block) {
         // TODO 自动去重

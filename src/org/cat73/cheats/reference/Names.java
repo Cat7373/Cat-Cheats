@@ -1,67 +1,67 @@
 package org.cat73.cheats.reference;
 
 public class Names {
-    public final static class Gui {
-        public final static String ENABLE = "catcheats.gui.enable";
-        public final static String DISABLE = "catcheats.gui.disable";
-        public final static String TOGGLE = "catcheats.gui.toggle";
-        public final static String SETTING = "catcheats.gui.setting";
-        public final static String SETHOTKEY = "catcheats.gui.sethotkey";
-        public final static String EXIT = "catcheats.gui.exit";
+    public static final class Gui {
+        public static final String ENABLE = "catcheats.gui.enable";
+        public static final String DISABLE = "catcheats.gui.disable";
+        public static final String TOGGLE = "catcheats.gui.toggle";
+        public static final String SETTING = "catcheats.gui.setting";
+        public static final String SETHOTKEY = "catcheats.gui.sethotkey";
+        public static final String EXIT = "catcheats.gui.exit";
     }
 
-    public final static class Keys {
-        public final static String GUI = "catcheats.keys.gui";
+    public static final class Keys {
+        public static final String GUI = "catcheats.keys.gui";
     }
 
-    public final static class Mods {
-        public final static class BlockXray {
-            public final static class Gui {
-                public final static class AddBlock {
-                    public final static String SAVE = "catcheats.mods.blockxray.gui.addblock.save";
-                    public final static String CANCEL = "catcheats.mods.blockxray.gui.addblock.cancel";
-                    public final static String BLOCKID = "catcheats.mods.blockxray.gui.addblock.blockid";
-                    public final static String DAMAGE = "catcheats.mods.blockxray.gui.addblock.damage";
-                    public final static String R = "catcheats.mods.blockxray.gui.addblock.r";
-                    public final static String G = "catcheats.mods.blockxray.gui.addblock.g";
-                    public final static String B = "catcheats.mods.blockxray.gui.addblock.b";
-                    public final static String A = "catcheats.mods.blockxray.gui.addblock.a";
+    public static final class Mods {
+        public static final class BlockXray {
+            public static final class Gui {
+                public static final class AddBlock {
+                    public static final String SAVE = "catcheats.mods.blockxray.gui.addblock.save";
+                    public static final String CANCEL = "catcheats.mods.blockxray.gui.addblock.cancel";
+                    public static final String BLOCKID = "catcheats.mods.blockxray.gui.addblock.blockid";
+                    public static final String DAMAGE = "catcheats.mods.blockxray.gui.addblock.damage";
+                    public static final String R = "catcheats.mods.blockxray.gui.addblock.r";
+                    public static final String G = "catcheats.mods.blockxray.gui.addblock.g";
+                    public static final String B = "catcheats.mods.blockxray.gui.addblock.b";
+                    public static final String A = "catcheats.mods.blockxray.gui.addblock.a";
                 }
 
-                public final static class Config {
-                    public final static String SAVE = "catcheats.mods.blockxray.gui.config.save";
-                    public final static String CANCEL = "catcheats.mods.blockxray.gui.config.cancel";
-                    public final static String RADIUS = "catcheats.mods.blockxray.gui.config.radius";
-                    public final static String INTERVAL = "catcheats.mods.blockxray.gui.config.interval";
-                    public final static String ANTIANTIXRAY = "catcheats.mods.blockxray.gui.config.antiantixray";
+                public static final class Config {
+                    public static final String SAVE = "catcheats.mods.blockxray.gui.config.save";
+                    public static final String CANCEL = "catcheats.mods.blockxray.gui.config.cancel";
+                    public static final String RADIUS = "catcheats.mods.blockxray.gui.config.radius";
+                    public static final String INTERVAL = "catcheats.mods.blockxray.gui.config.interval";
+                    public static final String ANTIANTIXRAY = "catcheats.mods.blockxray.gui.config.antiantixray";
                 }
 
-                public final static class Main {
-                    public final static String ADDBLOCK = "catcheats.mods.blockxray.gui.main.addblock";
-                    public final static String EDITBLOCK = "catcheats.mods.blockxray.gui.main.editblock";
-                    public final static String DELETEBLOCK = "catcheats.mods.blockxray.gui.main.deleteblock";
-                    public final static String CONFIG = "catcheats.mods.blockxray.gui.main.config";
-                    public final static String EXIT = "catcheats.mods.blockxray.gui.main.exit";
+                public static final class Main {
+                    public static final String ADDBLOCK = "catcheats.mods.blockxray.gui.main.addblock";
+                    public static final String EDITBLOCK = "catcheats.mods.blockxray.gui.main.editblock";
+                    public static final String DELETEBLOCK = "catcheats.mods.blockxray.gui.main.deleteblock";
+                    public static final String CONFIG = "catcheats.mods.blockxray.gui.main.config";
+                    public static final String EXIT = "catcheats.mods.blockxray.gui.main.exit";
                 }
             }
         }
 
-        public final static class CreateGive {
-            public final static class Error {
-                public final static String ITEM_NOT_FOUND = "commands.give.notFound";
-                public final static String NBT_ERROR = "commands.give.tagError";
-                public final static String MISSING_PARAM = "commands.give.usage";
-                public final static String UNKNOW_ITEM_NAME = "catcheats.mods.creategive.error.unknow_item_name";
-                public final static String COUNT_ERROR = "catcheats.mods.creategive.error.count_error";
-                public final static String DAMAGE_ERROR = "catcheats.mods.creategive.error.damage_error";
-                public final static String UNKNOW_ERROR = "catcheats.mods.creategive.error.unknow_error";
+        public static final class CreateGive {
+            public static final class Error {
+                public static final String ITEM_NOT_FOUND = "commands.give.notFound";
+                public static final String NBT_ERROR = "commands.give.tagError";
+                public static final String MISSING_PARAM = "commands.give.usage";
+                public static final String UNKNOW_ITEM_NAME = "catcheats.mods.creategive.error.unknow_item_name";
+                public static final String COUNT_ERROR = "catcheats.mods.creategive.error.count_error";
+                public static final String DAMAGE_ERROR = "catcheats.mods.creategive.error.damage_error";
+                public static final String UNKNOW_ERROR = "catcheats.mods.creategive.error.unknow_error";
             }
 
-            public final static class Gui {
-                public final static String EXECUTE = "catcheats.mods.creategive.gui.execute";
-                public final static String EXIT = "catcheats.mods.creategive.gui.exit";
-                public final static String SLOT = "catcheats.mods.creategive.gui.slot";
-                public final static String COMMAND = "catcheats.mods.creategive.gui.command";
+            public static final class Gui {
+                public static final String EXECUTE = "catcheats.mods.creategive.gui.execute";
+                public static final String EXIT = "catcheats.mods.creategive.gui.exit";
+                public static final String SLOT = "catcheats.mods.creategive.gui.slot";
+                public static final String COMMAND = "catcheats.mods.creategive.gui.command";
             }
         }
     }
